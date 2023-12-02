@@ -11,8 +11,11 @@
 <section layout:fragment="body">
     <div th:each="wine :${wines}">
         <img th:src="${wine.photoUrl}" alt="Product Image"/>
+        <p>Name:</p>
         <p th:text="${wine.wineName}"></p>
+        <p>Price:</p>
         <p th:text="${wine.price}"></p>
+        <p>Winery:</p>
         <p th:text="${wine.winery.wineryName}"></p>
     </div>
 </section>
