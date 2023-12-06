@@ -24,7 +24,7 @@ public class GeneralController {
     @GetMapping("/wines")
     public String getWinePage(Model model) {
         List<Wine> wines = wineService.getAll();
-        model.addAttribute("wines",wines);
+        model.addAttribute("wines", wines);
         return "listWines";
     }
 
@@ -32,18 +32,22 @@ public class GeneralController {
     public String getWineriesPage() {
         return "listWineries";
     }
+
     @GetMapping("/events")
     public String getEventsPage() {
         return "listEvents";
     }
+
     @GetMapping("/map")
     public String getMapPage() {
         return "map";
     }
+
     @GetMapping("/login")
     public String getLoginPage() {
         return "login";
     }
+
     @GetMapping("/register")
     public String getRegisterPage() {
         return "register";
