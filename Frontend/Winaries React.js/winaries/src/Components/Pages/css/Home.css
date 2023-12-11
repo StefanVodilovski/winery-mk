@@ -1,0 +1,6 @@
+.bckImg {
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+    background-position: center;
+}
