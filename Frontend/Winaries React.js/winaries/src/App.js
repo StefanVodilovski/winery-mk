@@ -2,6 +2,7 @@
 import { Route, Routes } from "react-router-dom"
 import './App.css';
 import { Navbar } from './Components/Navbar';
+import { Footer } from './Components/Footer';
 import { Home, Wines, Winaries, Events, Map } from './Components/Pages';
 
 
@@ -17,6 +18,7 @@ function App() {
         <Route path="/events" element={<Events />}> </Route>
         <Route path="/map" element={<Map />}> </Route>
       </Routes>
+      <Footer />
     </div>
   );
 }
