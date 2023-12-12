@@ -1,0 +1,141 @@
+footer{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    background-color: #302c2c;
+    padding: 40px 10% 20px 10%;
+    margin-top: 50px;
+    color: white;
+    height: auto;
+    font-size: 12px;
+    
+}
+
+.content{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    height: auto
+    
+}
+
+.content::after {
+    content: "";
+    width: 100%;
+    height: 1px;
+    
+    background: white;
+    
+    position: absolute;
+    bottom: -20px;
+    left: 0;
+    
+  }
+
+
+.left-section{
+    width: 30%;
+}
+
+.left-section h1{
+    position:relative;
+    margin-bottom: 30px;
+    font-size: 25px;
+    
+}
+.left-section h1::after {
+    content: "";
+    width: 3.4em;
+    height: 1px;
+    
+    background: white;
+    
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    
+  }
+.right-section{
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: center;
+    gap: 20px;
+    width: 60%;
+    height: 100%;
+}
+.right-section>div{
+    width: 100%;
+}
+footer form{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+footer form>div{
+    width: 45%;
+    height: 150px;
+}
+
+footer textarea{
+    padding-top: 6px;
+    padding-left: 10px;
+    resize: none;
+    height: 100%;
+}
+footer input, footer button{
+ padding: 10px;
+
+}
+footer textarea,footer input,footer button{
+    width: 100%;
+    background-color: #504c4c;
+    border: none;
+    border-radius: 7px;
+    box-shadow: 10px 10px 20px black;
+}
+
+#submit-button{
+    background-color: #b03434; 
+    color: white;
+    border-radius: 7px;
+}
+.input-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    height: 100%;
+}
+::placeholder {
+    color: white;
+    opacity: 1; /* Firefox */
+}
+  
+::-ms-input-placeholder { /* Edge 12 -18 */
+    color: white;
+}
+
+footer input, footer textarea{
+    color: white;
+}
+
+footer textarea:focus, footer input:focus {
+    color: white;
+}
+
+.socials{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+.socials > svg{
+    margin-left: 20px;
+}
+.copyright{
+    margin-top: 40px;
+    
+}
