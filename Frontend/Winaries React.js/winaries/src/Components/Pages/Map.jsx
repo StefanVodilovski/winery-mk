@@ -34,14 +34,13 @@ export const Map = () => {
     })
 
 
-    const createCustomClusterIcon = (cluster) => {
-        return new divIcon({
-            html: '<div class="cluster-icon>${cluster.getChildCount()}</div>',
-            className: "custom-marker-cluster",
-            iconSize: point(33, 33, true)
-        });
-    };
-
+    // const createClusterCustomIcon = function (cluster) {
+    //     return new divIcon({
+    //         html: `<span class="cluster-icon">${cluster.getChildCount()}</span>`,
+    //         className: "custom-marker-cluster",
+    //         iconSize: point(33, 33, true)
+    //     });
+    // };
 
     return (
         <div>
@@ -53,7 +52,7 @@ export const Map = () => {
 
                 <MarkerClusterGroup
                     chunkedLoading
-                    iconCreateFunction={createCustomClusterIcon}
+                // iconCreateFunction={createClusterCustomIcon}
                 >
                     {markers.map(
                         marker => (
