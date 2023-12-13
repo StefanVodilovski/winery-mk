@@ -37,12 +37,14 @@ footer{
 
 .left-section{
     width: 30%;
+
 }
 
 .left-section h1{
     position:relative;
     margin-bottom: 30px;
     font-size: 25px;
+    font-style: italic;
     
 }
 .left-section h1::after {
