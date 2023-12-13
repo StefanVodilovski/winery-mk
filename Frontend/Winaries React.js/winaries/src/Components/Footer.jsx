@@ -19,10 +19,12 @@ export const Footer = () => {
                     <div class="form-container">
                         <form>
                             <div>
-                                <textarea name="description" placeholder="Write your thoughts..."></textarea>
+                                <textarea name="description" placeholder="Write your thoughts..." required></textarea>
                             </div>
                             <div class="input-container">
-                                <input type="text" name="email" placeholder="Enter your e-mail..." /><br />
+                                <input type="text" name="email" placeholder="Enter your e-mail..." required/><br/>
+            
+
                                 <button type="submit" id="submit-button">SUBMIT</button>
                             </div>
 

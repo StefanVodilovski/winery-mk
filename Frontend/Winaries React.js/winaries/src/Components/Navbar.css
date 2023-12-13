@@ -3,17 +3,26 @@
 }
 
 .logo {
-    max-width: 100%;
-    height: auto;
+    width: 180px;
+    height: 70px;
+    background-image: url("../images/logoRed.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin-left: 20px;
+    transition: all ease 0.5s;
 }
 
 nav {
     display: flex;
     justify-content: space-between;
-    /* background-color: white; */
+    background-color: white;
     align-items: center;
     position: sticky;
     top: 0;
+    z-index: 1000;
+    transition: all ease 0.5s;
+    height: 100px;
 }
 
 nav .title {
@@ -26,6 +35,8 @@ nav .title {
 
 nav ul {
     display: flex;
+    margin-bottom: 0;
+    padding: 0;
 }
 
 nav ul.open {
@@ -44,10 +55,8 @@ nav ul li a {
     padding: 0.5rem;
     margin: 0 0.5rem;
     border-radius: 0.5rem;
-}
-
-nav ul li a:not(.active):hover {
-    background-color: lightgrey;
+    font-size: 24px;
+    transition: all ease 0.5s;
 }
 
 
@@ -68,6 +77,23 @@ nav .menu span {
     background-color: black;
     border-radius: 0.2rem;
 }
+a:has(.shopping-cart-icon):hover .shopping-cart-icon{
+    
+    color: #CB1919;
+  }
+  
+
+.shopping-cart-icon{
+    color: #E1E1E1;
+    text-shadow:2px 2px 4px #000000;
+    transition: all ease 0.5s;
+    font-size: 24px;
+}
+
+.right-end{
+    width: 200px;
+}
+
 
 @media (max-width: 650px) {
     nav .menu {
@@ -96,3 +122,8 @@ nav .menu span {
         margin: 0.25rem 0.5rem;
     }
 }
+
+
+
+
+

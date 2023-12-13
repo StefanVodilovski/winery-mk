@@ -1,8 +1,52 @@
-.bckImg {
+body.route-home nav:not(.scrolled){
+    background-color: transparent;
+}
+body.route-home nav:not(.scrolled) .logo{
+    background-image: url("../../../images/logoWhite.png");
+}
+body.route-home nav:not(.scrolled) ul li a{
+    color: white;
+    text-shadow: 1px 1px 4px black;
+}
+body.route-home nav:not(.scrolled) .shopping-cart-icon{
+    color: white;
+}
+body.route-home a:has(.shopping-cart-icon):hover .shopping-cart-icon{
+    
+    color: #CB1919;
+  }
+
+.home{
+    margin-top: -100px;
+}
+.background-container {
     max-width: 100%;
-    height: auto;
-    object-fit: cover;
+    height: 100vh; /* Adjust the height as needed */
+    background-image: url('../../../images/backgroundImage2.jpg');
+    background-size: cover;
     background-position: center;
+    background-repeat: no-repeat;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.welcome-title{
+    font-family: 'Julius Sans One', sans-serif;
+    color: white;
+    font-size: 13vh;
+    text-align: center;
+    text-shadow: 2px 2px 7px black;
+
+}
+.slogan{
+    font-family: 'Italianno', cursive;
+    color: white;
+    font-size: 7vh;
+    text-align: center;
+    text-shadow: 2px 2px 7px black;
 }
 
 * {
@@ -43,4 +87,5 @@
     border-radius: 50%;
     font-size: 1.2rem;
     box-shadow: 0 0 0px 5px #fff;
+
 }
