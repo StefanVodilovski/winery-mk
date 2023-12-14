@@ -1,5 +1,6 @@
 package dians.homework3.wines02.dto;
 
+import dians.homework3.wines02.model.Region;
 import dians.homework3.wines02.model.Winery;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,4 +22,5 @@ public class WineDto {
     private LocalDateTime createdOn;
     private LocalDateTime updatedOn;
     private Winery winery;
+    private Region region;
 }

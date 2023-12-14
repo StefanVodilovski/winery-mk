@@ -1,12 +1,10 @@
 package dians.homework3.wines02.model;
 
-import com.sun.istack.NotNull;
+import groovyjarjarantlr4.v4.runtime.misc.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -21,15 +19,10 @@ public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
-    @NotNull
     private String username;
-    @NotNull
     private String email;
-    @NotNull
     private String password;
-    @NotNull
     private String phoneNumber;
-    @NotNull
     private String address;
     private String photoUrl;
 

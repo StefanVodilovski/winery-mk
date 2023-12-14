@@ -15,6 +15,7 @@ public class WineMapper {
                 .price(wineDto.getPrice())
                 .updatedOn(wineDto.getUpdatedOn())
                 .winery(wineDto.getWinery())
+                .region(wineDto.getRegion())
                 .build();
     }
 
@@ -29,6 +30,7 @@ public class WineMapper {
                 .price(wine.getPrice())
                 .updatedOn(wine.getUpdatedOn())
                 .winery(wine.getWinery())
+                .region(wine.getRegion())
                 .build();
     }
 }

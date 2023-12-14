@@ -35,6 +35,6 @@ public class Winery {
     @UpdateTimestamp
     private LocalDateTime updatedOn;
 
-    @ManyToMany(mappedBy = "wineries")
+    @ManyToMany(mappedBy = "wineries", fetch = FetchType.EAGER)
     private List<Event> events = new ArrayList<>();
 }

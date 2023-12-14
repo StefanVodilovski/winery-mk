@@ -23,23 +23,19 @@ public class Wine {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
-    @NotNull
     private String name;
-    @NotNull
     private Integer price;
-    @NotNull
     private Integer stock;
-    @NotNull
     private double litrage;
-    @NotNull
     private String photoUrl;
+    private Region region;
 
     @CreationTimestamp
     private LocalDateTime createdOn;
     @UpdateTimestamp
     private LocalDateTime updatedOn;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Winery winery;
 }
