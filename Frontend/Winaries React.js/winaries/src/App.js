@@ -3,7 +3,7 @@ import { Route, Routes, useNavigate, useLocation  } from "react-router-dom"
 import './App.css';
 import { Navbar } from './Components/Navbar';
 import { Footer } from './Components/Footer';
-import { Home, Wines, Winaries, Events, Map } from './Components/Pages';
+import { Home, Wines, Winaries, Events, Map, Login, Register} from './Components/Pages';
 import { useEffect } from 'react';
 
 
@@ -35,6 +35,8 @@ function App() {
         <Route path="/winaries" element={<Winaries />}> </Route>
         <Route path="/events" element={<Events />}> </Route>
         <Route path="/map" element={<Map />}> </Route>
+        <Route path="/login" element={<Login />}> </Route>
+        <Route path="/register" element={<Register />}> </Route>
       </Routes>
       <Footer />
     </div>
