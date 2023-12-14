@@ -6,7 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +23,7 @@ public class EventDto {
     private String description;
     private String geolocation;
     private List<Winery> wineries = new ArrayList<>();
-    private List<UserEntity> users = new ArrayList<>();
+    private UserEntity createdBy;
     private LocalDateTime createdOn;
     private LocalDateTime updatedOn;
 }

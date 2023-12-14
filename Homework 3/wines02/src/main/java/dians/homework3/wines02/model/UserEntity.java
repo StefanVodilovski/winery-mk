@@ -1,5 +1,6 @@
 package dians.homework3.wines02.model;
 
+import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,13 +18,18 @@ import java.util.List;
 @AllArgsConstructor
 @Entity(name = "users")
 public class UserEntity {
-    @javax.persistence.Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
+    @NotNull
     private String username;
+    @NotNull
     private String email;
+    @NotNull
     private String password;
+    @NotNull
     private String phoneNumber;
+    @NotNull
     private String address;
     private String photoUrl;
 
@@ -35,18 +41,12 @@ public class UserEntity {
     )
     private List<Role> roles = new ArrayList<>();
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @Fetch(FetchMode.SELECT)
-    @JoinTable(
-            name = "users_attends",
-            joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "Id")},
-            inverseJoinColumns = {@JoinColumn(name = "event_id", referencedColumnName = "Id")}
-    )
-    private List<Event> events = new ArrayList<>();
+//    @OneToMany(mappedBy = "createdBy", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private List<Event> events = new ArrayList<>();
 
-    @OneToMany(mappedBy = "createdBy", cascade = CascadeType.ALL, orphanRemoval = true)
-    @Fetch(FetchMode.SELECT)
-    private List<Order> orders = new ArrayList<>();
+//    @OneToMany(mappedBy = "createdBy", cascade = CascadeType.ALL, orphanRemoval = true)
+//    @Fetch(FetchMode.SELECT)
+//    private List<Order> orders = new ArrayList<>();
 
     @OneToOne(mappedBy = "createdBy", cascade = CascadeType.ALL, orphanRemoval = true)
     private Cart cart = null;

@@ -2,6 +2,8 @@ package dians.homework3.wines02.model;
 
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
@@ -24,8 +26,9 @@ public class Order {
     private Integer price;
     private Status status;
 
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "created_by")
+//    @JoinColumn(name = "created_by")
     private UserEntity createdBy;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)

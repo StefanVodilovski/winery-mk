@@ -1,5 +1,6 @@
 package dians.homework3.wines02.model;
 
+import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -22,8 +23,11 @@ public class Winery {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
+    @NotNull
     private String name;
+    @NotNull
     private String description;
+    @NotNull
     private String photoUrl;
 
     @CreationTimestamp

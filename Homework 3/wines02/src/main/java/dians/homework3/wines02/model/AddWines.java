@@ -1,5 +1,6 @@
 package dians.homework3.wines02.model;
 
+import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,9 +20,10 @@ import java.util.List;
 @NoArgsConstructor
 @Table(name="add_wines")
 public class AddWines {
-    @javax.persistence.Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
+    @NotNull
     private Integer quantity;
 
     @CreationTimestamp
@@ -29,6 +31,7 @@ public class AddWines {
     @UpdateTimestamp
     private LocalDateTime updatedOn;
 
+    @NotNull
     @OneToOne()
     private Wine wine;
 
