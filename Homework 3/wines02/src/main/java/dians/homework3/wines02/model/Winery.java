@@ -23,17 +23,9 @@ public class Winery {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
-    @NotNull
     private String name;
-    @NotNull
     private String description;
-    @NotNull
     private String photoUrl;
-
-    @CreationTimestamp
-    private LocalDateTime createdOn;
-    @UpdateTimestamp
-    private LocalDateTime updatedOn;
 
     @ManyToMany(mappedBy = "wineries", fetch = FetchType.EAGER)
     private List<Event> events = new ArrayList<>();

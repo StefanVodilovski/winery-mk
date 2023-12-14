@@ -2,6 +2,7 @@ package dians.homework3.wines02.controller;
 
 import dians.homework3.wines02.dto.WineDto;
 import dians.homework3.wines02.filters.*;
+import dians.homework3.wines02.model.Wine;
 import dians.homework3.wines02.service.PipeWinesService;
 import dians.homework3.wines02.service.WineService;
 import org.springframework.web.bind.annotation.*;
@@ -25,12 +26,13 @@ public class WineController {
     }
 
 //    //Se filtrira do max cena
-    @GetMapping("filter")
-    public List<WineDto> filterWines(@RequestParam(name="price", required = false) String priceValue,
-                                     @RequestParam(name="region", required = false) String regionValue,
-                                     @RequestParam(name="winery", required = false) String wineryValue,
-                                     @RequestParam(name="litrage", required = false) String litrageValue) {
-        return pipeWinesService.filter(priceValue, regionValue, wineryValue, litrageValue);
+    @PostMapping("filter")
+    public List<WineDto> filterWines(@RequestParam String searchQuery,
+                                     @RequestParam String priceValue,
+                                     @RequestParam String regionValue,
+                                     @RequestParam String wineryValue,
+                                     @RequestParam String litrageValue) {
+        return pipeWinesService.filter(searchQuery, priceValue, regionValue, wineryValue, litrageValue);
     }
 
 }

@@ -19,7 +19,5 @@ public class WineryDto {
     private String name;
     private String description;
     private String photoUrl;
-    private LocalDateTime createdOn;
-    private LocalDateTime updatedOn;
     private List<Event> events = new ArrayList<>();
 }

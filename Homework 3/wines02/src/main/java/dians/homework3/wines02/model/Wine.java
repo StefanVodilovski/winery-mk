@@ -30,11 +30,6 @@ public class Wine {
     private String photoUrl;
     private Region region;
 
-    @CreationTimestamp
-    private LocalDateTime createdOn;
-    @UpdateTimestamp
-    private LocalDateTime updatedOn;
-
     @ManyToOne(fetch = FetchType.EAGER)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Winery winery;

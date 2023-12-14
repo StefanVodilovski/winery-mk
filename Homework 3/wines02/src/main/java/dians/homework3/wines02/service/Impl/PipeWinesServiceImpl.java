@@ -19,6 +19,7 @@ public class PipeWinesServiceImpl implements PipeWinesService {
     private final PriceFilter priceFilter;
     private final RegionFilter regionFilter;
     private final WineryFilter wineryFilter;
+    private final SearchFilter searchFilter;
     WineRepository wineRepository;
 
     public PipeWinesServiceImpl(WineRepository wineRepository) {
@@ -27,6 +28,8 @@ public class PipeWinesServiceImpl implements PipeWinesService {
         this.priceFilter = new PriceFilter();
         this.regionFilter = new RegionFilter();
         this.wineryFilter = new WineryFilter();
+        this.searchFilter = new SearchFilter();
+        pipeWines.addFilter(searchFilter);
         pipeWines.addFilter(priceFilter);
         pipeWines.addFilter(regionFilter);
         pipeWines.addFilter(wineryFilter);
@@ -35,8 +38,9 @@ public class PipeWinesServiceImpl implements PipeWinesService {
     }
 
     @Override
-    public List<WineDto> filter(String priceValue, String regionValue, String wineryValue, String litrageValue) {
+    public List<WineDto> filter(String search, String priceValue, String regionValue, String wineryValue, String litrageValue) {
         List<String> stringList = new ArrayList<>();
+        stringList.add(search);
         stringList.add(priceValue);
         stringList.add(regionValue);
         stringList.add(wineryValue);

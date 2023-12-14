@@ -19,8 +19,6 @@ public class WineDto {
     private Integer stock;
     private double litrage;
     private String photoUrl;
-    private LocalDateTime createdOn;
-    private LocalDateTime updatedOn;
     private Winery winery;
     private Region region;
 }
