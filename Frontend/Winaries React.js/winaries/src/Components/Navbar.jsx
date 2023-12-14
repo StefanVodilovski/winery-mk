@@ -47,7 +47,7 @@ export const Navbar = () => {
             <div className='right-end'>
                 <ul name="right_end">
                     <li><NavLink to="/cart"><FontAwesomeIcon icon={faBagShopping} className='shopping-cart-icon'/></NavLink></li>
-                    <li><NavLink to="/register">Login</NavLink></li>
+                    <li><NavLink to="/login">Login</NavLink></li>
                 </ul>
             </div>       
         </nav>
