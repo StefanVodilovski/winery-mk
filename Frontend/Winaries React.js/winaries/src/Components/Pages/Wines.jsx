@@ -1,16 +1,16 @@
-import React from 'react'
-
+import React, { useState } from 'react'
+import { Searchbar } from "../Searchbar"
+import { SearchWinesList } from "../SearchWinesList"
 import "./css/Wines.css"
 
 export const Wines = () => {
+    const [results, setResults] = useState([])
+
     return (
         <div >
             <div className='search-bar-container'>
-                <div>searchBar
-                </div>
-                <div>
-                    SearchResults
-                </div>
+                <Searchbar setResults={setResults}></Searchbar>
+                <SearchWinesList results={results} />
             </div>
         </div>
     )
