@@ -20,7 +20,7 @@ nav {
     align-items: center;
     position: sticky;
     top: 0;
-    z-index: 1000;
+    z-index: 10000;
     transition: all ease 0.5s;
     height: 100px;
 }
@@ -63,22 +63,21 @@ nav ul li a {
 nav .menu {
     display: none;
     position: absolute;
-    top: 0.75rem;
-    right: 0.5rem;
+    top: 0;
+    right: 2rem;
     flex-direction: column;
     justify-content: space-between;
     width: 2.25rem;
     height: 2rem;
+    color: white;
+    height: 100%;
 }
 
-nav .menu span {
-    height: 0.4rem;
-    width: 100%;
-    background-color: black;
-    border-radius: 0.2rem;
+.hamburger{
+    color: #E1E1E1;
 }
+
 a:has(.shopping-cart-icon):hover .shopping-cart-icon{
-    
     color: #CB1919;
   }
   
@@ -95,9 +94,11 @@ a:has(.shopping-cart-icon):hover .shopping-cart-icon{
 }
 
 
-@media (max-width: 650px) {
+@media (max-width: 1000px) {
     nav .menu {
         display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
     nav {
@@ -124,6 +125,10 @@ a:has(.shopping-cart-icon):hover .shopping-cart-icon{
 }
 
 
-
-
-
+.hamburger-menu-close{
+    display: none;
+    width: 100%;
+}
+.hamburger-menu-open{
+    display: block;
+}

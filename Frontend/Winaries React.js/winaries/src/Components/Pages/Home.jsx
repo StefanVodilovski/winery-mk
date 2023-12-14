@@ -45,25 +45,26 @@ export const Home = () => {
                 </div>
             </div>
             <Carousel />
-            <MapContainer center={[41.950, 22]} zoom={8} >
-                <TileLayer
-                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                    url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
-                />
-                {markers.map(
-                    marker => (
-                        <Marker position={marker.geoCode} icon={customIcon}>
-                            <Popup>
-                                {marker.popUp}
-                            </Popup>
-                        </Marker>
+            <div className='map-container'>
+                <MapContainer center={[41.950, 22]} zoom={8} >
+                    <TileLayer
+                        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                        url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+                    />
+                    {markers.map(
+                        marker => (
+                            <Marker position={marker.geoCode} icon={customIcon}>
+                                <Popup>
+                                    {marker.popUp}
+                                </Popup>
+                            </Marker>
 
-                    )
+                        )
 
-                )}
+                    )}
 
-            </MapContainer>
-
+                </MapContainer>
+            </div>
 
 
         </div>

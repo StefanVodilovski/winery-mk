@@ -10,12 +10,16 @@ body.route-home nav:not(.scrolled) ul li a{
 }
 body.route-home nav:not(.scrolled) .shopping-cart-icon{
     color: white;
+    filter: drop-shadow(0 0 1px #000);
 }
 body.route-home a:has(.shopping-cart-icon):hover .shopping-cart-icon{
     
     color: #CB1919;
   }
-
+  body.route-home nav:not(.scrolled) .hamburger{
+    color: white;
+    filter: drop-shadow(0 0 1px #000);
+}
 .home{
     margin-top: -100px;
 }
@@ -88,4 +92,11 @@ body.route-home a:has(.shopping-cart-icon):hover .shopping-cart-icon{
     font-size: 1.2rem;
     box-shadow: 0 0 0px 5px #fff;
 
+}
+
+.map-container{
+    margin-top: 50px;
+    width: 100%;
+    height: 90vh;   
+    padding: 0 50px;
 }

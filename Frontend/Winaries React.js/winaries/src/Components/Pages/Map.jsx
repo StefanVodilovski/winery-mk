@@ -2,6 +2,8 @@ import React from 'react'
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet"
 import { Icon, divIcon } from "leaflet"
 import MarkerClusterGroup from "react-leaflet-cluster"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faMagnifyingGlass} from '@fortawesome/free-solid-svg-icons'
 
 import "leaflet/dist/leaflet.css";
 import "./css/Map.css"
@@ -43,8 +45,15 @@ export const Map = () => {
     // };
 
     return (
-        <div>
-            <MapContainer center={[41.950, 22]} zoom={8}>
+        <div className='map'>
+
+            <div className='search-container'>
+                <input type="text" name="search"/>
+                <div className='search-icon-container'>
+                    <FontAwesomeIcon icon={faMagnifyingGlass} className='search-icon'/>
+                </div>
+            </div>
+            <MapContainer center={[41.744556, 21.730710]} zoom={9}>
                 <TileLayer
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                     url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'

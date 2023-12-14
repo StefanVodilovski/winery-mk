@@ -34,12 +34,10 @@ export const Navbar = () => {
                 <div className='logo'></div>
             </Link>
             
-            <div className='menu' onClick={() => {
-                setMenuOpen(!menuOpen)
-            }}>
-                <FontAwesomeIcon icon={faBars} size="2xl"/>
+            <div className='menu'>
+                <FontAwesomeIcon icon={faBars} size="2xl" className='hamburger'/>
             </div>
-            <ul className={menuOpen ? "open" : ""} >
+            <ul >
                 <li> <NavLink to="/"> Home </NavLink> </li>
                 <li> <NavLink to="/wines"> Wines </NavLink> </li>
                 <li> <NavLink to="/winaries"> Winaries </NavLink> </li>
@@ -47,12 +45,11 @@ export const Navbar = () => {
                 <li> <NavLink to="/map"> Map </NavLink> </li>
             </ul>
             <div className='right-end'>
-                <ul className={menuOpen ? "open" : ""} name="right_end">
+                <ul name="right_end">
                     <li><NavLink to="/cart"><FontAwesomeIcon icon={faBagShopping} className='shopping-cart-icon'/></NavLink></li>
                     <li><NavLink to="/register">Login</NavLink></li>
                 </ul>
-            </div>
-            
+            </div>       
         </nav>
     )
 }
