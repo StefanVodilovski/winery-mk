@@ -113,7 +113,7 @@ footer button {
     border-radius: 7px;
 }
 
-.input-container {
+footer .input-container {
     display: flex;
     flex-direction: column;
     justify-content: start;

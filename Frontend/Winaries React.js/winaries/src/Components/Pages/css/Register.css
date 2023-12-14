@@ -1,0 +1,76 @@
+body.route-register nav{
+    display: none;
+}
+
+body.route-register footer{
+    display: none;
+}
+
+.register-container{
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.register-container form{
+    height: 70vh;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.register-container .input-outer-container{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.register-container .input-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 45%;
+
+}
+
+.register-container .input-container input{
+    width: 100%;
+    background-color: #F6F5F5;
+    border: none;
+    padding-left: 20px;
+    color: black;
+    height: 45px;
+    border-radius: 10px;
+}
+
+.register-container label{
+    margin: 20px 0;
+    font-style: italic;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.register-container ::placeholder {
+    color: black;
+    opacity: 0.7; /* Firefox */
+}
+
+.register-container .input-container input:focus{
+    outline-color: #AC3636;
+    background-color: white;
+}
+
+.register-container button{
+    background-color: #514A4A;
+    width: 150px;
+    height: 40px;
+    color: white;
+    margin-top: 40px;
+    border: none;
+}
