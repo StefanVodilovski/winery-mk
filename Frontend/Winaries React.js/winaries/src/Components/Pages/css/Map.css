@@ -109,3 +109,7 @@ body.route-map .leaflet-container{
     font-size: 20px;
     color: #b9b9b9;
 }
+
+body.route-map .profile-menu{
+    background-color: rgba(246, 245, 245, 0.9);
+}
