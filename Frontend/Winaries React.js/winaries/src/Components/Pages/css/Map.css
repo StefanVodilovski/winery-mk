@@ -45,7 +45,7 @@ body.route-map a:has(.shopping-cart-icon):hover .shopping-cart-icon{
 }
 
 /* height of the container */
-.leaflet-container {
+body.route-map .leaflet-container {
     height: inherit; /* Inherit height from the parent container */
     width: inherit;
     border-radius: 2rem;
@@ -69,7 +69,7 @@ body.route-map .leaflet-container{
     box-shadow: 0 0 0px 5px #fff;
 }
 
-.search-container{
+body.route-map .search-container{
     position: absolute;
     height: 50px;
     left: 200px;
@@ -79,25 +79,25 @@ body.route-map .leaflet-container{
     background-color: rgba(246, 245, 245, 0.8);
     border-radius: 10px;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
 }
 
-.search-container input{
+body.route-map .search-container input{
     background-color: transparent;
     height: 100%;
-    width: 95%;
+    width: 90%;
     border: none;
     padding-left: 30px;
     font-size: 20px;
 }
 
-.search-container input:focus{
+body.route-map .search-container input:focus{
     outline: none;
 }
 
-.search-icon-container{
-    width: 5%;
+body.route-map .search-icon-container{
+    width: 50px;
     height: 100%;
     text-align: center;
     display: flex;
@@ -105,11 +105,18 @@ body.route-map .leaflet-container{
     align-items: center;
 }
 
-.search-icon{
+body.route-map .search-icon{
     font-size: 20px;
     color: #b9b9b9;
+
 }
 
 body.route-map .profile-menu{
     background-color: rgba(246, 245, 245, 0.9);
+}
+
+body.route-map .hamburger-menu{
+    background-color: rgba(246, 245, 245, 0.9);
+    top: 110px;
+    border-radius: 25px;
 }

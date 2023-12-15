@@ -6,7 +6,9 @@ import { Footer } from './Components/Footer';
 import { Home, Wines, Winaries, Events, Map} from './Components/Pages';
 import {Login} from './Components/Pages/Login';
 import {Register} from './Components/Pages/Register';
-import {Profile} from './Components/Pages/Profile'
+import {Profile} from './Components/Pages/Profile';
+import {CreateEvent} from './Components/Pages/CreateEvent'
+
 import { useEffect } from 'react';
 
 
@@ -41,6 +43,7 @@ function App() {
         <Route path="/login" element={<Login />}> </Route>
         <Route path="/register" element={<Register />}> </Route>
         <Route path="/profile" element={<Profile />}> </Route>
+        <Route path="/create-event" element={<CreateEvent />}> </Route>
       </Routes>
       <Footer />
     </div>

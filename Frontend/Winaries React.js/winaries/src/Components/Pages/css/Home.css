@@ -100,3 +100,29 @@ body.route-home a:has(.shopping-cart-icon):hover .shopping-cart-icon{
     height: 90vh;   
     padding: 0 50px;
 }
+
+body.route-home .leaflet-control-container{
+    display: none;
+  }
+
+body.route-home .leaflet-container{
+    position: relative;
+}
+
+.open-map-button-container{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+}
+
+.open-map-button{
+    background-color: white;
+    text-decoration: none;
+    font-size: 22px;
+    box-shadow: 5px 5px 20px rgb(37, 37, 37);
+    border: 1px solid black;
+    color: black !important;
+    padding: 20px 35px;
+}
