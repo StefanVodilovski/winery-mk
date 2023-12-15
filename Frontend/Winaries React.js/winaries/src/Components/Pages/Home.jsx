@@ -2,7 +2,7 @@ import React from 'react'
 import backgoundImg from '../../images/backgroundImage.jpg';
 import "./css/Home.css"
 import { Carousel } from '../Carousel';
-
+import { Link, NavLink } from "react-router-dom"
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet"
 import { Icon, divIcon } from "leaflet"
 
@@ -46,14 +46,17 @@ export const Home = () => {
             </div>
             <Carousel />
             <div className='map-container'>
-                <MapContainer center={[41.950, 22]} zoom={8} >
+                <MapContainer center={[41.671658, 21.762017]} zoom={9} dragging={false} scrollWheelZoom={false}>
                     <TileLayer
                         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                         url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
                     />
+                    <div className='open-map-button-container'>
+                        <NavLink className='open-map-button' to="/map" > OPEN MAP </NavLink>
+                    </div>
                     {markers.map(
                         marker => (
-                            <Marker position={marker.geoCode} icon={customIcon}>
+                            <Marker position={marker.geoCode} icon={customIcon} interactive={false}>
                                 <Popup>
                                     {marker.popUp}
                                 </Popup>
