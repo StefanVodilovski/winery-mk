@@ -1,0 +1,243 @@
+.active {
+    text-decoration: underline;
+}
+
+.logo {
+    width: 180px;
+    height: 70px;
+    background-image: url("../images/logoRed.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin-left: 20px;
+    transition: all ease 0.5s;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    background-color: white;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 9999999;
+    transition: all ease 0.5s;
+    height: 100px;
+}
+
+nav .title {
+    font-size: 1.5rem;
+    margin: 1rem;
+    font-weight: bold;
+    text-decoration: none;
+    color: black;
+}
+
+nav ul {
+    display: flex;
+    margin-bottom: 0;
+    padding: 0;
+}
+
+nav ul.open {
+    display: flex;
+
+}
+
+nav ul li {
+    list-style: none;
+}
+
+nav ul li a {
+    display: block;
+    text-decoration: none;
+    color: black;
+    padding: 0.5rem;
+    margin: 0 0.5rem;
+    border-radius: 0.5rem;
+    font-size: 24px;
+    transition: all ease 0.5s;
+}
+
+
+nav .menu {
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 2rem;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 2.25rem;
+    height: 2rem;
+    color: white;
+    height: 100%;
+}
+
+.hamburger{
+    color: #E1E1E1;
+}
+
+a:has(.shopping-cart-icon):hover .shopping-cart-icon{
+    color: #CB1919;
+  }
+  
+
+.shopping-cart-icon{
+    color: #E1E1E1;
+    text-shadow:2px 2px 4px #000000;
+    transition: all ease 0.5s;
+    font-size: 24px;
+}
+
+.right-end{
+    width: 200px;
+}
+
+
+@media (max-width: 1000px) {
+    nav .menu {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    nav {
+        flex-direction: column;
+        align-items: start;
+
+    }
+
+    nav ul {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        margin-bottom: 0.25rem;
+    }
+
+    nav ul li {
+        width: 100%;
+        text-align: center;
+    }
+
+    nav ul li a {
+        margin: 0.25rem 0.5rem;
+    }
+}
+
+
+.hamburger-menu-close{
+    display: none;
+    width: 100%;
+}
+.hamburger-menu-open{
+    display: block;
+}
+
+.right-end img{
+    height: 50px;
+    border-radius: 50%;
+    margin-left: 30%;
+}
+
+.right-end img.active{
+    border: 3px solid #FA0000;
+}
+
+
+
+.profile-menu{
+    width: 350px;
+    height: 480px;
+    border-radius: 20px;
+    background-color: white;
+    
+    position: absolute;
+    top: 110px;
+    right: 80px;
+    box-shadow: 10px 10px 40px rgb(58, 58, 58);
+    display: none;
+}
+.profile-menu-opened{
+    display: block;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+}
+
+.profile-menu img{
+    height: 70px;
+    border-radius: 50%;
+}
+
+.profile-username{
+    width: 100%;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    padding: 40px 50px;
+
+}
+.profile-username p{
+    margin-bottom: 0;
+    margin-left: 30px;
+    font-size: 26px;
+
+}
+
+.profile-links{
+    border-top: 1px solid #E1E1E1;
+    border-bottom: 1px solid #E1E1E1;
+    width: 80%;
+    padding: 20px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: -1px;
+    
+}
+
+.profile-links a{
+    text-decoration: none;
+    color: black;
+    font-size: 20px;
+}
+.signout{
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.signout a{
+    text-decoration: none;
+    color: black;
+    font-size: 20px;
+}
+
+.hamburger-menu{
+    width: 100%;
+    height: auto;
+    background-color: white;
+    position: absolute;
+    top: 100px;
+    display: none;
+}
+
+.hamburger-menu-opened{
+    display: block;
+}
+
+.hamburger-menu ul{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+}
+
+.hamburger-menu ul a{
+    color: black !important;
+    text-shadow: none !important;
+    padding: 15px 0;
+}
