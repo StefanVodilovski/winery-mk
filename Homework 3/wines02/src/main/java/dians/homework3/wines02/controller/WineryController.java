@@ -29,7 +29,7 @@ public class WineryController {
         return pipeWineriesService.filter(searchQuery, region);
     }
 
-    @GetMapping("find/{wineryId}")
+    @GetMapping("{wineryId}")
     public WineryDto getWineById(@PathVariable("wineryId") Long wineryId) {
         return wineryService.findById(wineryId);
     }

@@ -29,7 +29,7 @@ public class EventController {
         return pipeEventsService.filter(searchQuery, winery);
     }
 
-    @GetMapping("/find/{eventId}")
+    @GetMapping("{eventId}")
     public EventDto getWineById(@PathVariable("eventId") Long eventId) {
         return eventService.findById(eventId);
     }

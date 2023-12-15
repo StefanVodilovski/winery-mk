@@ -45,7 +45,7 @@ public class WineController {
         return pipeWinesService.filter(searchQuery, priceFilter, region, winery, litrage);
     }
 
-    @GetMapping("find/{wineId}")
+    @GetMapping("{wineId}")
     public WineDto getWineById(@PathVariable("wineId") Long wineId) {
         return wineService.findById(wineId);
     }
