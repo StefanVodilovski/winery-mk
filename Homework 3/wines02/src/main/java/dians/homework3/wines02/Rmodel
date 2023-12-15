@@ -1,0 +1,12 @@
+User (id#, username, password, phone_number, email, address, created_on, updated_on, cart_code*)
+Cart (code#, delivery_price)
+Role(id#, name)
+Event (code#, created_on, updated_n, start_date, end_date, name, description, address, user_id*)
+Order (code#, total_price, created_on, updated_on, user_id*)
+Wines (code#, name, price, stock, litrage, created_on, updated_on, photo_url, winery_code*)
+Winery (code#, name, description, address, photo_url, created_on, updated_on)
+User_roles (user_id#*, role_id#*)
+User_cart (user_id#*, car_code#*)
+Order_wines (order_code#*, wine_code#*, quantity)
+Cart_wines (cart_code#*, wine_code#*, quantity)
+

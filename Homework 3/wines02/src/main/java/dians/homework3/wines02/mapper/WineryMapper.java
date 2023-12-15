@@ -1,0 +1,34 @@
+package dians.homework3.wines02.mapper;
+
+import dians.homework3.wines02.dto.WineryDto;
+import dians.homework3.wines02.model.Winery;
+
+public class WineryMapper {
+    public static Winery mapToWinery(WineryDto wineryDto) {
+        return Winery.builder()
+                .Id(wineryDto.getId())
+                .description(wineryDto.getDescription())
+                .events(wineryDto.getEvents())
+                .name(wineryDto.getName())
+                .photoUrl(wineryDto.getPhotoUrl())
+                .xCordinate(wineryDto.getXCordinate())
+                .yCordinate(wineryDto.getYCordinate())
+                .region(wineryDto.getRegion())
+                .wines(wineryDto.getWines())
+                .build();
+    }
+
+    public static WineryDto mapToWineryDto(Winery winery) {
+        return WineryDto.builder()
+                .Id(winery.getId())
+                .description(winery.getDescription())
+                .events(winery.getEvents())
+                .name(winery.getName())
+                .photoUrl(winery.getPhotoUrl())
+                .xCordinate(winery.getXCordinate())
+                .yCordinate(winery.getYCordinate())
+                .region(winery.getRegion())
+                .wines(winery.getWines())
+                .build();
+    }
+}
