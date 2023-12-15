@@ -28,9 +28,8 @@ public class Wine {
     private Integer stock;
     private double litrage;
     private String photoUrl;
-    private Region region;
 
-    @ManyToOne(fetch = FetchType.EAGER)
     @OnDelete(action = OnDeleteAction.CASCADE)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Winery winery;
 }

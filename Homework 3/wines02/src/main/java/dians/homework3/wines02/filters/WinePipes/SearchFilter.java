@@ -1,4 +1,4 @@
-package dians.homework3.wines02.filters;
+package dians.homework3.wines02.filters.WinePipes;
 
 import dians.homework3.wines02.dto.WineDto;
 import org.springframework.stereotype.Component;

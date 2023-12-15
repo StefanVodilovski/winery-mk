@@ -11,7 +11,6 @@ public class CartMapper {
                 .updatedOn(cartDto.getUpdatedOn())
                 .createdBy(cartDto.getCreatedBy())
                 .createdOn(cartDto.getCreatedOn())
-                .totalAmount(cartDto.getTotalAmount())
                 .build();
     }
 
@@ -22,7 +21,6 @@ public class CartMapper {
                 .updatedOn(cart.getUpdatedOn())
                 .createdBy(cart.getCreatedBy())
                 .createdOn(cart.getCreatedOn())
-                .totalAmount(cart.getTotalAmount())
                 .build();
     }
 }

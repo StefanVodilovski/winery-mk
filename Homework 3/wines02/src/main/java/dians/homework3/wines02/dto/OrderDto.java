@@ -18,7 +18,6 @@ import java.util.List;
 public class OrderDto {
     private Long Id;
     private String code;
-    private Integer price;
     private Status status;
     private UserEntity createdBy;
     private List<AddWines> orderWines = new ArrayList<>();

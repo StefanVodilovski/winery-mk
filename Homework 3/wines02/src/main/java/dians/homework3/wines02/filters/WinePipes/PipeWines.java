@@ -1,4 +1,4 @@
-package dians.homework3.wines02.filters;
+package dians.homework3.wines02.filters.WinePipes;
 
 import dians.homework3.wines02.dto.WineDto;
 import lombok.Getter;
@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-@Getter
 public class PipeWines<T> {
     private List<Filter<T>> filters = new ArrayList<>();
 

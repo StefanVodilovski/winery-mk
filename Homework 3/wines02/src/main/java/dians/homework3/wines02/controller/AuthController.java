@@ -5,13 +5,11 @@ import dians.homework3.wines02.model.UserEntity;
 import dians.homework3.wines02.security.SecurityUtil;
 import dians.homework3.wines02.service.CartService;
 import dians.homework3.wines02.service.UserService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,52 +23,35 @@ public class AuthController {
         this.cartService = cartService;
     }
 
-//    @GetMapping("/register")
-//    public String getRegisterForm(Model model) {
-//        RegistrationDto user = new RegistrationDto();
-//        model.addAttribute("user", user);
-//        return "register";
-//    }
-
     @PostMapping("/register/save")
-    public String register(@ModelAttribute("user") RegistrationDto user, BindingResult result, Model model) {
+    public ResponseEntity<String> registerUser(@RequestBody RegistrationDto user) {
         UserEntity existedUserEmail = userService.findByEmail(user.getEmail());
         if(existedUserEmail != null && existedUserEmail.getEmail() != null && !existedUserEmail.getEmail().isEmpty()) {
-            return "redirect:/register?fail";
+            ResponseEntity.ok("Registration failed");
         }
 
         UserEntity existedUserUsername = userService.findByUsername(user.getUsername());
         if(existedUserUsername != null && existedUserUsername.getUsername() != null && !existedUserUsername.getUsername().isEmpty()) {
-            return "redirect:/register?fail";
-        }
-
-        if(result.hasErrors()) {
-            model.addAttribute("user", user);
-            return "register";
+            ResponseEntity.ok("Registration failed");
         }
         UserEntity userEntity = userService.saveUser(user);
         cartService.saveCart(userEntity);
-        return "redirect:/login?success";
+        return ResponseEntity.ok("User registered successfully");
     }
 
-//    @GetMapping("/login")
-//    public String loginPage() {
-//        return "login";
+//    @GetMapping("/user/manager")
+//    private  String getAllUsers(Model model) {
+//        List<UserEntity> users = userService.findAll();
+//        model.addAttribute("users", users);
+//        return "users_list";
 //    }
-
-    @GetMapping("/user/manager")
-    private  String getAllUsers(Model model) {
-        List<UserEntity> users = userService.findAll();
-        model.addAttribute("users", users);
-        return "users_list";
-    }
-
-    @GetMapping("/staff/manager")
-    private  String getAllStaff(Model model) {
-        List<UserEntity> users = userService.findAllStaff();
-        model.addAttribute("users", users);
-        return "staff_list";
-    }
+//
+//    @GetMapping("/staff/manager")
+//    private  String getAllStaff(Model model) {
+//        List<UserEntity> users = userService.findAllStaff();
+//        model.addAttribute("users", users);
+//        return "staff_list";
+//    }
 
 //    @GetMapping("/user/{userId}/delete")
 //    private String deleteUser(@PathVariable("userId") Long userId) {

@@ -7,7 +7,6 @@ public class OrderMapper {
     public static Order mapToOrder(OrderDto orderDto) {
         return Order.builder()
                 .Id(orderDto.getId())
-                .price(orderDto.getPrice())
                 .orderWines(orderDto.getOrderWines())
                 .code(orderDto.getCode())
                 .updatedOn(orderDto.getUpdatedOn())
@@ -20,7 +19,6 @@ public class OrderMapper {
     public static OrderDto mapToOrderDto(Order order) {
         return OrderDto.builder()
                 .Id(order.getId())
-                .price(order.getPrice())
                 .orderWines(order.getOrderWines())
                 .code(order.getCode())
                 .updatedOn(order.getUpdatedOn())

@@ -13,7 +13,6 @@ public class WineMapper {
                 .photoUrl(wineDto.getPhotoUrl())
                 .price(wineDto.getPrice())
                 .winery(wineDto.getWinery())
-                .region(wineDto.getRegion())
                 .build();
     }
 
@@ -26,7 +25,6 @@ public class WineMapper {
                 .photoUrl(wine.getPhotoUrl())
                 .price(wine.getPrice())
                 .winery(wine.getWinery())
-                .region(wine.getRegion())
                 .build();
     }
 }

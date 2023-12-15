@@ -1,11 +1,10 @@
 package dians.homework3.wines02.service.Impl;
 
 import dians.homework3.wines02.dto.WineDto;
-import dians.homework3.wines02.filters.*;
+import dians.homework3.wines02.filters.WinePipes.*;
 import dians.homework3.wines02.mapper.WineMapper;
 import dians.homework3.wines02.repository.WineRepository;
 import dians.homework3.wines02.service.PipeWinesService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -20,7 +19,7 @@ public class PipeWinesServiceImpl implements PipeWinesService {
     private final RegionFilter regionFilter;
     private final WineryFilter wineryFilter;
     private final SearchFilter searchFilter;
-    WineRepository wineRepository;
+    private final WineRepository wineRepository;
 
     public PipeWinesServiceImpl(WineRepository wineRepository) {
         this.pipeWines = new PipeWines<>();

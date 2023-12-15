@@ -21,6 +21,6 @@ public class AddWinesDto {
     private LocalDateTime createdOn;
     private LocalDateTime updatedOn;
     private Wine wine;
-    private List<Order> order = new ArrayList<>();
-    private List<Cart> cart = new ArrayList<>();
+    private Order order;
+    private Cart cart;
 }

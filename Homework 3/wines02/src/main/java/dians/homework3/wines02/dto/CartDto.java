@@ -16,7 +16,6 @@ import java.util.List;
 @NoArgsConstructor
 public class CartDto {
     private Long Id;
-    private Integer totalAmount;
     private UserEntity createdBy = null;
     private List<AddWines> cartWines = new ArrayList<>();
     private LocalDateTime createdOn;

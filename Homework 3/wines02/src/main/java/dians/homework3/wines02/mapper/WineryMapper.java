@@ -11,6 +11,10 @@ public class WineryMapper {
                 .events(wineryDto.getEvents())
                 .name(wineryDto.getName())
                 .photoUrl(wineryDto.getPhotoUrl())
+                .xCordinate(wineryDto.getXCordinate())
+                .yCordinate(wineryDto.getYCordinate())
+                .region(wineryDto.getRegion())
+                .wines(wineryDto.getWines())
                 .build();
     }
 
@@ -21,6 +25,10 @@ public class WineryMapper {
                 .events(winery.getEvents())
                 .name(winery.getName())
                 .photoUrl(winery.getPhotoUrl())
+                .xCordinate(winery.getXCordinate())
+                .yCordinate(winery.getYCordinate())
+                .region(winery.getRegion())
+                .wines(winery.getWines())
                 .build();
     }
 }

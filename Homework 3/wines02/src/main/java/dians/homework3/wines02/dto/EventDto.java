@@ -1,5 +1,6 @@
 package dians.homework3.wines02.dto;
 
+import dians.homework3.wines02.model.EventComment;
 import dians.homework3.wines02.model.UserEntity;
 import dians.homework3.wines02.model.Winery;
 import lombok.AllArgsConstructor;
@@ -24,6 +25,7 @@ public class EventDto {
     private String geolocation;
     private List<Winery> wineries = new ArrayList<>();
     private UserEntity createdBy;
+    private List<EventComment> comments = new ArrayList<>();
     private LocalDateTime createdOn;
     private LocalDateTime updatedOn;
 }

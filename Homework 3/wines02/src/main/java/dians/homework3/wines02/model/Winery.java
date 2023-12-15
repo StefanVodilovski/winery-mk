@@ -26,7 +26,13 @@ public class Winery {
     private String name;
     private String description;
     private String photoUrl;
+    private double xCordinate;
+    private double yCordinate;
+    private Region region;
 
     @ManyToMany(mappedBy = "wineries", fetch = FetchType.EAGER)
     private List<Event> events = new ArrayList<>();
+
+    @OneToMany(mappedBy = "winery", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Wine> wines;
 }

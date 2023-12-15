@@ -10,7 +10,7 @@ import java.util.List;
 
 @Service
 public class CartServiceImpl implements CartService {
-    CartRepository cartRepository;
+    private final CartRepository cartRepository;
 
     public CartServiceImpl(CartRepository cartRepository) {
         this.cartRepository = cartRepository;

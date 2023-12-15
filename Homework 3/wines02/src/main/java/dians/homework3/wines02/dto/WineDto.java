@@ -1,12 +1,10 @@
 package dians.homework3.wines02.dto;
 
-import dians.homework3.wines02.model.Region;
 import dians.homework3.wines02.model.Winery;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import java.time.LocalDateTime;
 
 @Data
 @Builder
@@ -20,5 +18,4 @@ public class WineDto {
     private double litrage;
     private String photoUrl;
     private Winery winery;
-    private Region region;
 }

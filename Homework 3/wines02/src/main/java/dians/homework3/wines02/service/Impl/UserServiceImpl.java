@@ -58,10 +58,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void deleteById(Long userId) {
-        UserEntity user = userRepository.getById(userId);
-        Role role = roleRepository.getReferenceById(1L);
-        user.getRoles().remove(role);
-        userRepository.deleteById(userId);
+//        UserEntity user = userRepository.getById(userId);
+//        Role role = roleRepository.getReferenceById(1L);
+//        user.getRoles().remove(role);
+//        userRepository.deleteById(userId);
     }
 
     @Override

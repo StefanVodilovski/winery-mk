@@ -17,6 +17,7 @@ public class EventMapper {
                 .startDateTime(eventDto.getStartDateTime())
                 .updatedOn(eventDto.getUpdatedOn())
                 .wineries(eventDto.getWineries())
+                .comments(eventDto.getComments())
                 .build();
     }
 
@@ -33,6 +34,7 @@ public class EventMapper {
                 .startDateTime(event.getStartDateTime())
                 .updatedOn(event.getUpdatedOn())
                 .wineries(event.getWineries())
+                .comments(event.getComments())
                 .build();
     }
 }
