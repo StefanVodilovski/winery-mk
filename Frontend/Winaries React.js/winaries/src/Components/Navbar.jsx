@@ -122,7 +122,7 @@ export const Navbar = () => {
                     <NavLink to="#" onClick={() => {closeProfileMenu(); closeHamburgerMenu();}}>View your orders</NavLink>
                 </div>
                 <div className='profile-links'>
-                    <NavLink to="#" onClick={() => {closeProfileMenu(); closeHamburgerMenu();}}>Create event</NavLink>
+                    <NavLink to="/create-event" onClick={() => {closeProfileMenu(); closeHamburgerMenu();}}>Create event</NavLink>
                 </div>
                 <div className='signout'>
                     <NavLink to="/logout" onClick={() => {closeProfileMenu(); closeHamburgerMenu();}}>SIGN OUT</NavLink>
