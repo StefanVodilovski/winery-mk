@@ -104,7 +104,7 @@ footer button {
     background-color: #504c4c;
     border: none;
     border-radius: 7px;
-    box-shadow: 10px 10px 20px black;
+    box-shadow: 10px 10px 20px rgb(22, 22, 22);
 }
 
 #submit-button {

@@ -41,6 +41,9 @@ export const Profile = () => {
 
                         <label htmlFor="phoneNumber">Phone Number</label>
                         <input type="text" name="phoneNumber" id="phoneNumber" placeholder='Phone Number...'/>
+
+                        <label htmlFor="address">Address</label>
+                        <input type="text" name="address" id="address" placeholder='Address...'/>
                     </div>
                     <div className='input-container'>
                         <p>Profile picture</p>
