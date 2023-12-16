@@ -5,7 +5,7 @@ import "./css/Register.css"
 export const Register = () => {
     return (
         <div className='register-container'>
-            <form>
+            <form method='POST' action='http://localhost:8080/register/save'>
                 <h1>REGISTER</h1>
                 <div className='input-outer-container'>
                     <div className='input-container'>

@@ -24,7 +24,20 @@ public class AuthController {
     }
 
     @PostMapping("/register/save")
-    public ResponseEntity<String> registerUser(@RequestBody RegistrationDto user) {
+    public ResponseEntity<String> registerUser(@RequestParam String email,
+                                               @RequestParam String username,
+                                               @RequestParam String password,
+                                               @RequestParam String confirmPassword,
+                                               @RequestParam String phoneNumber,
+                                               @RequestParam String address) {
+
+        RegistrationDto user = new RegistrationDto();
+        user.setEmail(email);
+        user.setUsername(username);
+        user.setPassword(password);
+        user.setPhoneNumber(phoneNumber);
+        user.setAddress(address);
+
         UserEntity existedUserEmail = userService.findByEmail(user.getEmail());
         if(existedUserEmail != null && existedUserEmail.getEmail() != null && !existedUserEmail.getEmail().isEmpty()) {
             ResponseEntity.ok("Registration failed");

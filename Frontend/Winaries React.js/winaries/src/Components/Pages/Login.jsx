@@ -4,12 +4,12 @@ import "./css/Login.css"
 export const Login = () => {
     return (
         <div className='login-container'>
-            <form>
+            <form method='POST' action='http://localhost:8080/login'>
                 <h1>LOG IN</h1>
                 <div className='input-outer-container'>
                     <div className='input-container'>
-                        <label htmlFor="email">Email</label>
-                        <input type="text" name="email" id="email" placeholder='Email...'/>
+                        <label htmlFor="username">Email</label>
+                        <input type="text" name="username" id="username" placeholder='Email...'/>
                     </div>
                     <div className='input-container'>
                         <label htmlFor="password">Password</label>
