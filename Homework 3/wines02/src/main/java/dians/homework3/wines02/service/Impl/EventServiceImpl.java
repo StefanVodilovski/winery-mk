@@ -31,7 +31,7 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public EventDto findById(Long eventId) {
-        Optional<Event> event = eventRepository.geById(eventId);
+        Optional<Event> event = eventRepository.findById(eventId);
         if (event.isPresent()) {
             return mapToEventDto(event.get());
         }

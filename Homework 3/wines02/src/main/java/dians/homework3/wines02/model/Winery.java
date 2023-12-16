@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -33,6 +34,4 @@ public class Winery {
     @ManyToMany(mappedBy = "wineries", fetch = FetchType.EAGER)
     private List<Event> events = new ArrayList<>();
 
-    @OneToMany(mappedBy = "winery", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Wine> wines;
 }

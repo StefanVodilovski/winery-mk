@@ -5,10 +5,12 @@ import dians.homework3.wines02.dto.CartDto;
 import dians.homework3.wines02.dto.WineDto;
 import dians.homework3.wines02.model.AddWines;
 import dians.homework3.wines02.model.UserEntity;
+import dians.homework3.wines02.model.Wine;
 import dians.homework3.wines02.service.AddWinesService;
 import dians.homework3.wines02.service.PipeWinesService;
 import dians.homework3.wines02.service.UserService;
 import dians.homework3.wines02.service.WineService;
+import org.hibernate.Hibernate;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,6 +18,7 @@ import java.util.List;
 
 import static dians.homework3.wines02.mapper.WineMapper.mapToWine;
 
+@CrossOrigin("http://localhost:3001")
 @RestController
 @RequestMapping("/wines/")
 public class WineController {

@@ -24,5 +24,4 @@ public class WineryDto {
     private double yCordinate;
     private Region region;
     private List<Event> events = new ArrayList<>();
-    private List<Wine> wines;
 }

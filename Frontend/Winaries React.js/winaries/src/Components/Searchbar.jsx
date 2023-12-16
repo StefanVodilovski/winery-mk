@@ -12,15 +12,16 @@ export const Searchbar = ({ setResults }) => {
         // region=
         // winery=
         // literage= 
-        let url = 'https://jsonplaceholder.typicode.com'
+        let url = 'http://localhost:8080/wines/1';
         fetch(url)
-            .then((response) => response.json())
-            .then((json) => {
-                const results = json.filter((item) => {
-                    return (value && item && item.name && item.name.toLowerCase().includes(value))
-                });
-                setResults(results)
-            });
+        .then((response) => response.json())
+        .then((json) => {
+            console.log(json);
+            setResults(json);
+        })
+        .catch((error) => {
+            console.error('Error fetching data:', error);
+        });
     };
 
     const handleChange = (value) => {

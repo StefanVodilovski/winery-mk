@@ -14,7 +14,6 @@ public class WineryMapper {
                 .xCordinate(wineryDto.getXCordinate())
                 .yCordinate(wineryDto.getYCordinate())
                 .region(wineryDto.getRegion())
-                .wines(wineryDto.getWines())
                 .build();
     }
 
@@ -28,7 +27,6 @@ public class WineryMapper {
                 .xCordinate(winery.getXCordinate())
                 .yCordinate(winery.getYCordinate())
                 .region(winery.getRegion())
-                .wines(winery.getWines())
                 .build();
     }
 }
