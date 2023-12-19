@@ -15,8 +15,7 @@ import java.time.LocalDateTime;
 public class EventCommentDto {
     private Long Id;
     private String content;
-    private UserEntity createdBy;
-    private Event event;
+    private UserDto createdBy;
     private LocalDateTime createdOn;
     private LocalDateTime updatedOn;
 }

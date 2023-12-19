@@ -30,16 +30,18 @@ public class Event {
     private LocalDateTime endDateTime;
     private String photoUrl;
     private String description;
-    private String geolocation;
+    private double xCordinate;
+    private double yCordinate;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @ManyToMany(cascade = CascadeType.MERGE)
+    @Fetch(FetchMode.SELECT)
     @JoinTable(name = "event_wineries",
             joinColumns = @JoinColumn(name = "event_id"),
             inverseJoinColumns = @JoinColumn(name = "winery_id"))
     private List<Winery> wineries = new ArrayList<>();
 
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private UserEntity createdBy;
 

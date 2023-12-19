@@ -1,20 +1,21 @@
 package dians.homework3.wines02.service.Impl;
 
+import dians.homework3.wines02.dto.EventCommentDto;
 import dians.homework3.wines02.dto.EventDto;
-import dians.homework3.wines02.dto.WineDto;
+import dians.homework3.wines02.mapper.EventCommentMapper;
 import dians.homework3.wines02.mapper.EventMapper;
 import dians.homework3.wines02.model.Event;
-import dians.homework3.wines02.model.Wine;
 import dians.homework3.wines02.repository.EventRepository;
 import dians.homework3.wines02.service.EventService;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static dians.homework3.wines02.mapper.EventMapper.mapToEventDto;
-import static dians.homework3.wines02.mapper.WineMapper.mapToWineDto;
 
 @Service
 public class EventServiceImpl implements EventService {
@@ -31,9 +32,29 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public EventDto findById(Long eventId) {
-        Optional<Event> event = eventRepository.geById(eventId);
+        Optional<Event> event = eventRepository.findById(eventId);
         if (event.isPresent()) {
             return mapToEventDto(event.get());
+        }
+        return new EventDto();
+    }
+
+    @Override
+    @Transactional
+    public List<EventCommentDto> findCommentsById(Long eventId) {
+        Optional<Event> event = eventRepository.findById(eventId);
+        return event.map(value -> value.getComments().stream().map(EventCommentMapper::mapToEventCommentDto).collect(Collectors.toList())).orElseGet(ArrayList::new);
+    }
+
+    @Override
+    public EventDto findAll(Long eventId) {
+        Optional<Event> eventWithWineries = eventRepository.findByIdWithWineries(eventId);
+        Optional<Event> eventWithComments = eventRepository.findByIdWithComments(eventId);
+
+        if(eventWithWineries.isPresent() && eventWithComments.isPresent()) {
+            Event mergedEvent = eventWithWineries.get();
+            mergedEvent.setComments(eventWithComments.get().getComments());
+            return mapToEventDto(mergedEvent);
         }
         return new EventDto();
     }

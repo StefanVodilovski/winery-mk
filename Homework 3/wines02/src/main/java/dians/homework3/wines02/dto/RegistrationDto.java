@@ -1,5 +1,6 @@
 package dians.homework3.wines02.dto;
 
+import dians.homework3.wines02.model.UserEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

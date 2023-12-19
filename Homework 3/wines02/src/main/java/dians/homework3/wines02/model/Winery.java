@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
@@ -18,7 +20,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name="winery")
+@Table(name = "winery")
 public class Winery {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,5 +36,6 @@ public class Winery {
     private List<Event> events = new ArrayList<>();
 
     @OneToMany(mappedBy = "winery", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Wine> wines;
+    @Fetch(FetchMode.SELECT)
+    private List<Wine> wines = new ArrayList<>();
 }

@@ -17,5 +17,5 @@ public class WineDto {
     private Integer stock;
     private double litrage;
     private String photoUrl;
-    private Winery winery;
+    private WineryDto2 winery;
 }

@@ -30,8 +30,8 @@ public class Order {
     @JoinColumn(name = "created_by")
     private UserEntity createdBy;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
-    @Fetch(FetchMode.SELECT)
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @Fetch(FetchMode.JOIN)
     private List<AddWines> orderWines = new ArrayList<>();
 
     @CreationTimestamp

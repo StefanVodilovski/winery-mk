@@ -16,11 +16,12 @@ public class AddWinesServiceImpl implements AddWinesService {
     }
 
     @Override
-    public void createAddWine(Wine wine, String quantity, Cart cart) {
+    public AddWines createAddWine(Wine wine, String quantity, Cart cart) {
         AddWines addWines = new AddWines();
         addWines.setWine(wine);
         addWines.setCart(cart);
         addWines.setQuantity(Integer.parseInt(quantity));
         addWinesRepository.save(addWines);
+        return addWines;
     }
 }
