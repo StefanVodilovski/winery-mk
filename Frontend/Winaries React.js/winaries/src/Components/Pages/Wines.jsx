@@ -36,14 +36,17 @@ export const Wines = () => {
         fetchData(query_data)
     };
 
-    const fetchData = (value) => {
+    const fetchData = (query_data) => {
         // ova url e /wines/filter 
         // searchQuery=value.
         // priceFilter=
         // region=
         // winery=
         // literage= 
-        let url = 'http://localhost:8080/wines/filter?searchQuery=' + value.searchQuery + "&priceFilter=" + value.priceFilter + "&region=" + value.region + "&winery=" + value.winery + "&litrage=" + value.litrage;
+        let url = 'http://localhost:8080/wines/filter?searchQuery=' + query_data.searchQuery.value 
+        + "&priceFilter=" + query_data.priceFilter.value + "&region=" + query_data.region.value 
+        + "&winery=" + query_data.winery.value + "&litrage=" + query_data.litrage.value;
+        console.log(url)
         fetch(url)
             .then((response) => response.json())
             .then((json) => {
