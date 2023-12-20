@@ -2,6 +2,7 @@ package dians.homework3.wines02.service.Impl;
 
 import dians.homework3.wines02.dto.EventCommentDto;
 import dians.homework3.wines02.dto.EventDto;
+import dians.homework3.wines02.dto.EventDto2;
 import dians.homework3.wines02.mapper.EventCommentMapper;
 import dians.homework3.wines02.mapper.EventMapper;
 import dians.homework3.wines02.model.Event;
@@ -26,17 +27,14 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public List<EventDto> getAll() {
-        return eventRepository.findAll().stream().map(EventMapper::mapToEventDto).collect(Collectors.toList());
+    public List<EventDto2> getAll() {
+        return eventRepository.findAll().stream().map(EventMapper::mapToEventDto2).collect(Collectors.toList());
     }
 
     @Override
     public EventDto findById(Long eventId) {
         Optional<Event> event = eventRepository.findById(eventId);
-        if (event.isPresent()) {
-            return mapToEventDto(event.get());
-        }
-        return new EventDto();
+        return event.map(EventMapper::mapToEventDto).orElse(null);
     }
 
     @Override

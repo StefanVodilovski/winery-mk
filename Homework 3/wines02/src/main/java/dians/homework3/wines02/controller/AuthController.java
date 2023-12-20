@@ -24,16 +24,26 @@ public class AuthController {
     }
 
     @PostMapping("/register/save")
-    public ResponseEntity<String> registerUser(@RequestBody RegistrationDto user) {
-        UserEntity existedUserEmail = userService.findByEmail(user.getEmail());
+    public ResponseEntity<String> registerUser(@RequestParam String email,
+                                               @RequestParam String password,
+                                               @RequestParam String address,
+                                               @RequestParam String username,
+                                               @RequestParam String phoneNumber) {
+        UserEntity existedUserEmail = userService.findByEmail(email);
         if(existedUserEmail != null && existedUserEmail.getEmail() != null && !existedUserEmail.getEmail().isEmpty()) {
             ResponseEntity.ok("Registration failed");
         }
 
-        UserEntity existedUserUsername = userService.findByUsername(user.getUsername());
+        UserEntity existedUserUsername = userService.findByUsername(username);
         if(existedUserUsername != null && existedUserUsername.getUsername() != null && !existedUserUsername.getUsername().isEmpty()) {
             ResponseEntity.ok("Registration failed");
         }
+        RegistrationDto user = new RegistrationDto();
+        user.setAddress(address);
+        user.setEmail(email);
+        user.setUsername(username);
+        user.setPhoneNumber(phoneNumber);
+        user.setPassword(password);
         UserEntity userEntity = userService.saveUser(user);
         cartService.saveCart(userEntity);
         return ResponseEntity.ok("User registered successfully");

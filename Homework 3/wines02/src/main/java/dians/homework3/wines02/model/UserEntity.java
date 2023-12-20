@@ -11,6 +11,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import static javax.persistence.FetchType.EAGER;
+
 @Getter
 @Setter
 @Data
@@ -30,7 +32,7 @@ public class UserEntity {
     private String address;
     private String photoUrl;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = EAGER, cascade = CascadeType.ALL)
     @JoinTable(
             name = "users_role",
             joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "Id")},
@@ -41,9 +43,9 @@ public class UserEntity {
     @OneToMany(mappedBy = "createdBy", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Event> events = new ArrayList<>();
 
-    @OneToMany(mappedBy = "createdBy", cascade = CascadeType.ALL, orphanRemoval = true)
-    @Fetch(FetchMode.SELECT)
-    private List<Order> orders = new ArrayList<>();
+//    @OneToMany(mappedBy = "createdBy", cascade = CascadeType.ALL, orphanRemoval = true)
+//    @Fetch(FetchMode.SELECT)
+//    private List<Order> orders = new ArrayList<>();
 
     @OneToOne(mappedBy = "createdBy", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private Cart cart = null;

@@ -1,6 +1,8 @@
 package dians.homework3.wines02.service.Impl;
 
+import dians.homework3.wines02.dto.WineDto;
 import dians.homework3.wines02.dto.WineryDto;
+import dians.homework3.wines02.mapper.WineMapper;
 import dians.homework3.wines02.mapper.WineryMapper;
 import dians.homework3.wines02.model.Winery;
 import dians.homework3.wines02.repository.WineryRepository;
@@ -40,5 +42,11 @@ public class WineryServiceImpl implements WineryService {
         } catch (NotFoundException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public List<WineDto> getAllWineryWines(Long wineryId) {
+        Optional<Winery> winery = wineryRepository.findById(wineryId);
+        return winery.map(value -> value.getWines().stream().map(WineMapper::mapToWineDto).collect(Collectors.toList())).orElse(null);
     }
 }

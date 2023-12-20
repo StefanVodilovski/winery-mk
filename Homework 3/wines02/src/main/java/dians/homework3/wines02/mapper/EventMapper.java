@@ -1,6 +1,7 @@
 package dians.homework3.wines02.mapper;
 
 import dians.homework3.wines02.dto.EventDto;
+import dians.homework3.wines02.dto.EventDto2;
 import dians.homework3.wines02.model.Event;
 
 import javax.transaction.Transactional;
@@ -37,6 +38,14 @@ public class EventMapper {
                 .comments(event.getComments().stream().map(EventCommentMapper::mapToEventCommentDto).collect(Collectors.toList()))
                 .xCordinate(event.getXCordinate())
                 .yCordinate(event.getYCordinate())
+                .build();
+    }
+
+    public static EventDto2 mapToEventDto2(Event event) {
+        return EventDto2.builder()
+                .name(event.getName())
+                .description(event.getDescription())
+                .photoUrl(event.getPhotoUrl())
                 .build();
     }
 }
