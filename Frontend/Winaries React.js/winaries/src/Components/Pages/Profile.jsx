@@ -47,9 +47,9 @@ export const Profile = () => {
                     </div>
                     <div className='input-container'>
                         <p>Profile picture</p>
-                        <div class="profile-pic">
-                            <label class="-label" for="file">
-                                <span class="glyphicon glyphicon-camera"></span>
+                        <div className="profile-pic">
+                            <label className="-label" for="file">
+                                <span className="glyphicon glyphicon-camera"></span>
                                 <span><FontAwesomeIcon icon={faPlus}/></span>
                             </label>
                             <input id="file" type="file" onChange={loadFile} accept="image/png, image/gif, image/jpeg"/>

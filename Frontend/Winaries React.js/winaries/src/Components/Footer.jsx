@@ -6,8 +6,8 @@ export const Footer = () => {
 
     return (
         <footer>
-            <div class="content">
-                <div class="left-section">
+            <div className="content">
+                <div className="left-section">
                     <h1>CONTACT</h1>
                     <p>
                         Help us enhance your experience with our web application.
@@ -15,13 +15,13 @@ export const Footer = () => {
                         Share your opinions on how we can improve and better cater to your needs.
                     </p>
                 </div>
-                <div class="right-section">
-                    <div class="form-container">
+                <div className="right-section">
+                    <div className="form-container">
                         <form>
                             <div>
                                 <textarea name="description" placeholder="Write your thoughts..." required></textarea>
                             </div>
-                            <div class="input-container">
+                            <div className="input-container">
                                 <input type="text" name="email" placeholder="Enter your e-mail..." required/><br/>
             
 
@@ -30,7 +30,7 @@ export const Footer = () => {
 
                         </form>
                     </div>
-                    <div class="socials">
+                    <div className="socials">
                         <FontAwesomeIcon icon={faInstagram} size="2x" />
                         <FontAwesomeIcon icon={faFacebook} size="2x" />
                     </div>

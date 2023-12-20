@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link, NavLink } from "react-router-dom"
 import logoImage from '../images/logoWhite.png';
-import BagImage from '../images/BagImage.png';
 import "./Navbar.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBagShopping, faBars} from '@fortawesome/free-solid-svg-icons'
