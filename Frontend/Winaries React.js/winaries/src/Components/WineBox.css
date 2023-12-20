@@ -79,7 +79,6 @@ html {
 
 .displayStack__1,
 .displayStack__2 {
-    margin: 2rem 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -88,6 +87,7 @@ html {
 .productPrice {
     font-size: 1.5rem;
     font-weight: bold;
+    color: #CB1919;
 }
 
 .productSales,

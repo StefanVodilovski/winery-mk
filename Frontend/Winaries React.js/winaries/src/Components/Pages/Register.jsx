@@ -1,11 +1,38 @@
-import React from 'react'
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import "./css/Register.css"
 
 
 export const Register = () => {
+
+    const [registrationStatus, setRegistrationStatus] = useState(null);
+    const navigate = useNavigate();
+
+    const handleRegistration = async (event) => {
+        event.preventDefault();
+
+        console.log(event.currentTarget);
+      
+        try {
+          const formData = new FormData(event.currentTarget);
+      
+          const response = await axios.post('http://localhost:8080/auth/register/save', formData);
+      
+          if (response.status === 200) {
+            setRegistrationStatus('success');
+            navigate('/login');
+          } else {
+            console.error('Registration failed. Status:', response.status);
+          }
+        } catch (error) {
+          console.error('Registration failed', error);
+        }
+      };
+
     return (
         <div className='register-container'>
-            <form method='POST' action='http://localhost:8080/register/save'>
+            <form onSubmit={handleRegistration}>
                 <h1>REGISTER</h1>
                 <div className='input-outer-container'>
                     <div className='input-container'>
