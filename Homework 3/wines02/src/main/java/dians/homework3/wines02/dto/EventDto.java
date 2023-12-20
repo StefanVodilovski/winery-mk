@@ -9,6 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.transaction.Transactional;
+import java.math.BigInteger;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +24,7 @@ public class EventDto {
     private String name;
     private LocalDateTime startDateTime;
     private LocalDateTime endDateTime;
-    private String photoUrl;
+    private byte[] photo;
     private String description;
     private double xCordinate;
     private double yCordinate;

@@ -33,7 +33,6 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public EventDto findById(Long eventId) {
-<<<<<<< HEAD
         Optional<Event> event = eventRepository.findById(eventId);
         return event.map(EventMapper::mapToEventDto).orElse(null);
     }
@@ -54,9 +53,6 @@ public class EventServiceImpl implements EventService {
             Event mergedEvent = eventWithWineries.get();
             mergedEvent.setComments(eventWithComments.get().getComments());
             return mapToEventDto(mergedEvent);
-        Optional<Event> event = eventRepository.geById(eventId);
-        if (event.isPresent()) {
-            return mapToEventDto(event.get());
         }
         return new EventDto();
     }

@@ -5,5 +5,4 @@ import dians.homework3.wines02.model.Cart;
 import dians.homework3.wines02.model.Wine;
 
 public interface AddWinesService {
-    AddWines createAddWine(Wine wine, String quantity, Cart cart);
 }

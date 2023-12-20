@@ -1,6 +1,7 @@
 package dians.homework3.wines02.controller;
 
 import dians.homework3.wines02.dto.RegistrationDto;
+import dians.homework3.wines02.dto.WineDto;
 import dians.homework3.wines02.model.UserEntity;
 import dians.homework3.wines02.security.SecurityUtil;
 import dians.homework3.wines02.service.CartService;
@@ -27,11 +28,9 @@ public class AuthController {
     public ResponseEntity<String> registerUser(@RequestParam String email,
                                                @RequestParam String username,
                                                @RequestParam String password,
-                                               @RequestParam String confirmPassword,
                                                @RequestParam String phoneNumber,
                                                @RequestParam String address) {
-
-        UserEntity existedUserEmail = userService.findByEmail(user.getEmail());
+        UserEntity existedUserEmail = userService.findByEmail(email);
         if(existedUserEmail != null && existedUserEmail.getEmail() != null && !existedUserEmail.getEmail().isEmpty()) {
             ResponseEntity.ok("Registration failed");
         }
@@ -48,7 +47,7 @@ public class AuthController {
         user.setPhoneNumber(phoneNumber);
         user.setPassword(password);
         UserEntity userEntity = userService.saveUser(user);
-        cartService.saveCart(userEntity);
+        cartService.save(userEntity);
         return ResponseEntity.ok("User registered successfully");
     }
 

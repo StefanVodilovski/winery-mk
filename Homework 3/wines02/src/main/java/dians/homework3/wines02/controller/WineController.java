@@ -1,8 +1,18 @@
 package dians.homework3.wines02.controller;
 
+
+import dians.homework3.wines02.dto.WineDto;
+import dians.homework3.wines02.model.AddWines;
+import dians.homework3.wines02.model.Cart;
+import dians.homework3.wines02.model.UserEntity;
+import dians.homework3.wines02.security.SecurityUtil;
+import dians.homework3.wines02.service.*;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
-import static dians.homework3.wines02.mapper.CartMapper.mapToCart;
 import static dians.homework3.wines02.mapper.WineMapper.mapToWine;
 
 @CrossOrigin("http://localhost:3001")
@@ -44,11 +54,10 @@ public class WineController {
 
     @GetMapping("add/cart/item/{wineId}")
     public ResponseEntity<AddWines> putToCart(@PathVariable("wineId") Long wineId,
-                            @RequestParam("quantity") String quantity) {
+                                              @RequestParam("quantity") String quantity) {
         UserEntity user = userService.findByEmail(SecurityUtil.getSessionUser());
-        Cart cart = user.getCart();
-        AddWines addWines = addWinesService.createAddWine(mapToWine(wineService.findById(wineId)), quantity,user.getCart());
-        cart.getCartWines().add(addWines);
-        return new ResponseEntity<>(addWines ,HttpStatus.OK);
+        WineDto wine = wineService.findById(wineId);
+        cartService.saveCart(user, wine, Integer.parseInt(quantity));
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

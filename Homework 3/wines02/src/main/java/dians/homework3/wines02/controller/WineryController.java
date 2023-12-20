@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin("http://localhost:3001")
 @RestController
 @RequestMapping("/wineries/")
 public class WineryController {
