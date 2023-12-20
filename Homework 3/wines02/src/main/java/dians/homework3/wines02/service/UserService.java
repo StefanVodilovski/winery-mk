@@ -19,6 +19,4 @@ public interface UserService {
 
     UserEntity findById(Long userId);
 
-
-    List<UserEntity> findAllStaff();
 }

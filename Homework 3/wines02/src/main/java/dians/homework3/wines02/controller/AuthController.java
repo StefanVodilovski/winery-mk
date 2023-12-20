@@ -39,28 +39,6 @@ public class AuthController {
         return ResponseEntity.ok("User registered successfully");
     }
 
-//    @GetMapping("/user/manager")
-//    private  String getAllUsers(Model model) {
-//        List<UserEntity> users = userService.findAll();
-//        model.addAttribute("users", users);
-//        return "users_list";
-//    }
-//
-//    @GetMapping("/staff/manager")
-//    private  String getAllStaff(Model model) {
-//        List<UserEntity> users = userService.findAllStaff();
-//        model.addAttribute("users", users);
-//        return "staff_list";
-//    }
-
-//    @GetMapping("/user/{userId}/delete")
-//    private String deleteUser(@PathVariable("userId") Long userId) {
-//        UserEntity user = userService.findById(userId);
-//        cartService.deleteById(user.getCart().getId());
-//        userService.deleteById(userId);
-//        return "redirect:/user/manager";
-//    }
-
     @GetMapping("/user/{userId}/edit")
     private String editUser(@PathVariable("userId") Long userId, Model model) {
         UserEntity user = userService.findById(userId);

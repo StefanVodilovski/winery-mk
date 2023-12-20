@@ -23,6 +23,7 @@ public class UserEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
     private String username;
+    @Column(unique = true)
     private String email;
     private String password;
     private String phoneNumber;
@@ -44,7 +45,7 @@ public class UserEntity {
     @Fetch(FetchMode.SELECT)
     private List<Order> orders = new ArrayList<>();
 
-    @OneToOne(mappedBy = "createdBy", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(mappedBy = "createdBy", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private Cart cart = null;
 
     @OneToMany(mappedBy = "createdBy", cascade = CascadeType.ALL, orphanRemoval = true)

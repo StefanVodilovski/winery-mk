@@ -83,10 +83,4 @@ public class UserServiceImpl implements UserService {
         return userRepository.getReferenceById(userId);
     }
 
-    @Override
-    public List<UserEntity> findAllStaff() {
-        return userRepository.findAll().stream()
-                .filter(user -> user.getRoles().stream().anyMatch(role -> "ROLE_STAFF".equals(role.getName())))
-                .collect(Collectors.toList());
-    }
 }
