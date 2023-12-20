@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin("http://localhost:3001")
 @RestController
 @RequestMapping("/events/")
 public class EventController {

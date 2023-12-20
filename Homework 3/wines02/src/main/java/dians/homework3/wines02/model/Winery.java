@@ -39,4 +39,5 @@ public class Winery {
     @OneToMany(mappedBy = "winery", cascade = CascadeType.ALL, orphanRemoval = true)
     @Fetch(FetchMode.SELECT)
     private List<Wine> wines = new ArrayList<>();
+}
 

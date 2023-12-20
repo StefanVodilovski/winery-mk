@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import static dians.homework3.wines02.mapper.CartMapper.mapToCartDto;
 
+@CrossOrigin("http://localhost:3001")
 @RestController
 @RequestMapping("/cart/")
 public class CartController {
