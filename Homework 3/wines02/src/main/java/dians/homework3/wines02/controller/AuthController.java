@@ -25,11 +25,13 @@ public class AuthController {
 
     @PostMapping("/register/save")
     public ResponseEntity<String> registerUser(@RequestParam String email,
-                                               @RequestParam String password,
-                                               @RequestParam String address,
                                                @RequestParam String username,
-                                               @RequestParam String phoneNumber) {
-        UserEntity existedUserEmail = userService.findByEmail(email);
+                                               @RequestParam String password,
+                                               @RequestParam String confirmPassword,
+                                               @RequestParam String phoneNumber,
+                                               @RequestParam String address) {
+
+        UserEntity existedUserEmail = userService.findByEmail(user.getEmail());
         if(existedUserEmail != null && existedUserEmail.getEmail() != null && !existedUserEmail.getEmail().isEmpty()) {
             ResponseEntity.ok("Registration failed");
         }
@@ -38,6 +40,7 @@ public class AuthController {
         if(existedUserUsername != null && existedUserUsername.getUsername() != null && !existedUserUsername.getUsername().isEmpty()) {
             ResponseEntity.ok("Registration failed");
         }
+
         RegistrationDto user = new RegistrationDto();
         user.setAddress(address);
         user.setEmail(email);

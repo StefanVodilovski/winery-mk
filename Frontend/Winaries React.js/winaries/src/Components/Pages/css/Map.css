@@ -1,0 +1,122 @@
+body.route-map nav:not(.scrolled){
+    background-color: rgba(246, 245, 245, 0.8);
+    border-radius: 25px;
+    margin: 20px 40px;
+    
+}
+body.route-map nav:not(.scrolled) .logo{
+    background-image: url("../../../images/logoBlack.png");
+}
+
+
+body.route-map a:has(.shopping-cart-icon):hover .shopping-cart-icon{
+    
+    color: #CB1919;
+  }
+
+  body.route-map footer{
+    display: none;
+  }
+
+  body.route-map .leaflet-control-container{
+    display: none;
+  }
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+.map{
+    margin-top: -140px;
+    height: 100vh;
+    width: 100%;
+}
+#root {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 1em;
+    font-family: sans-serif;
+    color: #333;
+    background-color: #f3e4d7;
+}
+
+/* height of the container */
+body.route-map .leaflet-container {
+    height: inherit; /* Inherit height from the parent container */
+    width: inherit;
+    border-radius: 2rem;
+    margin: 0;
+}
+
+body.route-map .leaflet-container{
+    border-radius: 0;
+}
+
+.cluster-icon {
+    background-color: #333;
+    height: 2em;
+    width: 2em;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    box-shadow: 0 0 0px 5px #fff;
+}
+
+body.route-map .search-container{
+    position: absolute;
+    height: 50px;
+    left: 200px;
+    right: 200px;
+    top: 150px;
+    z-index: 1000;
+    background-color: rgba(246, 245, 245, 0.8);
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+body.route-map .search-container input{
+    background-color: transparent;
+    height: 100%;
+    width: 90%;
+    border: none;
+    padding-left: 30px;
+    font-size: 20px;
+}
+
+body.route-map .search-container input:focus{
+    outline: none;
+}
+
+body.route-map .search-icon-container{
+    width: 50px;
+    height: 100%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+body.route-map .search-icon{
+    font-size: 20px;
+    color: #b9b9b9;
+
+}
+
+body.route-map .profile-menu{
+    background-color: rgba(246, 245, 245, 0.9);
+}
+
+body.route-map .hamburger-menu{
+    background-color: rgba(246, 245, 245, 0.9);
+    top: 110px;
+    border-radius: 25px;
+}

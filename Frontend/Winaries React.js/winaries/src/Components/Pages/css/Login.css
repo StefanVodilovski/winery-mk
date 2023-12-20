@@ -1,0 +1,69 @@
+body.route-login nav{
+    display: none;
+}
+
+body.route-login footer{
+    display: none;
+}
+
+.login-container{
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-container form{
+    height: 60vh;
+    width: 60vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.login-container .input-outer-container{
+    width: 100%;
+}
+
+.login-container .input-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.login-container .input-container input{
+    width: 100%;
+    background-color: #F6F5F5;
+    border: none;
+    padding-left: 20px;
+    color: black;
+    height: 45px;
+    border-radius: 10px;
+}
+.login-container label{
+    margin: 20px 0;
+    font-style: italic;
+    font-size: 20px;
+    font-weight: 500;
+}
+.login-container ::placeholder {
+    color: black;
+    opacity: 0.7; /* Firefox */
+  }
+.login-container .input-container input:focus{
+    outline-color: #AC3636;
+    background-color: white;
+}
+
+.login-container button{
+    background-color: #514A4A;
+    width: 150px;
+    height: 40px;
+    color: white;
+    margin-top: 40px;
+    border: none;
+}

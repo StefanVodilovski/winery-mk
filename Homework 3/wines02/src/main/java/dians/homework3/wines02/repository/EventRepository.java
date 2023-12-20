@@ -10,6 +10,7 @@ import java.util.Optional;
 @Repository
 public interface EventRepository extends JpaRepository<Event, Long> {
     Optional<Event> findById(Long eventId);
+
     @Query("SELECT event FROM Event event LEFT JOIN FETCH event.wineries WHERE event.Id = :eventId")
     Optional<Event> findByIdWithWineries(Long eventId);
 

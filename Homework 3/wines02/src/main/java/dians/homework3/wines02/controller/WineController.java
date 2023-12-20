@@ -1,23 +1,11 @@
 package dians.homework3.wines02.controller;
 
-import dians.homework3.wines02.dto.AddWinesDto;
-import dians.homework3.wines02.dto.CartDto;
-import dians.homework3.wines02.dto.WineDto;
-import dians.homework3.wines02.model.AddWines;
-import dians.homework3.wines02.model.Cart;
-import dians.homework3.wines02.model.UserEntity;
-import dians.homework3.wines02.security.SecurityUtil;
-import dians.homework3.wines02.service.*;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 import static dians.homework3.wines02.mapper.CartMapper.mapToCart;
 import static dians.homework3.wines02.mapper.WineMapper.mapToWine;
 
+@CrossOrigin("http://localhost:3001")
 @RestController
 @RequestMapping("/wines/")
 public class WineController {
