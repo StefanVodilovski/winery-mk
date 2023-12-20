@@ -4,21 +4,27 @@
     border: none;
     border-radius: 10px;
     padding: 0 15px;
-    box-shadow: 0px 0px 8px #ddd;
     background-color: white;
     display: flex;
     align-items: center;
 }
 
 .input-wrapper input {
-    background-color: transparent;
+    background-color: #F6F5F5;
     border: none;
     height: 100%;
     font-size: 1.25rem;
     width: 100%;
     margin-left: 5px;
+    border-radius: 10px;
+    color:black;
+    padding-left: 15px;
 }
 
 .input-wrapper input:focus {
     outline: none;
+}
+
+.input-wrapper input::placeholder{
+    color: black;
 }
