@@ -1,6 +1,7 @@
 package dians.homework3.wines02.filters.EventPipes;
 
 import dians.homework3.wines02.dto.EventDto;
+import dians.homework3.wines02.model.Event;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -13,13 +14,13 @@ public class PipeEvents<T> {
     public void addFilter(Filter<T> filter){
         filters.add(filter);}
 
-    public List<EventDto> runFilters(List<T> input, List<EventDto> events) {
-        List<EventDto> eventDtos = events;
+    public List<Event> runFilters(List<T> input, List<Event> events) {
+        List<Event> event = events;
         int counter = -1;
         for (Filter<T> filter: filters) {
             counter += 1;
-            eventDtos = filter.execute(input.get(counter),eventDtos);
+            event = filter.execute(input.get(counter),event);
         }
-        return eventDtos;
+        return event;
     }
 }

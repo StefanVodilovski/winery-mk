@@ -8,6 +8,7 @@ import dians.homework3.wines02.service.OrderService;
 import javassist.NotFoundException;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicLong;
@@ -48,5 +49,10 @@ public class OrderServiceImpl implements OrderService {
         } catch (NotFoundException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public List<OrderDto> findByUser(Long userId) {
+        return orderRepository.findAll().stream().filter(order -> order.getCreatedBy().getId().equals(userId)).map(OrderMapper::mapToOrderDto).collect(Collectors.toList());
     }
 }

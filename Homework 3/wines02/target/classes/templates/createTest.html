@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}"
+      xmlns:sec="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body layout:fragment="body">
+    <div th:object="${wine}">
+        <p th:test="*{name}">Name</p>
+        <form method="POST" th:action="@{/wines/add/cart/item/{wineId}(wineId=${wine.Id})}">
+            <input type="number" name="quantity" id="quantity">
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+</html>

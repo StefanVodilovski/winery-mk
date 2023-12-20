@@ -9,8 +9,10 @@ import dians.homework3.wines02.service.UserService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -83,10 +85,4 @@ public class UserServiceImpl implements UserService {
         return userRepository.getReferenceById(userId);
     }
 
-    @Override
-    public List<UserEntity> findAllStaff() {
-        return userRepository.findAll().stream()
-                .filter(user -> user.getRoles().stream().anyMatch(role -> "ROLE_STAFF".equals(role.getName())))
-                .collect(Collectors.toList());
-    }
 }

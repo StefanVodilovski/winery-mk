@@ -10,4 +10,6 @@ public interface WineryService {
     List<WineryDto> getAll();
 
     WineryDto findById(Long wineryId);
+
+    List<WineDto> getAllWineryWines(Long wineryId);
 }

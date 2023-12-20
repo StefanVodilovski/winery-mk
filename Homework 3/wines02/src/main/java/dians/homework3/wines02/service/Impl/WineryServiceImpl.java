@@ -1,6 +1,8 @@
 package dians.homework3.wines02.service.Impl;
 
+import dians.homework3.wines02.dto.WineDto;
 import dians.homework3.wines02.dto.WineryDto;
+import dians.homework3.wines02.mapper.WineMapper;
 import dians.homework3.wines02.mapper.WineryMapper;
 import dians.homework3.wines02.model.Winery;
 import dians.homework3.wines02.repository.WineryRepository;
@@ -8,12 +10,14 @@ import dians.homework3.wines02.service.WineryService;
 import javassist.NotFoundException;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static dians.homework3.wines02.mapper.WineryMapper.mapToWineryDto;
 
+@Transactional
 @Service
 public class WineryServiceImpl implements WineryService {
     private final WineryRepository wineryRepository;
@@ -38,5 +42,11 @@ public class WineryServiceImpl implements WineryService {
         } catch (NotFoundException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public List<WineDto> getAllWineryWines(Long wineryId) {
+        Optional<Winery> winery = wineryRepository.findById(wineryId);
+        return winery.map(value -> value.getWines().stream().map(WineMapper::mapToWineDto).collect(Collectors.toList())).orElse(null);
     }
 }

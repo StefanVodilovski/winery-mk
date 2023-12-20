@@ -31,48 +31,26 @@ public class AuthController {
                                                @RequestParam String phoneNumber,
                                                @RequestParam String address) {
 
-        RegistrationDto user = new RegistrationDto();
-        user.setEmail(email);
-        user.setUsername(username);
-        user.setPassword(password);
-        user.setPhoneNumber(phoneNumber);
-        user.setAddress(address);
-
         UserEntity existedUserEmail = userService.findByEmail(user.getEmail());
         if(existedUserEmail != null && existedUserEmail.getEmail() != null && !existedUserEmail.getEmail().isEmpty()) {
             ResponseEntity.ok("Registration failed");
         }
 
-        UserEntity existedUserUsername = userService.findByUsername(user.getUsername());
+        UserEntity existedUserUsername = userService.findByUsername(username);
         if(existedUserUsername != null && existedUserUsername.getUsername() != null && !existedUserUsername.getUsername().isEmpty()) {
             ResponseEntity.ok("Registration failed");
         }
+
+        RegistrationDto user = new RegistrationDto();
+        user.setAddress(address);
+        user.setEmail(email);
+        user.setUsername(username);
+        user.setPhoneNumber(phoneNumber);
+        user.setPassword(password);
         UserEntity userEntity = userService.saveUser(user);
         cartService.saveCart(userEntity);
         return ResponseEntity.ok("User registered successfully");
     }
-
-//    @GetMapping("/user/manager")
-//    private  String getAllUsers(Model model) {
-//        List<UserEntity> users = userService.findAll();
-//        model.addAttribute("users", users);
-//        return "users_list";
-//    }
-//
-//    @GetMapping("/staff/manager")
-//    private  String getAllStaff(Model model) {
-//        List<UserEntity> users = userService.findAllStaff();
-//        model.addAttribute("users", users);
-//        return "staff_list";
-//    }
-
-//    @GetMapping("/user/{userId}/delete")
-//    private String deleteUser(@PathVariable("userId") Long userId) {
-//        UserEntity user = userService.findById(userId);
-//        cartService.deleteById(user.getCart().getId());
-//        userService.deleteById(userId);
-//        return "redirect:/user/manager";
-//    }
 
     @GetMapping("/user/{userId}/edit")
     private String editUser(@PathVariable("userId") Long userId, Model model) {

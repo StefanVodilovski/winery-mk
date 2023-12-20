@@ -20,7 +20,4 @@ public class AddWinesDto {
     private Integer quantity;
     private LocalDateTime createdOn;
     private LocalDateTime updatedOn;
-    private Wine wine;
-    private Order order;
-    private Cart cart;
 }

@@ -28,7 +28,7 @@ public class OrderController {
 
     @GetMapping("all/{userId}")
     public List<OrderDto> getAllOrders(@PathVariable("userId") Long userId) {
-        return getUser(userId).getOrders().stream().map(OrderMapper::mapToOrderDto).collect(Collectors.toList());
+        return orderService.findByUser(userId);
     }
 
     @GetMapping("{orderId}")

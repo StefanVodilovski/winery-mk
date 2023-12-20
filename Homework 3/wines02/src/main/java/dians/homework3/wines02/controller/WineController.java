@@ -1,21 +1,8 @@
 package dians.homework3.wines02.controller;
 
-import dians.homework3.wines02.dto.AddWinesDto;
-import dians.homework3.wines02.dto.CartDto;
-import dians.homework3.wines02.dto.WineDto;
-import dians.homework3.wines02.model.AddWines;
-import dians.homework3.wines02.model.UserEntity;
-import dians.homework3.wines02.model.Wine;
-import dians.homework3.wines02.service.AddWinesService;
-import dians.homework3.wines02.service.PipeWinesService;
-import dians.homework3.wines02.service.UserService;
-import dians.homework3.wines02.service.WineService;
-import org.hibernate.Hibernate;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
+import static dians.homework3.wines02.mapper.CartMapper.mapToCart;
 import static dians.homework3.wines02.mapper.WineMapper.mapToWine;
 
 @CrossOrigin("http://localhost:3001")
@@ -26,12 +13,14 @@ public class WineController {
     private final AddWinesService addWinesService;
     private final UserService userService;
     private final PipeWinesService pipeWinesService;
+    private final CartService cartService;
 
-    public WineController(WineService wineService, AddWinesService addWinesService, UserService userService, PipeWinesService pipeWinesService) {
+    public WineController(WineService wineService, AddWinesService addWinesService, UserService userService, PipeWinesService pipeWinesService, CartService cartService) {
         this.wineService = wineService;
         this.addWinesService = addWinesService;
         this.userService = userService;
         this.pipeWinesService = pipeWinesService;
+        this.cartService = cartService;
     }
 
     @GetMapping("all")
@@ -53,11 +42,13 @@ public class WineController {
         return wineService.findById(wineId);
     }
 
-    @PostMapping("add/cart/item/{wineId}/{userId}")
-    public ResponseEntity<String> putToCart(@PathVariable("wineId") Long wineId,
-                            @PathVariable("userId") Long userId,
+    @GetMapping("add/cart/item/{wineId}")
+    public ResponseEntity<AddWines> putToCart(@PathVariable("wineId") Long wineId,
                             @RequestParam("quantity") String quantity) {
-        addWinesService.createAddWine(mapToWine(wineService.findById(wineId)),quantity,userService.findById(userId).getCart());
-        return ResponseEntity.ok("Added to cart");
+        UserEntity user = userService.findByEmail(SecurityUtil.getSessionUser());
+        Cart cart = user.getCart();
+        AddWines addWines = addWinesService.createAddWine(mapToWine(wineService.findById(wineId)), quantity,user.getCart());
+        cart.getCartWines().add(addWines);
+        return new ResponseEntity<>(addWines ,HttpStatus.OK);
     }
 }

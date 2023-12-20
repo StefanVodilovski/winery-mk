@@ -1,5 +1,6 @@
 package dians.homework3.wines02.controller;
 
+import dians.homework3.wines02.dto.WineDto;
 import dians.homework3.wines02.dto.WineryDto;
 import dians.homework3.wines02.service.PipeWineriesService;
 import dians.homework3.wines02.service.WineryService;
@@ -29,8 +30,15 @@ public class WineryController {
         return pipeWineriesService.filter(searchQuery, region);
     }
 
+    //Vidi u WineryDto sto vrakja
     @GetMapping("{wineryId}")
     public WineryDto getWineById(@PathVariable("wineryId") Long wineryId) {
         return wineryService.findById(wineryId);
+    }
+
+    //Gi vrakja site vina na vinarijata
+    @GetMapping("{wineryId}/wines")
+    public List<WineDto> getWinerywinesById(@PathVariable("wineryId") Long wineryId) {
+        return wineryService.getAllWineryWines(wineryId);
     }
 }

@@ -26,12 +26,15 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/login", "/register", "/css/**", "/js/**")
                 .permitAll()
+                .and()
+                .rememberMe().userDetailsService(userDetailService)
                 .and()
                 .formLogin(form -> form
                         .loginPage("/login")
@@ -41,7 +44,7 @@ public class SecurityConfig {
                         .permitAll()
                 ).logout(
                         logout -> logout
-                                .logoutRequestMatcher(new AntPathRequestMatcher("/logout")).permitAll()
+                                .logoutRequestMatcher(new AntPathRequestMatcher("/logout")).permitAll().deleteCookies("AuthCookie")
                 );
         return http.build();
     }

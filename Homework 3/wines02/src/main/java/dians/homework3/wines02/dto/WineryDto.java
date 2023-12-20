@@ -1,6 +1,7 @@
 package dians.homework3.wines02.dto;
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import dians.homework3.wines02.model.Event;
 import dians.homework3.wines02.model.Region;
 import dians.homework3.wines02.model.Wine;
@@ -23,5 +24,7 @@ public class WineryDto {
     private double xCordinate;
     private double yCordinate;
     private Region region;
+    private List<WineDto2> wines;
     private List<Event> events = new ArrayList<>();
+    private List<Wine> wines;
 }

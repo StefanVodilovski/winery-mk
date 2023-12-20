@@ -7,6 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +17,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Transactional
 public class EventDto {
     private Long Id;
     private String name;
@@ -22,10 +25,11 @@ public class EventDto {
     private LocalDateTime endDateTime;
     private String photoUrl;
     private String description;
-    private String geolocation;
-    private List<Winery> wineries = new ArrayList<>();
-    private UserEntity createdBy;
-    private List<EventComment> comments = new ArrayList<>();
+    private double xCordinate;
+    private double yCordinate;
+    private List<WineryDto2> wineries;
+    private UserDto createdBy;
+    private List<EventCommentDto> comments;
     private LocalDateTime createdOn;
     private LocalDateTime updatedOn;
 }
