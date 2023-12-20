@@ -15,21 +15,21 @@ export const Carousel = () => {
             title: "BEST OFFER",
             description: "CHATEAU KAMNIK, TEMJANIKA 2022",
             price: "680 den",
-            icon: require('../images/wine1.png')
+            icon: "https://wine.mk/wp-content/uploads/2023/08/old-school-rkaciteli-1-1-375x400.jpg"
         },
         {
             id: 1,
             title: "NEWEST",
             description: "CHATEAU KAMNIK, GOLDEN TEMJANIKA",
             price: "1070 den",
-            icon: require('../images/wine3.png')
+            icon: "https://wine.mk/wp-content/uploads/2023/10/Temjanika-Barovo-375x400.jpg"
         },
         {
             id: 2,
             title: "CHEAPEST",
             description: "CHATEAU KAMNIK, SELECTION 2021",
             price: "370 den",
-            icon: require('../images/wine2.png')
+            icon: "https://wine.mk/wp-content/uploads/2017/11/25-1-375x400.png"
         }
 
     ]
@@ -84,9 +84,8 @@ export const Carousel = () => {
                 {items.map((item) => {
                     return <div className='card'>
                         <div className='card-top'>
-                            {console.log(item.title)}
                             <h1>{item.title}</h1>
-                            <img src={item.icon} alt="" />
+                            <img src={item.icon} alt="" referrerpolicy="no-referrer"/>
                         </div>
                         <div className='card-bottom'>
                             <h3>{item.description}</h3>
