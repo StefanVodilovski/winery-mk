@@ -32,7 +32,7 @@ body.route-map a:has(.shopping-cart-icon):hover .shopping-cart-icon{
     height: 100vh;
     width: 100%;
 }
-#root {
+body.route-map #root {
     height: 100vh;
     display: flex;
     align-items: center;
@@ -45,10 +45,11 @@ body.route-map a:has(.shopping-cart-icon):hover .shopping-cart-icon{
 }
 
 /* height of the container */
-body.route-map .leaflet-container {
+.map .leaflet-container {
     height: inherit; /* Inherit height from the parent container */
     width: inherit;
     border-radius: 2rem;
+    position: relative;
     margin: 0;
 }
 
@@ -86,7 +87,7 @@ body.route-map .search-container{
 body.route-map .search-container input{
     background-color: transparent;
     height: 100%;
-    width: 90%;
+    width: 100%;
     border: none;
     padding-left: 30px;
     font-size: 20px;
