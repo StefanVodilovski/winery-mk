@@ -114,7 +114,7 @@ export const CreateEvent = () => {
                             </div>
                         </div>
                     </div>
-                    <div className='winaries-selection-section'>
+                    <div className='wineries-selection-section'>
                         <div className='search-container'>
                             <label htmlFor="search">Search Wineries</label>
                             <input type="text" name="search" id="search" placeholder='Search...' />
@@ -123,10 +123,10 @@ export const CreateEvent = () => {
                             <p>REGION</p>
                             <select name="region"></select>
                         </div>
-                        <div className='select-winaries-container'>
+                        <div className='select-wineries-container'>
 
                         </div>
-                        <div className='selected-winaries-container'>
+                        <div className='selected-wineries-container'>
 
                         </div>
                     </div>

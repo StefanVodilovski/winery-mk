@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { Searchbar } from "../Searchbar"
 import { SearchWinesList } from "../SearchWinesList"
 import "./css/Wines.css"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faMagnifyingGlass} from '@fortawesome/free-solid-svg-icons'
 
 export const Wines = () => {
     const [results, setResults] = useState([])
@@ -17,59 +19,43 @@ export const Wines = () => {
     const [winery, setWinery] = useState('-1');
     const [litrage, setLitrage] = useState('-1');
 
-    // Function to handle the click event of the button
     const handleButtonClick = () => {
-        // Do something with the selected values, e.g., pass them to another function
+
         console.log('Price Filter:', priceFilter);
         console.log('Region:', region);
         console.log('Winery:', winery);
         console.log('Litrage:', litrage);
         console.log('Search Query:', searchQuery)
 
-        let query_data = {
-            "searchQuery": results,
-            "priceFilter": priceFilter,
-            "region": region,
-            "winery": winery,
-            "litrage": litrage
-        }
-        fetchData(query_data)
+        fetchData()
     };
 
-    const fetchData = (query_data) => {
+    const fetchData = () => {
         // ova url e /wines/filter 
         // searchQuery=value.
         // priceFilter=
         // region=
         // winery=
         // literage= 
-        let url = 'http://localhost:8080/wines/filter?searchQuery=' + query_data.searchQuery.value 
-        + "&priceFilter=" + query_data.priceFilter.value + "&region=" + query_data.region.value 
-        + "&winery=" + query_data.winery.value + "&litrage=" + query_data.litrage.value;
-        console.log(url)
+        let url = 'http://localhost:8080/wines/filter?searchQuery=' + searchQuery 
+        + "&priceFilter=" + priceFilter + "&region=" + region 
+        + "&winery=" + winery + "&litrage=" + litrage;
         fetch(url)
             .then((response) => response.json())
             .then((json) => {
-                console.log(json);
                 setResults(json);
             })
             .catch((error) => {
                 console.error('Error fetching data:', error);
             });
     };
+    
 
     const initalData = () => {
-        // ova url e /wines/filter 
-        // searchQuery=value.
-        // priceFilter=
-        // region=
-        // winery=
-        // literage= 
         let url = 'http://localhost:8080/wines/all'
         fetch(url)
             .then((response) => response.json())
             .then((json) => {
-                console.log(json);
                 setResults(json);
             })
             .catch((error) => {
@@ -88,16 +74,16 @@ export const Wines = () => {
                 <div className='filter-section'>
                     <div className='search-bar-container'>
                         <Searchbar setResults={setResults} updateSearch={updateSearch} ></Searchbar>
-                        <button onClick={handleButtonClick}></button>
+                        <button className='search-button' onClick={handleButtonClick}><FontAwesomeIcon icon={faMagnifyingGlass} /></button>
                     </div>
                     <div className='filter-options'>
                         <div className='filter-option'>
                             <label htmlFor="priceFilter">Price</label>
                             <select id='priceFilter' name='priceFilter' onChange={(e) => (setPriceFilter(e.target.value))}>
                                 <option value={-1}></option>
-                                <option value={500}>to 500 den</option>
-                                <option value={1500}>to 1500 den</option>
-                                <option value={2500}>to 2500 den</option>
+                                <option value={500}>Up to 500 den</option>
+                                <option value={1500}>Up to 1500 den</option>
+                                <option value={2500}>Up to 2500 den</option>
                             </select>
                         </div>
                         <div className='filter-option'>

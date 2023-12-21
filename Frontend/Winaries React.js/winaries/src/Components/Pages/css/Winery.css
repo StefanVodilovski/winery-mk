@@ -1,0 +1,15 @@
+body.route-winery .winery-description-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+body.route-winery .winery-description{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+body.route-winery .winery-description img{
+    max-width: 300px;
+}

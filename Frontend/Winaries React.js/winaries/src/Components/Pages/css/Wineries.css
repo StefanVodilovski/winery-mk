@@ -1,4 +1,4 @@
-.wines-outer-container{
+.wineries-outer-container{
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -7,24 +7,24 @@
     margin-top: 30px;
 }
 
-.wines-inner-container{
+.wineries-inner-container{
     width: 70%;
     height: 100%;
 }
 
-.wines-inner-container h1{
+.wineries-inner-container h1{
     text-align: center;
 }
 
-body.route-wines .search-bar-container {
+body.route-wineries .search-bar-container {
     margin-top: 30px;
     width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: center ;
     align-items: center;
 }
 
-body.route-wines .search-button{
+body.route-wineries .search-button{
     border: none;
     color: white;
     text-align: center;
@@ -35,14 +35,14 @@ body.route-wines .search-button{
     border-bottom-right-radius: 10px;
 }
 
-body.route-wines .filter-options{
+body.route-wineries .filter-options{
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
     margin-top: 35px;
 }
 
-body.route-wines .filter-option{
+body.route-wineries .filter-option{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -50,12 +50,12 @@ body.route-wines .filter-option{
     width: 20%;
 }
 
-body.route-wines .filter-option label{
+body.route-wineries .filter-option label{
     font-size: 20px;
     margin-bottom: 10px;
 }
 
-body.route-wines .filter-option select{
+body.route-wineries .filter-option select{
     width: 100%;   
     border: none;
     background-color: #F6F5F5;
@@ -64,12 +64,11 @@ body.route-wines .filter-option select{
     border-radius: 5px;
 }
 
-body.route-wines .filter-option select:focus{
+body.route-wineries .filter-option select:focus{
     outline: none;
 }
 
-
-.wines-list{
+.wineries-list{
     margin-top: 45px;
     padding-top: 20px;
     border-top: 2px solid #F6F5F5;
