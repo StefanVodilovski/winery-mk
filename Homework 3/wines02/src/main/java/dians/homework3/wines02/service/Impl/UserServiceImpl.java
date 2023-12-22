@@ -79,13 +79,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto findByLogin(String username) {
-        Optional<UserEntity> userEntity = Optional.ofNullable(userRepository.findFirstByUsername(username));
+        Optional<UserEntity> userEntity = userRepository.findByUsername(username);
         return userEntity.map(UserMapper::mapToUserDto).orElse(null);
     }
 
     @Override
     public UserDto login(CredentialsDto credentialsDto) {
-        Optional<UserEntity> userEntity = Optional.ofNullable(userRepository.findFirstByUsername(credentialsDto.getUsername()));
+        Optional<UserEntity> userEntity = userRepository.findByUsername(credentialsDto.getUsername());
         if(userEntity.isPresent()) {
             if(passwordEncoder.matches(passwordEncoder.encode(credentialsDto.getPassword()), userEntity.get().getPassword())) {
                 return mapToUserDto(userEntity.get());
