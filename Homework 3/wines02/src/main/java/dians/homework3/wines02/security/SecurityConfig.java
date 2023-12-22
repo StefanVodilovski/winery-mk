@@ -12,6 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -44,6 +45,10 @@ public class SecurityConfig {
                                 .antMatchers(HttpMethod.POST, "/login", "/register","/**").permitAll()
                                 .antMatchers(HttpMethod.GET, "/login", "/register","/**").permitAll()
                                 .anyRequest().authenticated()
+                )
+                .logout(
+                        logout -> logout
+                                .logoutRequestMatcher(new AntPathRequestMatcher("/logout")).permitAll()
                 );
 //                .authorizeRequests()
 //                .antMatchers("/login", "/register", "/css/**", "/js/**")
