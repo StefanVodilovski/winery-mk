@@ -19,6 +19,6 @@ public class Role {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
     private String name;
-    @ManyToMany(mappedBy = "roles")
-    private List<UserEntity> users = new ArrayList<>();
+//    @ManyToMany(mappedBy = "roles")
+//    private List<UserEntity> users = new ArrayList<>();
 }

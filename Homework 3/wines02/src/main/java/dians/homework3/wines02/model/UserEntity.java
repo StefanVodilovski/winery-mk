@@ -34,13 +34,13 @@ public class UserEntity {
 //    @Column(name = "photo", columnDefinition = "BLOB")
 //    private byte[] photo;
 
-    @ManyToMany(fetch = EAGER, cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "users_role",
-            joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "Id")},
-            inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "Id")}
-    )
-    private List<Role> roles = new ArrayList<>();
+//    @ManyToMany(fetch = EAGER, cascade = CascadeType.ALL)
+//    @JoinTable(
+//            name = "users_role",
+//            joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "Id")},
+//            inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "Id")}
+//    )
+//    private List<Role> roles = new ArrayList<>();
 
     @OneToMany(mappedBy = "createdBy", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Event> events = new ArrayList<>();
