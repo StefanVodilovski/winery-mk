@@ -1,0 +1,11 @@
+body.route-wine .wine-description-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+body.route-wine .wine-description{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

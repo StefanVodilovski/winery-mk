@@ -52,7 +52,7 @@ export const Profile = () => {
                                 <span className="glyphicon glyphicon-camera"></span>
                                 <span><FontAwesomeIcon icon={faPlus}/></span>
                             </label>
-                            <input id="file" type="file" onChange={loadFile} accept="image/png, image/gif, image/jpeg"/>
+                            <input id="file" type="file" name='profileImage' onChange={loadFile} accept="image/png, image/gif, image/jpeg"/>
                             <img src={require("../../images/defaultProfilePicture.jpg")} id="output" width="200" />
                         </div>
                     </div>

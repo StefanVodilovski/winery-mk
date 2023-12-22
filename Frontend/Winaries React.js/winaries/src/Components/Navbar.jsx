@@ -83,7 +83,7 @@ export const Navbar = () => {
             <ul >
                 <li> <NavLink to="/" onClick={() => {closeProfileMenu(); closeHamburgerMenu();}}> Home </NavLink> </li>
                 <li> <NavLink to="/wines" onClick={() => {closeProfileMenu(); closeHamburgerMenu();}}> Wines </NavLink> </li>
-                <li> <NavLink to="/winaries" onClick={() => {closeProfileMenu(); closeHamburgerMenu();}}> Winaries </NavLink> </li>
+                <li> <NavLink to="/wineries" onClick={() => {closeProfileMenu(); closeHamburgerMenu();}}> Wineries </NavLink> </li>
                 <li> <NavLink to="/events" onClick={() => {closeProfileMenu(); closeHamburgerMenu();}}> Events </NavLink> </li>
                 <li> <NavLink to="/map" onClick={() => {closeProfileMenu(); closeHamburgerMenu();}}> Map </NavLink> </li>
                 <li><NavLink to="/cart" onClick={() => {closeProfileMenu(); closeHamburgerMenu();}}><FontAwesomeIcon icon={faBagShopping} className='shopping-cart-icon'/></NavLink></li>
@@ -95,7 +95,7 @@ export const Navbar = () => {
             <ul >
                 <li> <NavLink to="/" onClick={() => {closeProfileMenu(); closeHamburgerMenu();}}> Home </NavLink> </li>
                 <li> <NavLink to="/wines" onClick={() => {closeProfileMenu(); closeHamburgerMenu();}}> Wines </NavLink> </li>
-                <li> <NavLink to="/winaries" onClick={() => {closeProfileMenu(); closeHamburgerMenu();}}> Winaries </NavLink> </li>
+                <li> <NavLink to="/wineries" onClick={() => {closeProfileMenu(); closeHamburgerMenu();}}> Wineries </NavLink> </li>
                 <li> <NavLink to="/events" onClick={() => {closeProfileMenu(); closeHamburgerMenu();}}> Events </NavLink> </li>
                 <li> <NavLink to="/map" onClick={() => {closeProfileMenu(); closeHamburgerMenu();}}> Map </NavLink> </li>
 
