@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -41,7 +42,8 @@ public class SecurityConfig {
                 .and()
                 .authorizeRequests(authorizeRequests ->
                         authorizeRequests
-                                .antMatchers(HttpMethod.POST, "/login", "/register").permitAll()
+                                .antMatchers(HttpMethod.POST, "/login", "/register","/**").permitAll()
+                                .antMatchers(HttpMethod.GET, "/login", "/register","/**").permitAll()
                                 .anyRequest().authenticated()
                 );
 //                .authorizeRequests()
@@ -62,8 +64,4 @@ public class SecurityConfig {
 //                );
         return http.build();
     }
-
-//    public void configure(AuthenticationManagerBuilder builder) throws Exception {
-//        builder.userDetailsService(userDetailService).passwordEncoder(passwordEncoder());
-//    }
 }
