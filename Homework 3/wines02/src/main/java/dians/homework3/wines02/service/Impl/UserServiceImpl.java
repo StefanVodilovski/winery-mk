@@ -87,7 +87,7 @@ public class UserServiceImpl implements UserService {
     public UserDto login(CredentialsDto credentialsDto) {
         Optional<UserEntity> userEntity = userRepository.findByUsername(credentialsDto.getUsername());
         if(userEntity.isPresent()) {
-            if(passwordEncoder.matches(passwordEncoder.encode(credentialsDto.getPassword()), userEntity.get().getPassword())) {
+            if(passwordEncoder.matches(credentialsDto.getPassword(), userEntity.get().getPassword())) {
                 return mapToUserDto(userEntity.get());
             }
         }
