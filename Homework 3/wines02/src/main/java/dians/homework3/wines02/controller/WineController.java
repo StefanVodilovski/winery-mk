@@ -24,23 +24,17 @@ public class WineController {
     private final UserService userService;
     private final PipeWinesService pipeWinesService;
     private final CartService cartService;
-    private final UserAuthProvider authProvider;
 
-    public WineController(WineService wineService, UserService userService, PipeWinesService pipeWinesService, CartService cartService, UserAuthProvider authProvider) {
+    public WineController(WineService wineService, UserService userService, PipeWinesService pipeWinesService, CartService cartService) {
         this.wineService = wineService;
         this.userService = userService;
         this.pipeWinesService = pipeWinesService;
         this.cartService = cartService;
-        this.authProvider = authProvider;
     }
 
     @GetMapping("all")
-    public List<WineDto> getAllWines(@RequestHeader(value = "Authorization") String authorizationHeader) {
-        String token = authorizationHeader.replace("Bearer ", "");
-        if(authProvider.validateToken(token).isAuthenticated()) {
-            return this.wineService.getAll();
-        }
-        return null;
+    public List<WineDto> getAllWines() {
+        return this.wineService.getAll();
     }
 
     @GetMapping("filter")

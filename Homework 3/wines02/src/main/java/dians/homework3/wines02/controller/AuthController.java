@@ -9,9 +9,11 @@ import dians.homework3.wines02.security.SecurityUtil;
 import dians.homework3.wines02.security.UserAuthProvider;
 import dians.homework3.wines02.service.CartService;
 import dians.homework3.wines02.service.UserService;
+import io.jsonwebtoken.Jwts;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -23,6 +25,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import io.jsonwebtoken.Claims;
 
 import static dians.homework3.wines02.mapper.UserMapper.mapToUserDto;
 
@@ -34,6 +37,7 @@ public class AuthController {
     private final UserService userService;
     private final CartService cartService;
     private final UserAuthProvider userAuthProvider;
+    private final UserAuthProvider authProvider;
 
     public static boolean isValidEmail(String email) {
         String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
@@ -85,38 +89,53 @@ public class AuthController {
     }
 
     @GetMapping("user/edit")
-    private ResponseEntity<UserDto> editUser() {
-        UserEntity user = getSessionUserEntity();
+    private ResponseEntity<UserDto> editUser(@RequestHeader(value = "Authorization") String authorizationHeader) {
+        String token = authorizationHeader.replace("Bearer ", "");
+        Authentication authentication = authProvider.validateToken(token);
+        if(authentication.isAuthenticated()) {
+                String username = (String) authentication.getPrincipal();
+                UserEntity user = userService.findByUsername(username);
 
-        return ResponseEntity.ok(mapToUserDto(user));
+                if (user != null) {
+                    UserDto userDto = mapToUserDto(user);
+                    return ResponseEntity.ok(userDto);
+                } else {
+                    return ResponseEntity.notFound().build();
+                }
+        }
+        return ResponseEntity.<UserDto>status(HttpStatus.UNAUTHORIZED).body(null);
     }
 
     @PostMapping("user/edit")
     private ResponseEntity<UserDto> updateEditUser(@RequestParam String username,
                                 @RequestParam String email,
                                 @RequestParam MultipartFile profileImage,
-                                @RequestParam String address) {
-//        byte[] imageBytes = null;
-//        if (profileImage != null && !profileImage.isEmpty()) {
-//            try {
-//                imageBytes = profileImage.getBytes();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        }
-        UserEntity user = getSessionUserEntity();
-        if(!address.equals("-1")) {
-            user.setAddress(address);
-        }
-        if(!email.equals("-1")) {
-            user.setEmail(email);
-        }
-        if(!username.equals("-1")) {
-            user.setUsername(username);
-        }
-//        user.setPhoto(imageBytes);
-        userService.saveUpdate(user);
+                                @RequestParam String address,
+                                                   @RequestHeader(value = "Authorization") String authorizationHeader) {
+        String token = authorizationHeader.replace("Bearer ", "");
+        Authentication authentication = authProvider.validateToken(token);
+        if(authentication.isAuthenticated()) {
+            String name = (String) authentication.getPrincipal();
+            UserEntity user = userService.findByUsername(name);
 
-        return ResponseEntity.ok(mapToUserDto(user));
+            if (user != null) {
+                if(!address.equals("-1")) {
+                    user.setAddress(address);
+                }
+                if(!email.equals("-1")) {
+                    user.setEmail(email);
+                }
+                if(!username.equals("-1")) {
+                    user.setUsername(username);
+                }
+                userService.saveUpdate(user);
+                UserDto userDto = mapToUserDto(user);
+                return ResponseEntity.ok(userDto);
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        }
+
+        return ResponseEntity.<UserDto>status(HttpStatus.UNAUTHORIZED).body(null);
     }
 }

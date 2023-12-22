@@ -6,6 +6,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import dians.homework3.wines02.dto.UserDto;
 import dians.homework3.wines02.service.UserService;
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -19,6 +20,7 @@ import java.util.Date;
 
 @RequiredArgsConstructor
 @Component
+@Data
 public class UserAuthProvider {
     @Value("${sequrity.jwt.token.secret-key:secret-key}")
     private String secretKey;
