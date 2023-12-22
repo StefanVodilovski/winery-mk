@@ -20,7 +20,7 @@ import java.util.Date;
 @RequiredArgsConstructor
 @Component
 public class UserAuthProvider {
-    @Value("${sequrity.jwt.token.secret-key:secret-value}")
+    @Value("${sequrity.jwt.token.secret-key:secret-key}")
     private String secretKey;
     private final UserService userService;
 
@@ -31,7 +31,7 @@ public class UserAuthProvider {
 
     public String createToken(String login) {
         Date now = new Date();
-        Date validity = new Date(now.getTime() + 3_600_000);
+        Date validity = new Date(now.getTime() + 3600000);
         return JWT.create()
                 .withIssuer(login)
                 .withIssuedAt(now)

@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.validation.Valid;
 import java.io.IOException;
 import java.net.URI;
 import java.util.regex.Matcher;
@@ -45,42 +46,28 @@ public class AuthController {
     }
 
     @PostMapping("login")
-    public ResponseEntity<UserDto> login(@RequestParam String username,
-                                         @RequestParam String password) {
-        CredentialsDto credentialsDto = new CredentialsDto();
-        credentialsDto.setPassword(password);
-        credentialsDto.setUsername(username);
+    public ResponseEntity<UserDto> login(@RequestBody @Valid CredentialsDto credentialsDto) {
         UserDto user = userService.login(credentialsDto);
         user.setToken(userAuthProvider.createToken(user.getUsername()));
 
         return ResponseEntity.ok(user);
     }
 
-    @PostMapping("register/save")
-    public ResponseEntity<UserDto> registerUser(@RequestParam String email,
-                                               @RequestParam String username,
-                                               @RequestParam String password,
-                                               @RequestParam String phoneNumber,
-                                               @RequestParam String address) {
+    @PostMapping("register")
+    public ResponseEntity<UserDto> registerUser(@RequestBody @Valid RegistrationDto registrationDto) {
 
-        if(!isValidEmail(email)) {
+        if(!isValidEmail(registrationDto.getEmail())) {
             throw new AppException("Incorrect email form.", HttpStatus.BAD_REQUEST);
         }
-        if(!isStrongPassword(password)) {
+        if(!isStrongPassword(registrationDto.getPassword())) {
             throw new AppException("Your password is weak.", HttpStatus.BAD_REQUEST);
         }
-        RegistrationDto user = new RegistrationDto();
-        user.setAddress(address);
-        user.setEmail(email);
-        user.setUsername(username);
-        user.setPhoneNumber(phoneNumber);
-        user.setPassword(password);
-        UserEntity userEntity = userService.register(user);
+        UserEntity userEntity = userService.register(registrationDto);
         cartService.save(userEntity);
         UserDto userDto = mapToUserDto(userEntity);
-        userDto.setToken(userAuthProvider.createToken(user.getUsername()));
+        userDto.setToken(userAuthProvider.createToken(registrationDto.getUsername()));
 
-        return ResponseEntity.created(URI.create("/users/"+user.getId()))
+        return ResponseEntity.created(URI.create("/users/"+userDto.getId()))
                 .body(userDto);
     }
 

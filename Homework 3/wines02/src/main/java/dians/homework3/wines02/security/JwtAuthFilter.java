@@ -1,5 +1,6 @@
 package dians.homework3.wines02.security;
 
+import dians.homework3.wines02.exception.UserAuthenticationEntryPoint;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -14,28 +15,30 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class JwtAuthFilter extends OncePerRequestFilter {
 
-    private final UserAuthProvider userAuthProvider;
+    private final UserAuthProvider userAuthenticationProvider;
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request,
-                                    HttpServletResponse response,
-                                    FilterChain filterChain) throws ServletException, IOException {
-        String header = request.getHeader(HttpHeaders.AUTHORIZATION);
+    protected void doFilterInternal(
+            HttpServletRequest httpServletRequest,
+            HttpServletResponse httpServletResponse,
+            FilterChain filterChain) throws ServletException, IOException {
+        String header = httpServletRequest.getHeader(HttpHeaders.AUTHORIZATION);
 
-        if(header != null) {
-            String[] elements = header.split(" ");
+        if (header != null) {
+            String[] authElements = header.split(" ");
 
-            if(elements.length == 2 && "Bearer".equals(elements[0])) {
+            if (authElements.length == 2
+                    && "Bearer".equals(authElements[0])) {
                 try {
                     SecurityContextHolder.getContext().setAuthentication(
-                            userAuthProvider.validateToken(elements[1])
-                    );
+                            userAuthenticationProvider.validateToken(authElements[1]));
                 } catch (RuntimeException e) {
                     SecurityContextHolder.clearContext();
                     throw e;
                 }
             }
         }
-        filterChain.doFilter(request, response);
+
+        filterChain.doFilter(httpServletRequest, httpServletResponse);
     }
 }
