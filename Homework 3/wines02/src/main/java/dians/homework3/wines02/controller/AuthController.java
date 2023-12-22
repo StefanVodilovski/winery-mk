@@ -12,9 +12,12 @@ import dians.homework3.wines02.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.net.URI;
@@ -51,6 +54,12 @@ public class AuthController {
         user.setToken(userAuthProvider.createToken(user.getUsername()));
 
         return ResponseEntity.ok(user);
+    }
+
+    @GetMapping("/logout")
+    public ResponseEntity<String> logout() {
+        SecurityContextHolder.clearContext(); // Clear the security context
+        return ResponseEntity.ok("Logout successful");
     }
 
     @PostMapping("register")

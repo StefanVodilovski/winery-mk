@@ -45,10 +45,6 @@ public class SecurityConfig {
                                 .antMatchers(HttpMethod.POST, "/login", "/register","/**").permitAll()
                                 .antMatchers(HttpMethod.GET, "/login", "/register","/**").permitAll()
                                 .anyRequest().authenticated()
-                )
-                .logout(
-                        logout -> logout
-                                .logoutRequestMatcher(new AntPathRequestMatcher("/logout")).permitAll()
                 );
 //                .authorizeRequests()
 //                .antMatchers("/login", "/register", "/css/**", "/js/**")
