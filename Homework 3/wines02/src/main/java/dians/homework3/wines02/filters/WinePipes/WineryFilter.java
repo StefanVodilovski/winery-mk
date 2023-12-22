@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 public class WineryFilter implements Filter<String> {
     @Override
     public List<WineDto> execute(String winery, List<WineDto> wines) {
-        if(winery != null) {
+        if(!winery.equals("-1")) {
             return wines.stream().filter(wine -> wine.getWinery().getName().equals(winery)).collect(Collectors.toList());
         }
         return wines;

@@ -11,7 +11,7 @@ public class PriceFilter implements Filter<String> {
 
     @Override
     public List<WineDto> execute(String price, List<WineDto> wines) {
-        if(price != null) {
+        if(!price.equals("-1")) {
             Integer priceInteger = Integer.parseInt(price);
             return wines.stream().filter(wine -> (wine.getPrice() <= priceInteger)).collect(Collectors.toList());
         }

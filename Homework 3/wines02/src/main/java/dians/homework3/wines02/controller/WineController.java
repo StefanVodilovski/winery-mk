@@ -2,6 +2,7 @@ package dians.homework3.wines02.controller;
 
 
 import dians.homework3.wines02.dto.AddWinesDto;
+import dians.homework3.wines02.dto.UserDto;
 import dians.homework3.wines02.dto.WineDto;
 import dians.homework3.wines02.model.AddWines;
 import dians.homework3.wines02.model.UserEntity;
@@ -16,6 +17,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static dians.homework3.wines02.mapper.UserMapper.mapToUserDto;
+
 @CrossOrigin("http://localhost:3001")
 @RestController
 @RequestMapping("/wines/")
@@ -24,12 +27,14 @@ public class WineController {
     private final UserService userService;
     private final PipeWinesService pipeWinesService;
     private final CartService cartService;
+    private final UserAuthProvider authProvider;
 
-    public WineController(WineService wineService, UserService userService, PipeWinesService pipeWinesService, CartService cartService) {
+    public WineController(WineService wineService, UserService userService, PipeWinesService pipeWinesService, CartService cartService, UserAuthProvider authProvider) {
         this.wineService = wineService;
         this.userService = userService;
         this.pipeWinesService = pipeWinesService;
         this.cartService = cartService;
+        this.authProvider = authProvider;
     }
 
     @GetMapping("all")
@@ -53,10 +58,22 @@ public class WineController {
 
     @GetMapping("add/cart/item/{wineId}")
     public ResponseEntity<String> putToCart(@PathVariable("wineId") Long wineId,
-                                                 @RequestParam("quantity") String quantity) {
-        UserEntity user = userService.findByUsername(SecurityUtil.getSessionUser());
-        WineDto wine = wineService.findById(wineId);
-        cartService.saveCart(user, wine, Integer.parseInt(quantity));
-        return ResponseEntity.ok("Successfully added to cart.");
+                                                 @RequestParam("quantity") String quantity,
+                                            @RequestHeader(value = "Authorization") String authorizationHeader) {
+        String token = authorizationHeader.replace("Bearer ", "");
+        Authentication authentication = authProvider.validateToken(token);
+        if(authentication.isAuthenticated()) {
+            String username = (String) authentication.getPrincipal();
+            UserEntity user = userService.findByUsername(username);
+
+            if (user != null) {
+                WineDto wine = wineService.findById(wineId);
+                cartService.saveCart(user, wine, Integer.parseInt(quantity));
+                return ResponseEntity.ok("Successfully added to cart.");
+            } else {
+                return ResponseEntity.badRequest().build();
+            }
+        }
+        return ResponseEntity.badRequest().build();
     }
 }

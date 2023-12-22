@@ -11,7 +11,7 @@ public class RegionFilter implements Filter<String> {
 
     @Override
     public List<WineDto> execute(String region, List<WineDto> wines) {
-        if(region != null) {
+        if(!region.equals("-1")) {
             return wines.stream().filter(wine -> wine.getWinery().getRegion().name().equals(region)).collect(Collectors.toList());
         }
         return wines;

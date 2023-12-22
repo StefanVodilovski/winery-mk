@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 public class RegionFilterWinery implements Filter<String> {
     @Override
     public List<WineryDto> execute(String region, List<WineryDto> wineries) {
-        if(region != null) {
+        if(!region.equals("-1")) {
             return wineries.stream().filter(wine -> wine.getRegion().name().equals(region)).collect(Collectors.toList());
         }
         return wineries;
