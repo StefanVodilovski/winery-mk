@@ -24,7 +24,7 @@ import static dians.homework3.wines02.mapper.UserMapper.mapToUserDto;
 
 @CrossOrigin("http://localhost:3001")
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/auth/")
 @RequiredArgsConstructor
 public class AuthController {
     private final UserService userService;
@@ -44,7 +44,7 @@ public class AuthController {
         return password.matches(passwordRegex);
     }
 
-    @PostMapping("/login")
+    @PostMapping("login")
     public ResponseEntity<UserDto> login(@RequestParam String username,
                                          @RequestParam String password) {
         CredentialsDto credentialsDto = new CredentialsDto();
@@ -56,7 +56,7 @@ public class AuthController {
         return ResponseEntity.ok(user);
     }
 
-    @PostMapping("/register/save")
+    @PostMapping("register/save")
     public ResponseEntity<UserDto> registerUser(@RequestParam String email,
                                                @RequestParam String username,
                                                @RequestParam String password,
