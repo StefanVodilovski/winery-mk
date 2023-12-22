@@ -41,7 +41,7 @@ public class UserServiceImpl implements UserService {
         userEntity.setAddress(registrationDto.getAddress());
         userEntity.setPassword(passwordEncoder.encode(registrationDto.getPassword()));
         Role role = roleRepository.findByName("ROLE_USER");
-        userEntity.setRoles(Collections.singletonList(role));
+//        userEntity.setRoles(Collections.singletonList(role));
         userRepository.save(userEntity);
         return userEntity;
     }
@@ -55,7 +55,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<UserEntity> findAll() {
         return userRepository.findAll().stream()
-                .filter(user -> user.getRoles().stream().anyMatch(role -> "ROLE_USER".equals(role.getName())))
+//                .filter(user -> user.getRoles().stream().anyMatch(role -> "ROLE_USER".equals(role.getName())))
                 .collect(Collectors.toList());
     }
 
