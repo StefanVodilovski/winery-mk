@@ -18,4 +18,5 @@ public class WineryDto2 {
     private double xCordinate;
     private double yCordinate;
     private Region region;
+    private String wineryLink;
 }

@@ -15,7 +15,7 @@ public class EventMapper {
                 .description(eventDto.getDescription())
                 .createdOn(eventDto.getCreatedOn())
                 .endDateTime(eventDto.getEndDateTime())
-                .photoUrl(eventDto.getPhotoUrl())
+                .photo(eventDto.getPhoto())
                 .startDateTime(eventDto.getStartDateTime())
                 .updatedOn(eventDto.getUpdatedOn())
                 .xCordinate(eventDto.getXCordinate())
@@ -31,7 +31,7 @@ public class EventMapper {
                 .createdBy(UserMapper.mapToUserDto(event.getCreatedBy()))
                 .createdOn(event.getCreatedOn())
                 .endDateTime(event.getEndDateTime())
-                .photoUrl(event.getPhotoUrl())
+                .photo(event.getPhoto())
                 .startDateTime(event.getStartDateTime())
                 .updatedOn(event.getUpdatedOn())
                 .wineries(event.getWineries().stream().map(WineryMapper::mapToWineryDto2).collect(Collectors.toList()))
@@ -44,8 +44,7 @@ public class EventMapper {
     public static EventDto2 mapToEventDto2(Event event) {
         return EventDto2.builder()
                 .name(event.getName())
-                .description(event.getDescription())
-                .photoUrl(event.getPhotoUrl())
+                .photo(event.getPhoto())
                 .build();
     }
 }

@@ -11,6 +11,7 @@ import javax.persistence.*;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.math.BigInteger;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +29,9 @@ public class Event {
     private String name;
     private LocalDateTime startDateTime;
     private LocalDateTime endDateTime;
-    private String photoUrl;
+    @Lob
+    @Column(name = "photo", columnDefinition = "BLOB")
+    private byte[] photo;
     private String description;
     private double xCordinate;
     private double yCordinate;

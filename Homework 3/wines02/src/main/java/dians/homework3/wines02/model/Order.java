@@ -24,6 +24,7 @@ public class Order {
     private Long Id;
     private String code;
     private Status status;
+    private Integer total;
 
     @OnDelete(action = OnDeleteAction.CASCADE)
     @ManyToOne()

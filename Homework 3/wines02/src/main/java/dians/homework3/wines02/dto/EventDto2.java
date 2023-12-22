@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.transaction.Transactional;
+import java.math.BigInteger;
 
 @Data
 @Builder
@@ -14,6 +15,5 @@ import javax.transaction.Transactional;
 @Transactional
 public class EventDto2 {
     private String name;
-    private String photoUrl;
-    private String description;
+    private byte[] photo;
 }

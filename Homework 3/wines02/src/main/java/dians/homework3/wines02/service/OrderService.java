@@ -1,6 +1,7 @@
 package dians.homework3.wines02.service;
 
 import dians.homework3.wines02.dto.OrderDto;
+import dians.homework3.wines02.model.AddWines;
 import dians.homework3.wines02.model.UserEntity;
 import org.codehaus.groovy.vmplugin.v8.PluginDefaultGroovyMethods;
 
@@ -12,4 +13,6 @@ public interface OrderService {
     OrderDto getById(Long orderId);
 
     List<OrderDto> findByUser(Long userId);
+
+    OrderDto makeOrder(List<AddWines> addWines, UserEntity user, Integer totalPrice);
 }

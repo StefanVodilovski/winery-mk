@@ -16,6 +16,7 @@ public class WineryMapper {
                 .xCordinate(wineryDto.getXCordinate())
                 .yCordinate(wineryDto.getYCordinate())
                 .region(wineryDto.getRegion())
+                .wineryLink(wineryDto.getWineryLink())
                 .build();
     }
     public static WineryDto mapToWineryDto(Winery winery) {
@@ -29,6 +30,7 @@ public class WineryMapper {
                 .yCordinate(winery.getYCordinate())
                 .region(winery.getRegion())
                 .wines(winery.getWines().stream().map(WineMapper::mapToWineDto2).collect(Collectors.toList()))
+                .wineryLink(winery.getWineryLink())
                 .build();
     }
 
@@ -42,6 +44,7 @@ public class WineryMapper {
                 .xCordinate(winery.getXCordinate())
                 .yCordinate(winery.getYCordinate())
                 .region(winery.getRegion())
+                .wineryLink(winery.getWineryLink())
                 .build();
     }
 }

@@ -32,6 +32,7 @@ public class Winery {
     private double xCordinate;
     private double yCordinate;
     private Region region;
+    private String wineryLink;
 
     @ManyToMany(mappedBy = "wineries", fetch = FetchType.EAGER)
     private List<Event> events = new ArrayList<>();

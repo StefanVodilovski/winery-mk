@@ -1,75 +1,126 @@
 package dians.homework3.wines02.controller;
 
+import dians.homework3.wines02.dto.CredentialsDto;
 import dians.homework3.wines02.dto.RegistrationDto;
-import dians.homework3.wines02.dto.WineDto;
+import dians.homework3.wines02.dto.UserDto;
+import dians.homework3.wines02.exception.AppException;
 import dians.homework3.wines02.model.UserEntity;
 import dians.homework3.wines02.security.SecurityUtil;
+import dians.homework3.wines02.security.UserAuthProvider;
 import dians.homework3.wines02.service.CartService;
 import dians.homework3.wines02.service.UserService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.util.List;
+import java.io.IOException;
+import java.net.URI;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-@Controller
+import static dians.homework3.wines02.mapper.UserMapper.mapToUserDto;
+
+@CrossOrigin("http://localhost:3001")
+@RestController
+@RequestMapping("/auth")
+@RequiredArgsConstructor
 public class AuthController {
     private final UserService userService;
     private final CartService cartService;
+    private final UserAuthProvider userAuthProvider;
 
-    public AuthController(UserService userService, CartService cartService) {
-        this.userService = userService;
-        this.cartService = cartService;
+    public static boolean isValidEmail(String email) {
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+        Pattern pattern = Pattern.compile(emailRegex);
+        Matcher matcher = pattern.matcher(email);
+
+        return matcher.matches();
+    }
+    public static boolean isStrongPassword(String password) {
+        String passwordRegex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&!@#$%^&*()-_=+\\[\\]{}|;:'\",.<>?/]{8,}$";
+
+        return password.matches(passwordRegex);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<UserDto> login(@RequestParam String username,
+                                         @RequestParam String password) {
+        CredentialsDto credentialsDto = new CredentialsDto();
+        credentialsDto.setPassword(password);
+        credentialsDto.setUsername(username);
+        UserDto user = userService.login(credentialsDto);
+        user.setToken(userAuthProvider.createToken(user.getUsername()));
+
+        return ResponseEntity.ok(user);
     }
 
     @PostMapping("/register/save")
-    public ResponseEntity<String> registerUser(@RequestParam String email,
+    public ResponseEntity<UserDto> registerUser(@RequestParam String email,
                                                @RequestParam String username,
                                                @RequestParam String password,
                                                @RequestParam String phoneNumber,
                                                @RequestParam String address) {
-        UserEntity existedUserEmail = userService.findByEmail(email);
-        if(existedUserEmail != null && existedUserEmail.getEmail() != null && !existedUserEmail.getEmail().isEmpty()) {
-            ResponseEntity.ok("Registration failed");
-        }
 
-        UserEntity existedUserUsername = userService.findByUsername(username);
-        if(existedUserUsername != null && existedUserUsername.getUsername() != null && !existedUserUsername.getUsername().isEmpty()) {
-            ResponseEntity.ok("Registration failed");
+        if(!isValidEmail(email)) {
+            throw new AppException("Incorrect email form.", HttpStatus.BAD_REQUEST);
         }
-
+        if(!isStrongPassword(password)) {
+            throw new AppException("Your password is weak.", HttpStatus.BAD_REQUEST);
+        }
         RegistrationDto user = new RegistrationDto();
         user.setAddress(address);
         user.setEmail(email);
         user.setUsername(username);
         user.setPhoneNumber(phoneNumber);
         user.setPassword(password);
-        UserEntity userEntity = userService.saveUser(user);
+        UserEntity userEntity = userService.register(user);
         cartService.save(userEntity);
-        return ResponseEntity.ok("User registered successfully");
+        UserDto userDto = mapToUserDto(userEntity);
+        userDto.setToken(userAuthProvider.createToken(user.getUsername()));
+
+        return ResponseEntity.created(URI.create("/users/"+user.getId()))
+                .body(userDto);
     }
 
-    @GetMapping("/user/{userId}/edit")
-    private String editUser(@PathVariable("userId") Long userId, Model model) {
-        UserEntity user = userService.findById(userId);
-        model.addAttribute("user", user);
-        return "user_edit";
+    public UserEntity getSessionUserEntity() {
+        return userService.findByUsername(SecurityUtil.getSessionUser());
     }
 
-//    @PostMapping("/user/{userId}/edit")
-//    private String updateEditUser(@PathVariable("userId") Long userId, @ModelAttribute("user") RegistrationDto user) {
-//        user.setId(userId);
-//        userService.save(user);
-//        return "redirect:/user/manager?success";
-//    }
+    @GetMapping("user/edit")
+    private ResponseEntity<UserDto> editUser() {
+        UserEntity user = getSessionUserEntity();
 
-    @GetMapping("/profile")
-    public String getProfilePage(Model model) {
-        String email = SecurityUtil.getSessionUser();
-        UserEntity user = userService.findByEmail(email);
-        model.addAttribute("user", user);
-        return "profile";
+        return ResponseEntity.ok(mapToUserDto(user));
+    }
+
+    @PostMapping("user/edit")
+    private ResponseEntity<UserDto> updateEditUser(@RequestParam String username,
+                                @RequestParam String email,
+                                @RequestParam MultipartFile profileImage,
+                                @RequestParam String address) {
+        byte[] imageBytes = null;
+        if (profileImage != null && !profileImage.isEmpty()) {
+            try {
+                imageBytes = profileImage.getBytes();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        UserEntity user = getSessionUserEntity();
+        if(!address.equals("-1")) {
+            user.setAddress(address);
+        }
+        if(!email.equals("-1")) {
+            user.setEmail(email);
+        }
+        if(!username.equals("-1")) {
+            user.setUsername(username);
+        }
+        user.setPhoto(imageBytes);
+        userService.saveUpdate(user);
+
+        return ResponseEntity.ok(mapToUserDto(user));
     }
 }

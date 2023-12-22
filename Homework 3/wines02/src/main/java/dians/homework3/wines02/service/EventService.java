@@ -1,6 +1,7 @@
 package dians.homework3.wines02.service;
 
 import dians.homework3.wines02.dto.*;
+import dians.homework3.wines02.model.Event;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -14,4 +15,6 @@ public interface EventService {
     List<EventCommentDto> findCommentsById(Long eventId);
 
     EventDto findAll(Long eventId);
+
+    void save(Event event);
 }

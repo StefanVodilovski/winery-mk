@@ -19,6 +19,7 @@ public class OrderDto {
     private Long Id;
     private String code;
     private Status status;
+    private Integer total;
     private UserDto createBy;
     private List<AddWinesDto> orderWines;
     private LocalDateTime createdOn;

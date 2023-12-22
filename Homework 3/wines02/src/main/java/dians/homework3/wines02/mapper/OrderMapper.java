@@ -14,6 +14,7 @@ public class OrderMapper {
                 .updatedOn(orderDto.getUpdatedOn())
                 .status(orderDto.getStatus())
                 .createdOn(orderDto.getCreatedOn())
+                .total(orderDto.getTotal())
                 .build();
     }
 
@@ -26,6 +27,7 @@ public class OrderMapper {
                 .status(order.getStatus())
                 .createdOn(order.getCreatedOn())
                 .createBy(UserMapper.mapToUserDto(order.getCreatedBy()))
+                .total(order.getTotal())
                 .build();
     }
 }

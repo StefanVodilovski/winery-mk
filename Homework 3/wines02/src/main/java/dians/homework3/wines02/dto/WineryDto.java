@@ -26,4 +26,5 @@ public class WineryDto {
     private Region region;
     private List<WineDto2> wines;
     private List<Event> events = new ArrayList<>();
+    private String wineryLink;
 }

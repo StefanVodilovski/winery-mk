@@ -18,7 +18,8 @@ public class UserDto {
     private String email;
     private String address;
     private String phoneNumber;
-    private String photoUrl;
+    private byte[] photo;
+    private String token;
     private LocalDateTime createdOn;
     private LocalDateTime updatedOn;
 }

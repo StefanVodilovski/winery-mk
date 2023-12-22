@@ -1,9 +1,9 @@
 package dians.homework3.wines02.controller;
 
 
+import dians.homework3.wines02.dto.AddWinesDto;
 import dians.homework3.wines02.dto.WineDto;
 import dians.homework3.wines02.model.AddWines;
-import dians.homework3.wines02.model.Cart;
 import dians.homework3.wines02.model.UserEntity;
 import dians.homework3.wines02.security.SecurityUtil;
 import dians.homework3.wines02.service.*;
@@ -13,21 +13,17 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static dians.homework3.wines02.mapper.WineMapper.mapToWine;
-
 @CrossOrigin("http://localhost:3001")
 @RestController
 @RequestMapping("/wines/")
 public class WineController {
     private final WineService wineService;
-    private final AddWinesService addWinesService;
     private final UserService userService;
     private final PipeWinesService pipeWinesService;
     private final CartService cartService;
 
-    public WineController(WineService wineService, AddWinesService addWinesService, UserService userService, PipeWinesService pipeWinesService, CartService cartService) {
+    public WineController(WineService wineService, UserService userService, PipeWinesService pipeWinesService, CartService cartService) {
         this.wineService = wineService;
-        this.addWinesService = addWinesService;
         this.userService = userService;
         this.pipeWinesService = pipeWinesService;
         this.cartService = cartService;
@@ -53,11 +49,11 @@ public class WineController {
     }
 
     @GetMapping("add/cart/item/{wineId}")
-    public ResponseEntity<AddWines> putToCart(@PathVariable("wineId") Long wineId,
-                                              @RequestParam("quantity") String quantity) {
-        UserEntity user = userService.findByEmail(SecurityUtil.getSessionUser());
+    public ResponseEntity<String> putToCart(@PathVariable("wineId") Long wineId,
+                                                 @RequestParam("quantity") String quantity) {
+        UserEntity user = userService.findByUsername(SecurityUtil.getSessionUser());
         WineDto wine = wineService.findById(wineId);
         cartService.saveCart(user, wine, Integer.parseInt(quantity));
-        return new ResponseEntity<>(HttpStatus.OK);
+        return ResponseEntity.ok("Successfully added to cart.");
     }
 }
