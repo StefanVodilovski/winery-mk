@@ -30,6 +30,8 @@ public class UserEntity {
     private String password;
     private String phoneNumber;
     private String address;
+//    @Lob
+//    @Column(name = "photo", columnDefinition = "BLOB")
 //    private byte[] photo;
 
     @ManyToMany(fetch = EAGER, cascade = CascadeType.ALL)

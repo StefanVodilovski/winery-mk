@@ -29,8 +29,8 @@ public class Event {
     private String name;
     private LocalDateTime startDateTime;
     private LocalDateTime endDateTime;
-    @Lob
-    @Column(name = "photo", columnDefinition = "BLOB")
+//    @Lob
+//    @Column(name = "photo", columnDefinition = "BLOB")
 //    private byte[] photo;
     private String description;
     private double xCordinate;
