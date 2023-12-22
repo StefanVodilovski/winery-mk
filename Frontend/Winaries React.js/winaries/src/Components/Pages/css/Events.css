@@ -1,0 +1,78 @@
+.events-outer-container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.events-inner-container{
+    width: 70%;
+    height: 100%;
+}
+
+.events-inner-container h1{
+    text-align: center;
+}
+
+body.route-events .search-bar-container {
+    margin-top: 30px;
+    width: 100%;
+    display: flex;
+    justify-content: center ;
+    align-items: center;
+}
+
+body.route-events .search-button{
+    border: none;
+    color: white;
+    text-align: center;
+    background-color: #CB1919;
+    height: 40px;
+    width: 70px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+body.route-events .filter-options{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 35px;
+}
+
+body.route-events .filter-option{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    width: 20%;
+}
+
+body.route-events .filter-option label{
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+body.route-events .filter-option select{
+    width: 100%;   
+    border: none;
+    background-color: #F6F5F5;
+    color: black;
+    padding: 7px 0;
+    border-radius: 5px;
+}
+
+body.route-events .filter-option select:focus{
+    outline: none;
+}
+
+.events-list{
+    margin-top: 45px;
+    padding-top: 20px;
+    border-top: 2px solid #F6F5F5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

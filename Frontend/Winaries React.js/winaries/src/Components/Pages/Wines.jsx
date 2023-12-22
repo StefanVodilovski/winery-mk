@@ -64,6 +64,7 @@ export const Wines = () => {
     };
 
     useEffect(() => {
+        console.log("hellow")
         initalData();
     }, []);
 
