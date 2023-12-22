@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 public class SearchFilter implements Filter<String> {
     @Override
     public List<WineDto> execute(String searchInput, List<WineDto> wines) {
-        if(!searchInput.equals("-1")) {
+        if(searchInput != null) {
             String finalSearchQuery = searchInput.toLowerCase();
             return wines.stream().filter(wine -> wine.getName().toLowerCase().contains(finalSearchQuery)).collect(Collectors.toList());
         }

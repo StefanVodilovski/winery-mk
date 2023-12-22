@@ -11,7 +11,7 @@ public class SearchFilterWinery implements Filter<String> {
 
     @Override
     public List<WineryDto> execute(String searchInput, List<WineryDto> wineries) {
-        if(!searchInput.equals("-1")) {
+        if(searchInput != null) {
             String finalSearchQuery = searchInput.toLowerCase();
             return wineries.stream().filter(wine -> wine.getName().toLowerCase().contains(finalSearchQuery)).collect(Collectors.toList());
         }

@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 public class LitrageFilter implements Filter<String> {
     @Override
     public List<WineDto> execute(String litrage, List<WineDto> wines) {
-        if(!litrage.equals("-1")) {
+        if(litrage != null) {
             Double litrageDouble = Double.parseDouble(litrage);
             return wines.stream().filter(wine -> wine.getLitrage() == litrageDouble).collect(Collectors.toList());
         }

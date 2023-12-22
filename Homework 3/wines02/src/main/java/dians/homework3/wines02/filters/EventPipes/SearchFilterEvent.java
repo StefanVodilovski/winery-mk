@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 public class SearchFilterEvent implements Filter<String> {
     @Override
     public List<Event> execute(String searchInput, List<Event> events) {
-        if(!searchInput.equals("-1")) {
+        if(searchInput != null) {
             String finalSearchQuery = searchInput.toLowerCase();
             return events.stream().filter(event -> event.getName().contains(finalSearchQuery)).collect(Collectors.toList());
         }

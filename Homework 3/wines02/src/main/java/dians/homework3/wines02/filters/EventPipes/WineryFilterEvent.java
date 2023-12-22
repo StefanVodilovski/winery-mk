@@ -10,7 +10,7 @@ import java.util.List;
 public class WineryFilterEvent implements Filter<String> {
     @Override
     public List<Event> execute(String winery, List<Event> events) {
-        if(!winery.equals("-1")) {
+        if(winery != null) {
             return events.stream()
                     .filter(event -> event.getWineries().stream()
                             .anyMatch(eventWine -> eventWine.getName().equals(winery)))
