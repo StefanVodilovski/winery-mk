@@ -56,7 +56,7 @@ public class AuthController {
         return ResponseEntity.ok(user);
     }
 
-    @GetMapping("/logout")
+    @GetMapping("logout")
     public ResponseEntity<String> logout() {
         SecurityContextHolder.clearContext(); // Clear the security context
         return ResponseEntity.ok("Logout successful");
