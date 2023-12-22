@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom';
 import { Link, NavLink } from "react-router-dom"
 import logoImage from '../images/logoWhite.png';
 import "./Navbar.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBagShopping, faBars} from '@fortawesome/free-solid-svg-icons'
+import { getAuthToken, request, setAuthHeader } from '../Helpers/axios_helper';
 
 export const Navbar = () => {
 
     const [scrollVh, setScrollVh] = useState(0);
+    const navigate = useNavigate();
 
     useEffect(() => {
       const handleScroll = () => {
@@ -69,6 +72,26 @@ export const Navbar = () => {
         };
       }, []);
 
+
+
+      const handleLogout = async () => {
+            request(
+              "GET",
+              "/auth/logout",
+              {
+
+              }).then(
+              () => {
+                  setAuthHeader(null);
+                  navigate('/login');
+              }).catch(
+              (error) => {
+                  setAuthHeader(null);
+                  navigate('/');
+              }
+          );
+      };
+
     return (
         <nav className={navClass}>
             <Link to="/" className='title'>
@@ -124,7 +147,7 @@ export const Navbar = () => {
                     <NavLink to="/create-event" onClick={() => {closeProfileMenu(); closeHamburgerMenu();}}>Create event</NavLink>
                 </div>
                 <div className='signout'>
-                    <NavLink to="/logout" onClick={() => {closeProfileMenu(); closeHamburgerMenu();}}>SIGN OUT</NavLink>
+                    <button onClick={handleLogout}>LOG OUT</button>
                 </div>
             </div>     
         </nav>

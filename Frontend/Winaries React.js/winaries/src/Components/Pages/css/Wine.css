@@ -9,3 +9,96 @@ body.route-wine .wine-description{
     justify-content: center;
     align-items: center;
 }
+body.route-wine .wineryName {
+    font-size: 18px;
+}
+body.route-wine .wine-description span{
+    font-size: 14px;
+    color: rgb(163, 163, 163);
+}
+body.route-wine .wine-description h1 {
+    font-weight: bolder;
+}
+
+body.route-wine .winePrice {
+    margin-bottom: 0;
+    font-size: 30px;
+}
+
+/* Chrome, Safari, Edge, Opera */
+body.route-wine input::-webkit-outer-spin-button,
+body.route-wine input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+body.route-wine input[type=number] {
+  text-align: center;
+  border: 1px solid rgb(207, 207, 207);
+  height: 100%;
+  width: 40px;
+}
+
+
+body.route-wine #prev,
+body.route-wine #next {
+    background-color: transparent;
+    width: 15px;
+}
+
+body.route-wine #prev {
+    height: 100%;
+    border-right: none;
+    border-top: 1px solid rgb(207, 207, 207);
+    border-bottom: 1px solid rgb(207, 207, 207);
+    border-left: 1px solid rgb(207, 207, 207);
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
+}
+
+body.route-wine #next {
+    height: 100%;
+    border-left: none;
+    border-top: 1px solid rgb(207, 207, 207);
+    border-bottom: 1px solid rgb(207, 207, 207);
+    border-right: 1px solid rgb(207, 207, 207);
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+}
+
+
+body.route-wine .wine-description .inputType {
+    display: inline;
+    margin-right: 20px;
+}
+
+body.route-wine .wine-description form {
+    height: 50px;
+    display: flex;
+}
+
+body.route-wine .wine-description button#addToCart {
+    padding-left: 17px;
+    padding-right: 17px;
+    border: none;
+    background-color: #CB1919;
+    color: white;
+    font-size: 17px;
+}
+
+body.route-wine hr {
+    margin-top: 80px;
+}
+
+body.route-wine #winePageWidth {
+    margin: auto;
+    width: 80%;
+}
+
+body.route-wine .also-from-container h1 {
+    margin-top: 20px;
+    color: #D13636;
+    font-style: italic;
+    font-size: 30px;
+}

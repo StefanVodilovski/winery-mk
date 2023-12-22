@@ -2,38 +2,30 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';  // Ensure this line is correct
 import axios from 'axios';
 import "./css/Login.css"
+import { request, setAuthHeader } from '../../Helpers/axios_helper';
 
 export const Login = () => {
-    const [loginStatus, setLoginStatus] = useState(null);
   const navigate = useNavigate();
 
   const handleLogin = async (event) => {
     event.preventDefault();
-
-    try {
-      const formData = new FormData(event.currentTarget);
-
-      // Example: Serialize form data to JSON
-      const data = {};
-      formData.forEach((value, key) => {
-        data[key] = value;
-      });
-
-      const response = await axios.post('http://localhost:8080/login', data, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-
-      if (response.data.success) {
-        setLoginStatus('success');
-        navigate('/');
-      } else {
-        console.error('Login failed. Message:', response.data.message);
-      }
-    } catch (error) {
-      console.error('Login failed', error);
-    }
+        const formData = new FormData(event.currentTarget);
+        request(
+          "POST",
+          "/auth/login",
+          {
+              username: formData.get('username'),
+              password: formData.get('password'),
+          }).then(
+          (response) => {
+              setAuthHeader(response.data.token);
+              navigate('/');
+          }).catch(
+          (error) => {
+              setAuthHeader(null);
+              navigate('/login');
+          }
+      );
   };
     return (
         <div className='login-container'>
@@ -41,16 +33,12 @@ export const Login = () => {
                 <h1>LOG IN</h1>
                 <div className='input-outer-container'>
                     <div className='input-container'>
-                        <label htmlFor="email">Email</label>
-                        <input type="text" name="email" id="email" placeholder='Email...'/>
+                        <label htmlFor="username">Email</label>
+                        <input type="text" name="username" id="username" placeholder='Username...'/>
                     </div>
                     <div className='input-container'>
                         <label htmlFor="password">Password</label>
                         <input type="password" name="password" id="password" placeholder='Password...'/>
-                    </div>
-                    <div className='input-container'>
-                        <label htmlFor="rememberMe">Password</label>
-                        <input type="checkbox" name="remember-me" id="rememberMe"/>Remember Me
                     </div>
                 </div>
                 <button type='submit'>LOG IN</button>

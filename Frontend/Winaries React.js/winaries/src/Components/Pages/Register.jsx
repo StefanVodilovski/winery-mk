@@ -2,32 +2,50 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import "./css/Register.css"
+import { request, setAuthHeader } from '../../Helpers/axios_helper';
 
 
 export const Register = () => {
 
-    const [registrationStatus, setRegistrationStatus] = useState(null);
     const navigate = useNavigate();
 
     const handleRegistration = async (event) => {
         event.preventDefault();
-
-        console.log(event.currentTarget);
-      
-        try {
-          const formData = new FormData(event.currentTarget);
-      
-          const response = await axios.post('http://localhost:8080/auth/register/save', formData);
-      
-          if (response.status === 200) {
-            setRegistrationStatus('success');
-            navigate('/login');
-          } else {
-            console.error('Registration failed. Status:', response.status);
+        const formData = new FormData(event.currentTarget);
+        request(
+          "POST",
+          "/auth/register",
+          {
+              email: formData.get('email'),
+              password: formData.get('password'),
+              username: formData.get('username'),
+              phoneNumber: formData.get('phoneNumber'),
+              address: formData.get('address')
+          }).then(
+          (response) => {
+              setAuthHeader(response.data.token);
+              navigate('/login');
+          }).catch(
+          (error) => {
+              console.log(error)
+              setAuthHeader(null);
+              navigate('/register');
           }
-        } catch (error) {
-          console.error('Registration failed', error);
-        }
+      );
+      
+        // try {
+        //   const formData = new FormData(event.currentTarget);
+      
+        //   const response = await axios.post('http://localhost:8080/auth/register', formData);
+      
+        //   if (response.status === 200) {
+        //     navigate('/login');
+        //   } else {
+        //     console.error('Registration failed. Status:', response.status);
+        //   }
+        // } catch (error) {
+        //   console.error('Registration failed', error);
+        // }
       };
 
     return (

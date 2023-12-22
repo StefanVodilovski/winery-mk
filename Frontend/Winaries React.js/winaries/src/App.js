@@ -11,10 +11,7 @@ import {Profile} from './Components/Pages/Profile';
 import {CreateEvent} from './Components/Pages/CreateEvent'
 import {Wine} from './Components/Pages/Wine'
 import {Winery} from './Components/Pages/Winery'
-
-
 import { useEffect } from 'react';
-
 
 
 function App() {

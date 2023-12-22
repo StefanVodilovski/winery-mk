@@ -7,20 +7,19 @@ export const Winery = () => {
   const wineryData = location.state?.wineryData || {};
 
   return (
-    <div>
+    <div id='wineryPageWidth'>
         <div className='winery-description-container'>
-            <div className='winery-description'>
                 <div>
                   <img src={wineryData.photoUrl} alt="" />
                 </div>
-                <div>
+                <div id='wineryData'>
                   <h1>{wineryData.name}</h1>
-                  <p>{wineryData.description}</p>
+                  <p>{wineryData.description.toUpperCase()}</p>
                   <a href="">VISIT</a>
                 </div>
-            </div>
 
         </div>
+        <hr/>
         <div className='also-from-container'>
           <h1>ALSO FROM {wineryData.name.toUpperCase()}</h1>
           <div className='also-from-wineries-list'>

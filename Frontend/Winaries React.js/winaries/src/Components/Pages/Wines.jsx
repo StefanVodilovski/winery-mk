@@ -4,6 +4,7 @@ import { SearchWinesList } from "../SearchWinesList"
 import "./css/Wines.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlass} from '@fortawesome/free-solid-svg-icons'
+import { request, setAuthHeader, getAuthToken } from '../../Helpers/axios_helper';
 
 export const Wines = () => {
     const [results, setResults] = useState([])
@@ -20,51 +21,61 @@ export const Wines = () => {
     const [litrage, setLitrage] = useState('-1');
 
     const handleButtonClick = () => {
-
-        console.log('Price Filter:', priceFilter);
-        console.log('Region:', region);
-        console.log('Winery:', winery);
-        console.log('Litrage:', litrage);
-        console.log('Search Query:', searchQuery)
-
         fetchData()
     };
 
     const fetchData = () => {
-        // ova url e /wines/filter 
-        // searchQuery=value.
-        // priceFilter=
-        // region=
-        // winery=
-        // literage= 
-        let url = 'http://localhost:8080/wines/filter?searchQuery=' + searchQuery 
-        + "&priceFilter=" + priceFilter + "&region=" + region 
-        + "&winery=" + winery + "&litrage=" + litrage;
-        fetch(url)
-            .then((response) => response.json())
-            .then((json) => {
-                setResults(json);
-            })
-            .catch((error) => {
-                console.error('Error fetching data:', error);
-            });
-    };
-    
+        let url = "/wines/filter?";
+        if(searchQuery != "")
+            url = url + "&searchQuery=" + searchQuery;
+        if(priceFilter != -1)
+            url = url + "&priceFilter=" + priceFilter;
+        if(region != -1)
+            url = url + "&region=" + region;
+        if(winery != -1)
+            url = url + "&winery=" + winery;
+        if(litrage != -1)
+            url = url + "&litrage=" + litrage;
+        console.log(url)
+        
+            request(
+                "GET",
+                url,
+                {
+                    headers: {
+                        authorizationHeader: `Bearer ${getAuthToken()}`, // Include the authentication token in the Authorization header
+                    },
+                  }
+                ).then(
+                (response) => {
+                    setResults(response.data)
+                }).catch(
+                (error) => {
+                  console.error('Error fetching data:', error);
+                }
+            );
+    };    
 
     const initalData = () => {
-        let url = 'http://localhost:8080/wines/all'
-        fetch(url)
-            .then((response) => response.json())
-            .then((json) => {
-                setResults(json);
-            })
-            .catch((error) => {
-                console.error('Error fetching data:', error);
-            });
+        request(
+            "GET",
+            "/wines/all",
+            {
+                headers: {
+                    authorizationHeader: `Bearer ${getAuthToken()}`, // Include the authentication token in the Authorization header
+                },
+              }
+            ).then(
+            (response) => {
+                setResults(response.data)
+            }).catch(
+            (error) => {
+              console.error('Error fetching data:', error);
+            }
+        );
     };
 
     useEffect(() => {
-        console.log("hellow")
         initalData();
     }, []);
 
