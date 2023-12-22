@@ -64,14 +64,14 @@ public class EventController {
                                 @RequestParam(required = false) MultipartFile eventImage,
                                 @RequestParam(required = false) Double lat,
                                 @RequestParam(required = false) Double lng) {
-        byte[] imageBytes = null;
-        if (eventImage != null && !eventImage.isEmpty()) {
-            try {
-                imageBytes = eventImage.getBytes();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+//        byte[] imageBytes = null;
+//        if (eventImage != null && !eventImage.isEmpty()) {
+//            try {
+//                imageBytes = eventImage.getBytes();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
 
         Event event = new Event();
         event.setName(name);
@@ -79,7 +79,7 @@ public class EventController {
         event.setEndDateTime(dateEnd);
         event.setDescription(description);
         event.setCreatedBy(userService.findByUsername(SecurityUtil.getSessionUser()));
-        event.setPhoto(imageBytes);
+//        event.setPhoto(imageBytes);
         event.setXCordinate(lat != null ? lat : 0.0);
         event.setYCordinate(lng != null ? lng : 0.0);
         eventService.save(event);

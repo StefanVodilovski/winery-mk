@@ -30,7 +30,7 @@ public class UserEntity {
     private String password;
     private String phoneNumber;
     private String address;
-    private byte[] photo;
+//    private byte[] photo;
 
     @ManyToMany(fetch = EAGER, cascade = CascadeType.ALL)
     @JoinTable(

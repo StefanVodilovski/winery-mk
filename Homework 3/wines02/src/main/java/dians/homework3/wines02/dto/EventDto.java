@@ -24,7 +24,7 @@ public class EventDto {
     private String name;
     private LocalDateTime startDateTime;
     private LocalDateTime endDateTime;
-    private byte[] photo;
+//    private byte[] photo;
     private String description;
     private double xCordinate;
     private double yCordinate;

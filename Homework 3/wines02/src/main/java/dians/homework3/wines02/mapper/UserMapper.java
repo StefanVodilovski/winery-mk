@@ -14,7 +14,7 @@ public class UserMapper {
                 .createdOn(userDto.getCreatedOn())
                 .updatedOn(userDto.getUpdatedOn())
                 .phoneNumber(userDto.getPhoneNumber())
-                .photo(userDto.getPhoto())
+//                .photo(userDto.getPhoto())
                 .build();
     }
 
@@ -27,7 +27,7 @@ public class UserMapper {
                 .createdOn(user.getCreatedOn())
                 .updatedOn(user.getUpdatedOn())
                 .phoneNumber(user.getPhoneNumber())
-                .photo(user.getPhoto())
+//                .photo(user.getPhoto())
                 .build();
     }
 }

@@ -100,14 +100,14 @@ public class AuthController {
                                 @RequestParam String email,
                                 @RequestParam MultipartFile profileImage,
                                 @RequestParam String address) {
-        byte[] imageBytes = null;
-        if (profileImage != null && !profileImage.isEmpty()) {
-            try {
-                imageBytes = profileImage.getBytes();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+//        byte[] imageBytes = null;
+//        if (profileImage != null && !profileImage.isEmpty()) {
+//            try {
+//                imageBytes = profileImage.getBytes();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
         UserEntity user = getSessionUserEntity();
         if(!address.equals("-1")) {
             user.setAddress(address);
@@ -118,7 +118,7 @@ public class AuthController {
         if(!username.equals("-1")) {
             user.setUsername(username);
         }
-        user.setPhoto(imageBytes);
+//        user.setPhoto(imageBytes);
         userService.saveUpdate(user);
 
         return ResponseEntity.ok(mapToUserDto(user));

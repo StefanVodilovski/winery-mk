@@ -15,5 +15,5 @@ import java.math.BigInteger;
 @Transactional
 public class EventDto2 {
     private String name;
-    private byte[] photo;
+//    private byte[] photo;
 }
