@@ -263,9 +263,22 @@ body.route-create-event .submit-button:disabled{
     background-color: #e0dcdc;
 }
 
-
-
-
 .non-clickable-icon {
     pointer-events: none !important;
-  }
+}
+
+body.route-create-event hr {
+    margin-top: 80px;
+    width: 100%;
+}
+
+body.route-create-event .select-wineries-container{
+    width: 100%;
+}
+
+
+
+
+
+  
+  

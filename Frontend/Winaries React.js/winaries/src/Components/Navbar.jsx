@@ -110,8 +110,13 @@ export const Navbar = () => {
                 <li> <NavLink to="/events" onClick={() => {closeProfileMenu(); closeHamburgerMenu();}}> Events </NavLink> </li>
                 <li> <NavLink to="/map" onClick={() => {closeProfileMenu(); closeHamburgerMenu();}}> Map </NavLink> </li>
                 <li><NavLink to="/cart" onClick={() => {closeProfileMenu(); closeHamburgerMenu();}}><FontAwesomeIcon icon={faBagShopping} className='shopping-cart-icon'/></NavLink></li>
-                {/* <li><NavLink to="/login">Login</NavLink></li> */}
-                <li><NavLink to="/login" onClick={() => {closeProfileMenu(); closeHamburgerMenu();}}>SIGN OUT</NavLink></li>
+                {getAuthToken() !== "null" ? (
+                      <li><button onClick={handleLogout}>LOG OUT</button></li>
+                    ) : (
+                      <li>
+                        <NavLink to="/login" onClick={() => { closeProfileMenu(); closeHamburgerMenu(); }}>LOG IN</NavLink>
+                      </li>
+                    )}
             </ul>
             </div>
 
@@ -126,8 +131,22 @@ export const Navbar = () => {
             <div className='right-end'>
                 <ul name="right_end">
                     <li><NavLink to="/cart" onClick={() => {closeProfileMenu(); closeHamburgerMenu();}}><FontAwesomeIcon icon={faBagShopping} className='shopping-cart-icon'/></NavLink></li>
-                    {/* <li><NavLink to="/login">Login</NavLink></li> */}
-                    <li><img className={activeProfile ? 'active' : ''} onClick={handleClickProfile} src={require("../images/defaultProfilePicture.jpg")} /></li>
+                    {getAuthToken() !== "null" ? (
+                      <li>
+                        <img
+                          className={activeProfile ? 'active' : ''}
+                          onClick={handleClickProfile}
+                          src={require("../images/defaultProfilePicture.jpg")}
+                        />
+                      </li>
+                    ) : (
+                      <li>
+                        <NavLink to="/login" onClick={() => { closeProfileMenu(); closeHamburgerMenu(); }}>
+                          LOG IN
+                        </NavLink>
+                      </li>
+                    )}
+                    
                 </ul>
             </div>
 
@@ -146,7 +165,7 @@ export const Navbar = () => {
                 <div className='profile-links'>
                     <NavLink to="/create-event" onClick={() => {closeProfileMenu(); closeHamburgerMenu();}}>Create event</NavLink>
                 </div>
-                <div className='signout'>
+                <div className='logout'>
                     <button onClick={handleLogout}>LOG OUT</button>
                 </div>
             </div>     

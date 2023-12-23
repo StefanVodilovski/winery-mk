@@ -13,6 +13,7 @@ import "./css/Map.css"
 
 export const Map = () => {
     const [results, setResults] = useState([])
+    const [filter, setFilter] = useState([])
     const [input, setInput] = useState('')
 
     const customIcon = new Icon({
@@ -27,6 +28,7 @@ export const Map = () => {
             ).then(
             (response) => {
                 setResults(response.data)
+                setFilter(response.data)
             }).catch(
             (error) => {
               console.error('Error fetching data:', error);
@@ -38,17 +40,26 @@ export const Map = () => {
         initalData();
     }, []);
 
-    const filterWineries = (e) =>{
+    const changeInput = (e) =>{
         setInput(e.target.value)
-        console.log(input)
+        filterWineries(e.target.value);
     }
+
+    const filterWineries = (value) => {
+        if (value.trim() === '') {
+            setFilter(results);
+        } else {
+            const filteredResults = results.filter(result => result.name.toLowerCase().includes(value.toLowerCase()));
+            setFilter(filteredResults);
+        }
+    };
 
 
     return (
         <div className='map'>
 
             <div className='search-container'>
-                <input type="text" name="search" onChange={filterWineries} value={input}/>
+                <input type="text" name="search" onChange={changeInput} value={input}/>
                 <div className='search-icon-container'>
                     <FontAwesomeIcon icon={faMagnifyingGlass} className='search-icon'/>
                 </div>
@@ -63,16 +74,15 @@ export const Map = () => {
                     chunkedLoading
                 // iconCreateFunction={createClusterCustomIcon}
                 >
-                    {results.map(
+                    {filter.map(
                         winery => (
-                            <Marker position={[winery.xcordinate, winery.ycordinate]} icon={customIcon}>
+                            <Marker key={winery.id} position={[winery.xcordinate, winery.ycordinate]} icon={customIcon}>
                                 <Popup>
                                     {winery.name}
                                 </Popup>
                             </Marker>
 
                         )
-
                     )}
                 </MarkerClusterGroup>
             </MapContainer>

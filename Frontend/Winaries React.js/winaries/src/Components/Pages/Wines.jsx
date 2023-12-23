@@ -115,7 +115,7 @@ export const Wines = () => {
                                 <option value={2}>Kartal Winery</option>
                                 <option value={3}>Iliev Winery</option>
                                 <option value={4}>Old School Winery</option>
-                                <option value={5}>Kamnik Winary</option>
+                                <option value={5}>Kamnik Winery</option>
                                 <option value={6}>Paragon Winery</option>
                             </select>
                         </div>

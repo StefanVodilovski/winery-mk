@@ -4,6 +4,7 @@ import { SearchWineriesList } from "../SearchWineriesList"
 import "./css/Wineries.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlass} from '@fortawesome/free-solid-svg-icons'
+import { request, setAuthHeader, getAuthToken } from '../../Helpers/axios_helper';
 
 export const Wineries = () => {
     const [results, setResults] = useState([])
@@ -17,41 +18,42 @@ export const Wineries = () => {
     
 
     const handleButtonClick = () => {
-        console.log('Region:', region);
-        console.log('Search Query:', searchQuery)
-
         fetchData()
     };
 
     const fetchData = () => {
-        // ova url e /wines/filter 
-        // searchQuery=value.
-        // priceFilter=
-        // region=
-        // winery=
-        // literage= 
-        let url = 'http://localhost:8080/wineries/filter?searchQuery=' + searchQuery + "&region=" + region;
-        fetch(url)
-            .then((response) => response.json())
-            .then((json) => {
-                setResults(json);
-            })
-            .catch((error) => {
-                console.error('Error fetching data:', error);
-            });
-    };
-    
+        let url = "/wineries/filter?";
+        if(searchQuery != "")
+            url = url + "&searchQuery=" + searchQuery;
+        if(region != -1)
+            url = url + "&region=" + region;
+        console.log(url)
+        
+            request(
+                "GET",
+                url,
+                ).then(
+                (response) => {
+                    setResults(response.data)
+                }).catch(
+                (error) => {
+                  console.error('Error fetching data:', error);
+                }
+            );
+    };    
 
     const initalData = () => {
-        let url = 'http://localhost:8080/wineries/all'
-        fetch(url)
-            .then((response) => response.json())
-            .then((json) => {
-                setResults(json);
-            })
-            .catch((error) => {
-                console.error('Error fetching data:', error);
-            });
+        request(
+            "GET",
+            "/wineries/all",
+            ).then(
+            (response) => {
+                setResults(response.data)
+            }).catch(
+            (error) => {
+              console.error('Error fetching data:', error);
+            }
+        );
     };
 
     useEffect(() => {
