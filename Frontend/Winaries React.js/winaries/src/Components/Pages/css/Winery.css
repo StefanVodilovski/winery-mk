@@ -45,4 +45,13 @@ body.route-winery .also-from-container h1 {
     color: #D13636;
     font-style: italic;
     font-size: 30px;
+    margin-bottom: 40px;
+}
+
+.also-from-wineries-list img {
+    text-align: center;
+}
+
+.also-from-wineries-list .productCard__content {
+    margin: 30px 60px;
 }

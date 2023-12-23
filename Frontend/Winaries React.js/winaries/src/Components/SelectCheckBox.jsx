@@ -6,21 +6,16 @@ export const SelectCheckBox = ({results, setResults, selectList, setSelectList, 
   const [isChecked, setIsChecked] = useState(initialValue);
 
   const handleCheckboxChange = () => {
-    setSelectedList((prevSelectedList) => {
-      const winery = results.find((result) => result.id === id);
-  
-      if (isChecked) {
-        // Remove from selectedList and add to selectList
-        setSelectList((prevSelectList) => [...prevSelectList, winery]);
-        return prevSelectedList.filter((item) => item.id !== id);
+    let temp = !isChecked
+    setIsChecked(temp);
+    const winery = results.find((result) => result.id === id);
+      if (temp) {
+        setSelectList(selectList.filter(w => w.id !== id));
+        setSelectedList(selectedList.concat(winery));
       } else {
-        // Remove from selectList and add to selectedList
-        setSelectList((prevSelectList) => prevSelectList.filter((item) => item.id !== id));
-        return [...prevSelectedList, winery];
-      }
-    });
-  
-    setIsChecked(!isChecked);
+        setSelectList(selectList.concat(winery));
+        setSelectedList(selectedList.filter(w => w.id !== id));
+      }    
   };
 
   return (
@@ -31,7 +26,7 @@ export const SelectCheckBox = ({results, setResults, selectList, setSelectList, 
         className="image"
       />
       <label className={`checkbox-button ${isChecked ? 'checked' : 'unchecked'}`}>
-        <input type="checkbox" checked={isChecked} onChange={handleCheckboxChange} />
+        <input type="checkbox" checked={isChecked} onClick={handleCheckboxChange} />
         {isChecked ? 'SELECTED' : 'SELECT'}
       </label>
     </div>

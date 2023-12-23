@@ -9,6 +9,7 @@
 
 .productName {
     font-size: 1.5rem;
+    text-align: start;
 }
 
 .displayStack__1 {
@@ -21,4 +22,11 @@
     font-size: 1.5rem;
     font-weight: bold;
     color: #CB1919;
+}
+
+#wine-image-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

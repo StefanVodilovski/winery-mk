@@ -102,4 +102,17 @@ body.route-wine .also-from-container h1 {
     color: #D13636;
     font-style: italic;
     font-size: 30px;
+    margin-bottom: 40px;
+}
+
+.also-from-wines-list img {
+    text-align: center;
+}
+
+.also-from-wines-list .productCard__content {
+    margin: 30px 60px;
+}
+
+body.route-wine .wine-description div:first-child {
+    margin-right: 50px;
 }

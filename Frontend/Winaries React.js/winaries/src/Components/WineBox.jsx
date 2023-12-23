@@ -3,7 +3,6 @@ import "./WineBox.css"
 import { useNavigate } from 'react-router-dom';
 
 
-
 export const WineBox = ({ result }) => {
     const navigate = useNavigate(); 
 
@@ -22,9 +21,11 @@ export const WineBox = ({ result }) => {
     
     return (
         <div key={result.id} className='wine-card' onClick={handleCardClick}>
-            <img src={result.photoUrl} alt="wine image" className='wine-card-image'  referrerPolicy="no-referrer"/>
+            <div id="wine-image-container">
+              <img src={result.photoUrl} alt="wine image" className='wine-card-image'  referrerPolicy="no-referrer"/>
+            </div>
             <div className='productCard__content'>
-                <h3 className='productName'>{result.name}</h3>
+                <h3 className='productName'>{result.name.toUpperCase()}</h3>
                 <div className='displayStack__1'>
                     <div className='productPrice'>{result.price}mkd</div>
                 </div>

@@ -57,7 +57,7 @@ export const Wine = () => {
                   <img src={wineData.photoUrl} alt="" />
                 </div>
                 <div>
-                  <h1>{wineData.name}</h1>
+                  <h1>{wineData.name.toUpperCase()}</h1>
                   <p className='winePrice'>{wineData.price} mkd</p>
                   <p className='wineryName'>WINERY: <span>{wineData.winery.name}</span></p>
                   <form>

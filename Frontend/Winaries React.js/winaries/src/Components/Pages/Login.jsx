@@ -33,7 +33,7 @@ export const Login = () => {
                 <h1>LOG IN</h1>
                 <div className='input-outer-container'>
                     <div className='input-container'>
-                        <label htmlFor="username">Email</label>
+                        <label htmlFor="username">Username</label>
                         <input type="text" name="username" id="username" placeholder='Username...'/>
                     </div>
                     <div className='input-container'>

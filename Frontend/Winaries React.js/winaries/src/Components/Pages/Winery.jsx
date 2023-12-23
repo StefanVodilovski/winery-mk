@@ -57,7 +57,7 @@ export const Winery = () => {
                   <img src={wineryData.photoUrl} alt="" />
                 </div>
                 <div id='wineryData'>
-                  <h1>{wineryData.name}</h1>
+                  <h1>{wineryData.name.toUpperCase()}</h1>
                   <p>{wineryData.description.toUpperCase()}</p>
                   <a href="">VISIT</a>
                 </div>

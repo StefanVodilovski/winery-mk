@@ -13,15 +13,17 @@ export const SliderBox = ({results, display}) => {
         slidesToScroll: 3,
         responsive: [
           {
-            breakpoint: 1450,
+            breakpoint: 1400,
             settings: {
               slidesToShow: 2,
+              slidesToScroll: 2,
             },
           },
           {
-            breakpoint: 900,
+            breakpoint: 950,
             settings: {
               slidesToShow: 1,
+              slidesToScroll: 1,
             },
           },
         ],
