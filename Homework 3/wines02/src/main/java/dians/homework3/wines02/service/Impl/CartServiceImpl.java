@@ -38,6 +38,7 @@ public class CartServiceImpl implements CartService {
             AddWines addWines = new AddWines();
             addWines.setWine(mapToWine(wineDto));
             addWines.setQuantity(quantity);
+            addWines.setCart(cart);
             addWinesRepository.save(addWines);
             wines.add(addWines);
             cart.setCartWines(wines);
