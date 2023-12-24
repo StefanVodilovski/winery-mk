@@ -64,9 +64,9 @@ public class WineController {
         String token = authorizationHeader.replace("Bearer ", "");
         Authentication authentication = authProvider.validateToken(token);
         if(authentication != null && authentication.isAuthenticated()) {
-            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+            UserDto userDto = (UserDto) authentication.getPrincipal();
 
-            UserEntity user = userService.findByUsername(userDetails.getUsername());
+            UserEntity user = userService.findByUsername(userDto.getUsername());
 
             if (user != null) {
                 WineDto wine = wineService.findById(wineId);
