@@ -57,8 +57,8 @@ public class CartServiceImpl implements CartService {
 
     @Override
     @Transactional
-    public void deleteAddWines(Cart cart, List<AddWines> addWines) {
-        cart.getCartWines().removeAll(addWines);
+    public void deleteAddWines(Cart cart) {
+        cart.getCartWines().clear();
         cartRepository.save(cart);
     }
 
