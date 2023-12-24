@@ -63,35 +63,7 @@ public class OrderController {
         return orderService.getById(orderId);
     }
 
-    @PostMapping("new")
-    public ResponseEntity<String> getAllWines(@RequestHeader(value = "Authorization") String authorizationHeader) {
-        String token = authorizationHeader.replace("Bearer ", "");
-        Authentication authentication = authProvider.validateToken(token);
-        if(authentication.isAuthenticated()) {
-            UserDto userDto = (UserDto) authentication.getPrincipal();
-
-            UserEntity user = userService.findByUsername(userDto.getUsername());
-
-            if (user != null) {
-                Cart cart = user.getCart();
-                if(cart != null) {
-                    List<AddWines> addWines = cart.getCartWines();
-                    Integer total = addWines.stream()
-                            .mapToInt(wine -> wine.getWine().getPrice() * wine.getQuantity())
-                            .sum();
-                    orderService.makeOrder(addWines,user,total);
-                    cartService.deleteProducts(cart);
-                    return ResponseEntity.ok("Added successfully");
-                }
-                return ResponseEntity.badRequest().build();
-            } else {
-                return ResponseEntity.notFound().build();
-            }
-        }
-        return ResponseEntity.badRequest().build();
-    }
-
-    @GetMapping("order/create")
+    @PostMapping("order/create")
     public ResponseEntity<OrderDto> createOrder(@RequestHeader(value = "Authorization") String authorizationHeader) {
         String token = authorizationHeader.replace("Bearer ", "");
         Authentication authentication = authProvider.validateToken(token);
