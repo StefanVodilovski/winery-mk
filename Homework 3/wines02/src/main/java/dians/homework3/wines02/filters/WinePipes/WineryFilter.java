@@ -9,9 +9,9 @@ import java.util.stream.Collectors;
 @Component
 public class WineryFilter implements Filter<String> {
     @Override
-    public List<WineDto> execute(String winery, List<WineDto> wines) {
-        if(winery != null) {
-            return wines.stream().filter(wine -> wine.getWinery().getName().equals(winery)).collect(Collectors.toList());
+    public List<WineDto> execute(String wineryId, List<WineDto> wines) {
+        if(wineryId != null) {
+            return wines.stream().filter(wine -> wine.getWinery().getId().equals(Long.parseLong(wineryId))).collect(Collectors.toList());
         }
         return wines;
     }

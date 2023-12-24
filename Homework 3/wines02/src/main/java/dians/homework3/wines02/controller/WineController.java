@@ -57,7 +57,7 @@ public class WineController {
     }
 
     @GetMapping("add/cart/item/{wineId}")
-    public ResponseEntity<String> putToCart(@PathVariable("wineId") Long wineId,
+        public ResponseEntity<String> putToCart(@PathVariable("wineId") Long wineId,
                                                  @RequestParam("quantity") String quantity,
                                             @RequestHeader(value = "Authorization") String authorizationHeader) {
         String token = authorizationHeader.replace("Bearer ", "");
