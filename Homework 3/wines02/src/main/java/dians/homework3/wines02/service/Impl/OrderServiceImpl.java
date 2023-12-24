@@ -49,11 +49,11 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     @Transactional
-    public OrderDto makeOrder(List<AddWines> addWines, UserEntity user, Integer totalPrice) {
+    public OrderDto makeOrder(List<AddWinesOrder> addWines, UserEntity user, Integer totalPrice) {
         Order order = new Order();
+//        addWines.forEach(wine -> wine.setOrder(order));
 //        order.setOrderWines(addWines);
-        addWines.stream().forEach(wine -> wine.setOrder(order));
-        addWinesRepository.saveAll(addWines);
+        order.setOrderWines(addWines);
         order.setTotal(totalPrice);
         order.setStatus(Status.Preparing);
         order.setCreatedBy(user);

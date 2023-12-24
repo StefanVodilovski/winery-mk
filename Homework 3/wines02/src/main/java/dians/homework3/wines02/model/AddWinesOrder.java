@@ -5,23 +5,19 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name="add_wines")
-public class AddWines {
-    @Id
+@Table(name="add_wines_orders")
+public class AddWinesOrder {
+    @javax.persistence.Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
     private Integer quantity;
@@ -35,6 +31,5 @@ public class AddWines {
     private Wine wine;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    private Cart cart;
-
+    private Order order;
 }

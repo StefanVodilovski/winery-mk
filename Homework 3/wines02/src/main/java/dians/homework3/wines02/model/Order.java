@@ -33,7 +33,7 @@ public class Order {
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @Fetch(FetchMode.SELECT)
-    private List<AddWines> orderWines = new ArrayList<>();
+    private List<AddWinesOrder> orderWines = new ArrayList<>();
 
     @CreationTimestamp
     private LocalDateTime createdOn;

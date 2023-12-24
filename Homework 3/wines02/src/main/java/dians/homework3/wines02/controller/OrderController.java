@@ -2,7 +2,9 @@ package dians.homework3.wines02.controller;
 
 import dians.homework3.wines02.dto.OrderDto;
 import dians.homework3.wines02.dto.UserDto;
+import dians.homework3.wines02.mapper.AddWinesMapper;
 import dians.homework3.wines02.model.AddWines;
+import dians.homework3.wines02.model.AddWinesOrder;
 import dians.homework3.wines02.model.Cart;
 import dians.homework3.wines02.model.UserEntity;
 import dians.homework3.wines02.security.SecurityUtil;
@@ -16,6 +18,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -83,7 +86,9 @@ public class OrderController {
                                 .map(wine -> wine.getWine().getPrice() * wine.getQuantity())
                                 .mapToInt(Integer::valueOf)
                                 .sum();
-                        OrderDto orderDto = orderService.makeOrder(addWines, user, totalPrice);
+                        List<AddWinesOrder> addWinesOrder = new ArrayList<>();
+                        addWinesOrder = addWines.stream().map(AddWinesMapper::mapToAddWinesOrder).collect(Collectors.toList());
+                        OrderDto orderDto = orderService.makeOrder(addWinesOrder, user, totalPrice);
                         cartService.deleteAddWines(cart);
                         return ResponseEntity.ok(orderDto);
                 }
