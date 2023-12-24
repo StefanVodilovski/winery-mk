@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -62,8 +63,10 @@ public class WineController {
                                             @RequestHeader(value = "Authorization") String authorizationHeader) {
         String token = authorizationHeader.replace("Bearer ", "");
         Authentication authentication = authProvider.validateToken(token);
-        if(authentication.isAuthenticated()) {
-            UserEntity user = (UserEntity) authentication.getPrincipal();
+        if(authentication != null && authentication.isAuthenticated()) {
+            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+
+            UserEntity user = userService.findByUsername(userDetails.getUsername());
 
             if (user != null) {
                 WineDto wine = wineService.findById(wineId);
