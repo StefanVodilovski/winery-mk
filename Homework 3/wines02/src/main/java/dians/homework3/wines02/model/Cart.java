@@ -30,7 +30,7 @@ public class Cart {
     @JoinColumn(name = "created_by")
     private UserEntity createdBy = null;
 
-    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @Fetch(FetchMode.SELECT)
     private List<AddWines> cartWines = new ArrayList<>();
 
