@@ -60,7 +60,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public OrderDto makeOrder(List<AddWines> addWines, UserEntity user, Integer totalPrice) {
         Order order = new Order();
-        order.setOrderWines(addWines);
+//        order.setOrderWines(addWines);
         order.setTotal(totalPrice);
         order.setStatus(Status.Preparing);
         order.setCreatedBy(user);
