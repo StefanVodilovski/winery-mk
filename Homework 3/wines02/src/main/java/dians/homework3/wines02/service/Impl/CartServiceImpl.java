@@ -56,12 +56,9 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public void deleteAddWines(Cart cart) {
-        for (AddWines addWines : cart.getCartWines()) {
-            // Set the cart reference to null to avoid orphan removal issues
-            addWines.setCart(null);
-        }
-        cart.setCartWines(new ArrayList<>());
+    @Transactional
+    public void deleteAddWines(Cart cart, List<AddWines> addWines) {
+        cart.getCartWines().removeAll(addWines);
         cartRepository.save(cart);
     }
 
