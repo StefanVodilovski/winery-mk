@@ -10,6 +10,7 @@ import dians.homework3.wines02.repository.CartRepository;
 import dians.homework3.wines02.service.CartService;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -56,14 +57,12 @@ public class CartServiceImpl implements CartService {
     @Override
     public Cart findById(long l) {
         Optional<Cart> cart = cartRepository.findById(l);
-        if(cart.isPresent()) {
-            return cart.get();
-        }
-        return new Cart();
+        return cart.orElseGet(Cart::new);
     }
 
     @Override
     public void deleteProducts(Cart cart) {
-        cartRepository.delete(cart);
+        cart.setCartWines(new ArrayList<>());
+        cartRepository.save(cart);
     }
 }

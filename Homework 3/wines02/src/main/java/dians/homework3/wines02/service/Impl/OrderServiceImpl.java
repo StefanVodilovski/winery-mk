@@ -27,17 +27,17 @@ public class OrderServiceImpl implements OrderService {
         this.orderRepository = orderRepository;
     }
 
-    @Override
-    public void createOrder(UserEntity userEntity) {
-        Cart cart = userEntity.getCart();
-        Order order = new Order();
-        order.setOrderWines(cart.getCartWines());
-        order.setCreatedBy(userEntity);
-        long uniqueNumber = counter.getAndIncrement();
-        order.setCode(String.valueOf(uniqueNumber));
-        order.setStatus(Status.Preparing);
-        orderRepository.save(order);
-    }
+//    @Override
+//    public void createOrder(UserEntity userEntity) {
+//        Cart cart = userEntity.getCart();
+//        Order order = new Order();
+//        order.setOrderWines(cart.getCartWines());
+//        order.setCreatedBy(userEntity);
+//        long uniqueNumber = counter.getAndIncrement();
+//        order.setCode(String.valueOf(uniqueNumber));
+//        order.setStatus(Status.Preparing);
+//        orderRepository.save(order);
+//    }
 
     @Override
     public OrderDto getById(Long orderId) {
@@ -63,12 +63,6 @@ public class OrderServiceImpl implements OrderService {
         order.setOrderWines(addWines);
         order.setTotal(totalPrice);
         order.setStatus(Status.Preparing);
-//        List<Role> roles = user.getRoles().stream().filter((role) -> role.getName().equals("ROLE_CASHIER")).toList();
-//        if(!roles.isEmpty()) {
-//            order.setStatus(Status.HERE);
-//        } else {
-//            order.setStatus(Status.WAITING);
-//        }
         order.setCreatedBy(user);
         LocalDateTime date = LocalDateTime.now();
         StringBuilder code = new StringBuilder(date.getSecond() + "" + date.getMinute() + "" + date.getHour() + "" + date.getDayOfMonth() + "" + date.getMonthValue() + "" + date.getYear());

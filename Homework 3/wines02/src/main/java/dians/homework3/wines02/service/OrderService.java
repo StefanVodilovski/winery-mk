@@ -8,7 +8,7 @@ import org.codehaus.groovy.vmplugin.v8.PluginDefaultGroovyMethods;
 import java.util.List;
 
 public interface OrderService {
-    void createOrder(UserEntity userEntity);
+//    void createOrder(UserEntity userEntity);
 
     OrderDto getById(Long orderId);
 

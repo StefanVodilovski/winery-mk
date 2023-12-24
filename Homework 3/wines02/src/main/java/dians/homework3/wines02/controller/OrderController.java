@@ -73,8 +73,17 @@ public class OrderController {
             UserEntity user = userService.findByUsername(userDto.getUsername());
 
             if (user != null) {
-                orderService.createOrder(user);
-                return ResponseEntity.ok("Added successfully");
+                Cart cart = user.getCart();
+                if(cart != null) {
+                    List<AddWines> addWines = cart.getCartWines();
+                    Integer total = addWines.stream()
+                            .mapToInt(wine -> wine.getWine().getPrice() * wine.getQuantity())
+                            .sum();
+                    orderService.makeOrder(addWines,user,total);
+                    cartService.deleteProducts(cart);
+                    return ResponseEntity.ok("Added successfully");
+                }
+                return ResponseEntity.badRequest().build();
             } else {
                 return ResponseEntity.notFound().build();
             }
