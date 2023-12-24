@@ -37,4 +37,14 @@ public class AddWinesMapper {
                 .wine(addWines.getWine())
                 .build();
     }
+
+    public static AddWinesDto mapToAddWinesOrderDto(AddWinesOrder addWines) {
+        return AddWinesDto.builder()
+                .Id(addWines.getId())
+                .quantity(addWines.getQuantity())
+                .createdOn(addWines.getCreatedOn())
+                .updatedOn(addWines.getUpdatedOn())
+                .wine(mapToWineDto(addWines.getWine()))
+                .build();
+    }
 }
