@@ -21,7 +21,6 @@ public class OrderDto {
     private Status status;
     private Integer total;
     private UserDto createBy;
-    private List<AddWinesDto> orderWines;
     private LocalDateTime createdOn;
     private LocalDateTime updatedOn;
 }

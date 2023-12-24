@@ -2,7 +2,6 @@ package dians.homework3.wines02.mapper;
 
 import dians.homework3.wines02.dto.AddWinesDto;
 import dians.homework3.wines02.model.AddWines;
-import dians.homework3.wines02.model.AddWinesOrder;
 
 import static dians.homework3.wines02.mapper.WineMapper.mapToWine;
 import static dians.homework3.wines02.mapper.WineMapper.mapToWineDto;
@@ -27,24 +26,5 @@ public class AddWinesMapper {
                 .wine(mapToWineDto(addWines.getWine()))
                 .build();
     }
-
-    public static AddWinesOrder mapToAddWinesOrder(AddWines addWines) {
-        return AddWinesOrder.builder()
-                .Id(addWines.getId())
-                .quantity(addWines.getQuantity())
-                .createdOn(addWines.getCreatedOn())
-                .updatedOn(addWines.getUpdatedOn())
-                .wine(addWines.getWine())
-                .build();
-    }
-
-    public static AddWinesDto mapToAddWinesOrderDto(AddWinesOrder addWines) {
-        return AddWinesDto.builder()
-                .Id(addWines.getId())
-                .quantity(addWines.getQuantity())
-                .createdOn(addWines.getCreatedOn())
-                .updatedOn(addWines.getUpdatedOn())
-                .wine(mapToWineDto(addWines.getWine()))
-                .build();
-    }
 }
+

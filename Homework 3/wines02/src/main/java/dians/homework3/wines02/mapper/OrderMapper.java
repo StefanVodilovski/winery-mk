@@ -21,7 +21,6 @@ public class OrderMapper {
     public static OrderDto mapToOrderDto(Order order) {
         return OrderDto.builder()
                 .Id(order.getId())
-                .orderWines(order.getOrderWines().stream().map(AddWinesMapper::mapToAddWinesOrderDto).collect(Collectors.toList()))
                 .code(order.getCode())
                 .updatedOn(order.getUpdatedOn())
                 .status(order.getStatus())

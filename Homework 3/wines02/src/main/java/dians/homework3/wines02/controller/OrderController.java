@@ -4,10 +4,8 @@ import dians.homework3.wines02.dto.OrderDto;
 import dians.homework3.wines02.dto.UserDto;
 import dians.homework3.wines02.mapper.AddWinesMapper;
 import dians.homework3.wines02.model.AddWines;
-import dians.homework3.wines02.model.AddWinesOrder;
 import dians.homework3.wines02.model.Cart;
 import dians.homework3.wines02.model.UserEntity;
-import dians.homework3.wines02.security.SecurityUtil;
 import dians.homework3.wines02.security.UserAuthProvider;
 import dians.homework3.wines02.service.AddWinesService;
 import dians.homework3.wines02.service.CartService;
@@ -23,7 +21,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static dians.homework3.wines02.mapper.AddWinesMapper.mapToAddWines;
-import static dians.homework3.wines02.mapper.UserMapper.mapToUserDto;
 
 @CrossOrigin("http://localhost:3001")
 @RestController
