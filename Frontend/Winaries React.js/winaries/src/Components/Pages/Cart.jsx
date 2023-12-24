@@ -57,16 +57,16 @@ export const Cart = () => {
                     <h1>CART</h1>
                     <div className='cart-content'>
                             {results.cartWines && results.cartWines.length > 0 ? (
-                                <List height={500} itemCount={results.cartWines.length} itemSize={500} width={600}>
+                                <List height={500} itemCount={results.cartWines.length} itemSize={350} width={600}>
                                     {({ index, style }) => (
                                         // Render your content here based on the index
                                         <div style={style} className='cart-wine'>
                                             <img src={results.cartWines[index].wine.photoUrl} alt={results.cartWines[index].wine.name} />
-                                            <div>
+                                            <div id="wine-details">
                                                 <h2>{results.cartWines[index].wine.name.toUpperCase()}</h2>
-                                                <p>Price: {results.cartWines[index].wine.price} mkd</p>
-                                                <p>Total Price: {results.cartWines[index].wine.price} x {results.cartWines[index].quantity} = {(results.cartWines[index].wine.price)*(results.cartWines[index].quantity)} mkd</p>
-                                                <p>WINERY: {results.cartWines[index].wine.winery.name}</p>
+                                                <p id="single-price">Price: {results.cartWines[index].wine.price} mkd</p>
+                                                <p id="total-price">Total Price: {results.cartWines[index].wine.price} x {results.cartWines[index].quantity} = <span>{(results.cartWines[index].wine.price)*(results.cartWines[index].quantity)} mkd</span></p>
+                                                <p id="winery-name">WINERY: <span>{results.cartWines[index].wine.winery.name}</span></p>
                                             </div>
                                         </div>
                                     )}
@@ -79,7 +79,7 @@ export const Cart = () => {
                                 <p>Total: mkd</p>
                                 <p>Delivery: mkd</p>
                                 <hr/>
-                                <h2>TOTAL: <span>mkd</span></h2>
+                                <p id="total-price-order">TOTAL: <span>mkd</span></p>
                                 <button onClick={handleOrder}>ORDER</button>
                         </div>
                         <div>
