@@ -12,6 +12,7 @@ export const Wine = () => {
   const wineData = location.state?.wineData || {};
 
   const[results, setResults] = useState([])
+  const[responseMessage, setResponseMessage] = useState('')
 
   const [number, setNumber] = useState(1);
 
@@ -34,13 +35,16 @@ export const Wine = () => {
   const handleAddToCart = () => {
     request(
       "GET",
-      "/wines/add/cart/item/" + wineData.id +"?quantity=" + number,
+      "/cart/add/wines/" + wineData.id +"?quantity=" + number,
       {
         headers: {
-            authorizationHeader: `Bearer ${getAuthToken()}`, // Include the authentication token in the Authorization header
+            Authorization: `Bearer ${getAuthToken()}`, // Include the authentication token in the Authorization header
         },
       }
-      ).catch(
+      ).then(
+        (response) => {
+            setResponseMessage(response.data)
+        }).catch(
       (error) => {
         console.error('Error fetching data:', error);
       }
@@ -67,6 +71,7 @@ export const Wine = () => {
 
   useEffect(() => {
     setNumber(1);
+    setResponseMessage('')
   }, [wineData]);
 
   return (
@@ -87,6 +92,9 @@ export const Wine = () => {
                       <button type="button" onClick={higherValue} id='next'><FontAwesomeIcon icon={faAngleRight} /></button>
                     </div>
                     <button type='submit' id='addToCart' onClick={handleAddToCart}>ADD TO CART</button>
+                    </div>
+                    <div className='response-message'>
+                      {responseMessage}
                     </div>
                 </div>
             </div>

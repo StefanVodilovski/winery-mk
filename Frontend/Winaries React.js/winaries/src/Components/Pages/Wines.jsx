@@ -41,11 +41,6 @@ export const Wines = () => {
             request(
                 "GET",
                 url,
-                {
-                    headers: {
-                        authorizationHeader: `Bearer ${getAuthToken()}`, // Include the authentication token in the Authorization header
-                    },
-                  }
                 ).then(
                 (response) => {
                     setResultsWines(response.data)
@@ -60,11 +55,6 @@ export const Wines = () => {
         request(
             "GET",
             "/wines/all",
-            {
-                headers: {
-                    authorizationHeader: `Bearer ${getAuthToken()}`, // Include the authentication token in the Authorization header
-                },
-              }
             ).then(
             (response) => {
                 setResultsWines(response.data)
@@ -117,9 +107,9 @@ export const Wines = () => {
                             <label htmlFor="region">Region</label>
                             <select name='region' id='region' onChange={(e) => (setRegion(e.target.value))}>
                                 <option value={-1}></option>
-                                <option value={0}>Povardarie</option>
-                                <option value={1}>Tikvesh</option>
-                                <option value={2}>Veles</option>
+                                <option value={"Povardarie"}>Povardarie</option>
+                                <option value={"Tikvesh"}>Tikvesh</option>
+                                <option value={"Veles"}>Veles</option>
                             </select>
                         </div>
                         <div className='filter-option'>

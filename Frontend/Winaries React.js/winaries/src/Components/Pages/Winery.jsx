@@ -59,7 +59,7 @@ export const Winery = () => {
                 <div id='wineryData'>
                   <h1>{wineryData.name.toUpperCase()}</h1>
                   <p>{wineryData.description.toUpperCase()}</p>
-                  <a href="">VISIT</a>
+                  <a href={wineryData.wineryLink}>VISIT</a>
                 </div>
 
         </div>

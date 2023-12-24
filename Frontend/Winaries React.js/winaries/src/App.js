@@ -11,6 +11,7 @@ import {Profile} from './Components/Pages/Profile';
 import {CreateEvent} from './Components/Pages/CreateEvent'
 import {Wine} from './Components/Pages/Wine'
 import {Winery} from './Components/Pages/Winery'
+import {Cart} from './Components/Pages/Cart'
 import { useEffect } from 'react';
 
 
@@ -47,6 +48,7 @@ function App() {
         <Route path="/create-event" element={<CreateEvent />}> </Route>
         <Route path="/wine" element={<Wine />}> </Route>
         <Route path="/winery" element={<Winery />}> </Route>
+        <Route path="/cart" element={<Cart />}> </Route>
       </Routes>
       <Footer />
     </div>
