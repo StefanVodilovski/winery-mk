@@ -56,6 +56,12 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
+    public void deleteAddWines(Cart cart) {
+        cart.setCartWines(new ArrayList<>());
+        cartRepository.save(cart);
+    }
+
+    @Override
     public Cart findById(long l) {
         Optional<Cart> cart = cartRepository.findById(l);
         return cart.orElseGet(Cart::new);

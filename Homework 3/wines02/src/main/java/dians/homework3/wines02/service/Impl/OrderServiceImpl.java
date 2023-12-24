@@ -22,11 +22,9 @@ import static dians.homework3.wines02.mapper.WineryMapper.mapToWineryDto;
 @Service
 public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepository;
-    private final AddWinesRepository addWinesRepository;
 
-    public OrderServiceImpl(OrderRepository orderRepository, AddWinesRepository addWinesRepository) {
+    public OrderServiceImpl(OrderRepository orderRepository) {
         this.orderRepository = orderRepository;
-        this.addWinesRepository = addWinesRepository;
     }
 
     @Override
@@ -49,8 +47,6 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public OrderDto makeOrder(List<AddWines> addWines, UserEntity user, Integer totalPrice) {
-        addWines.forEach(wine -> wine.setCart(null));
-        addWinesRepository.saveAll(addWines);
         Order order = new Order();
         order.setOrderWines(addWines);
         order.setTotal(totalPrice);

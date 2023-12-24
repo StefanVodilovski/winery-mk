@@ -11,5 +11,7 @@ public interface CartService {
 
     public void save(UserEntity user);
 
+    void deleteAddWines(Cart cart);
+
     Cart findById(long l);
 }
