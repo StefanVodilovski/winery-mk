@@ -49,7 +49,6 @@ public class CartController {
 
             UserEntity user = userService.findByUsername(userDto.getUsername());
             if (user != null) {
-                user = userService.findByUsername(SecurityUtil.getSessionUser());
                 return ResponseEntity.ok(mapToCartDto(user.getCart()));
             } else {
                 return ResponseEntity.notFound().build();
