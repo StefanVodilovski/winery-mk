@@ -3,14 +3,16 @@ import { Route, Routes, useNavigate, useLocation  } from "react-router-dom"
 import './App.css';
 import { Navbar } from './Components/Navbar';
 import { Footer } from './Components/Footer';
-import { Home, Wines, Winaries, Events, Map} from './Components/Pages';
+import { Home, Wines, Events, Map} from './Components/Pages';
+import {Wineries} from './Components/Pages/Wineries'
 import {Login} from './Components/Pages/Login';
 import {Register} from './Components/Pages/Register';
 import {Profile} from './Components/Pages/Profile';
 import {CreateEvent} from './Components/Pages/CreateEvent'
-
+import {Wine} from './Components/Pages/Wine'
+import {Winery} from './Components/Pages/Winery'
+import {Cart} from './Components/Pages/Cart'
 import { useEffect } from 'react';
-
 
 
 function App() {
@@ -37,13 +39,16 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />}> </Route>
         <Route path="/wines" element={<Wines />}> </Route>
-        <Route path="/winaries" element={<Winaries />}> </Route>
+        <Route path="/wineries" element={<Wineries />}> </Route>
         <Route path="/events" element={<Events />}> </Route>
         <Route path="/map" element={<Map />}> </Route>
         <Route path="/login" element={<Login />}> </Route>
         <Route path="/register" element={<Register />}> </Route>
         <Route path="/profile" element={<Profile />}> </Route>
         <Route path="/create-event" element={<CreateEvent />}> </Route>
+        <Route path="/wine" element={<Wine />}> </Route>
+        <Route path="/winery" element={<Winery />}> </Route>
+        <Route path="/cart" element={<Cart />}> </Route>
       </Routes>
       <Footer />
     </div>

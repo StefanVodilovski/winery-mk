@@ -202,14 +202,15 @@ a:has(.shopping-cart-icon):hover .shopping-cart-icon{
     color: black;
     font-size: 20px;
 }
-.signout{
+.logout{
     margin-top: 50px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.signout a{
-    text-decoration: none;
+.logout button{
+    background-color: transparent;
+    border: none;
     color: black;
     font-size: 20px;
 }
@@ -239,5 +240,13 @@ a:has(.shopping-cart-icon):hover .shopping-cart-icon{
 .hamburger-menu ul a{
     color: black !important;
     text-shadow: none !important;
+    padding: 15px 0;
+}
+.hamburger-menu ul button{
+    color: black !important;
+    text-shadow: none !important;
+    font-size: 24px;
+    border: none;
+    background-color: transparent;
     padding: 15px 0;
 }

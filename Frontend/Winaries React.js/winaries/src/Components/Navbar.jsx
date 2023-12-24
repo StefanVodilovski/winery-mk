@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom';
 import { Link, NavLink } from "react-router-dom"
 import logoImage from '../images/logoWhite.png';
 import "./Navbar.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBagShopping, faBars} from '@fortawesome/free-solid-svg-icons'
+import { getAuthToken, request, setAuthHeader } from '../Helpers/axios_helper';
 
 export const Navbar = () => {
 
     const [scrollVh, setScrollVh] = useState(0);
+    const navigate = useNavigate();
 
     useEffect(() => {
       const handleScroll = () => {
@@ -69,6 +72,25 @@ export const Navbar = () => {
         };
       }, []);
 
+
+
+      const handleLogout = async () => {
+            request(
+              "GET",
+              "/auth/logout",
+              {
+
+              }).then(
+              () => {
+                  setAuthHeader(null);
+                  navigate('/login');
+              }).catch(
+              (error) => {
+                  setAuthHeader(null);
+                  navigate('/');
+              }
+          );
+      };
     return (
         <nav className={navClass}>
             <Link to="/" className='title'>
@@ -83,19 +105,24 @@ export const Navbar = () => {
             <ul >
                 <li> <NavLink to="/" onClick={() => {closeProfileMenu(); closeHamburgerMenu();}}> Home </NavLink> </li>
                 <li> <NavLink to="/wines" onClick={() => {closeProfileMenu(); closeHamburgerMenu();}}> Wines </NavLink> </li>
-                <li> <NavLink to="/winaries" onClick={() => {closeProfileMenu(); closeHamburgerMenu();}}> Winaries </NavLink> </li>
+                <li> <NavLink to="/wineries" onClick={() => {closeProfileMenu(); closeHamburgerMenu();}}> Wineries </NavLink> </li>
                 <li> <NavLink to="/events" onClick={() => {closeProfileMenu(); closeHamburgerMenu();}}> Events </NavLink> </li>
                 <li> <NavLink to="/map" onClick={() => {closeProfileMenu(); closeHamburgerMenu();}}> Map </NavLink> </li>
                 <li><NavLink to="/cart" onClick={() => {closeProfileMenu(); closeHamburgerMenu();}}><FontAwesomeIcon icon={faBagShopping} className='shopping-cart-icon'/></NavLink></li>
-                {/* <li><NavLink to="/login">Login</NavLink></li> */}
-                <li><NavLink to="/login" onClick={() => {closeProfileMenu(); closeHamburgerMenu();}}>SIGN OUT</NavLink></li>
+                {getAuthToken() !== "null" ? (
+                      <li><button onClick={handleLogout}>LOG OUT</button></li>
+                    ) : (
+                      <li>
+                        <NavLink to="/login" onClick={() => { closeProfileMenu(); closeHamburgerMenu(); }}>LOG IN</NavLink>
+                      </li>
+                    )}
             </ul>
             </div>
 
             <ul >
                 <li> <NavLink to="/" onClick={() => {closeProfileMenu(); closeHamburgerMenu();}}> Home </NavLink> </li>
                 <li> <NavLink to="/wines" onClick={() => {closeProfileMenu(); closeHamburgerMenu();}}> Wines </NavLink> </li>
-                <li> <NavLink to="/winaries" onClick={() => {closeProfileMenu(); closeHamburgerMenu();}}> Winaries </NavLink> </li>
+                <li> <NavLink to="/wineries" onClick={() => {closeProfileMenu(); closeHamburgerMenu();}}> Wineries </NavLink> </li>
                 <li> <NavLink to="/events" onClick={() => {closeProfileMenu(); closeHamburgerMenu();}}> Events </NavLink> </li>
                 <li> <NavLink to="/map" onClick={() => {closeProfileMenu(); closeHamburgerMenu();}}> Map </NavLink> </li>
 
@@ -103,8 +130,22 @@ export const Navbar = () => {
             <div className='right-end'>
                 <ul name="right_end">
                     <li><NavLink to="/cart" onClick={() => {closeProfileMenu(); closeHamburgerMenu();}}><FontAwesomeIcon icon={faBagShopping} className='shopping-cart-icon'/></NavLink></li>
-                    {/* <li><NavLink to="/login">Login</NavLink></li> */}
-                    <li><img className={activeProfile ? 'active' : ''} onClick={handleClickProfile} src={require("../images/defaultProfilePicture.jpg")} /></li>
+                    {getAuthToken() !== "null" ? (
+                      <li>
+                        <img
+                          className={activeProfile ? 'active' : ''}
+                          onClick={handleClickProfile}
+                          src={require("../images/defaultProfilePicture.jpg")}
+                        />
+                      </li>
+                    ) : (
+                      <li>
+                        <NavLink to="/login" onClick={() => { closeProfileMenu(); closeHamburgerMenu(); }}>
+                          LOG IN
+                        </NavLink>
+                      </li>
+                    )}
+                    
                 </ul>
             </div>
 
@@ -123,8 +164,8 @@ export const Navbar = () => {
                 <div className='profile-links'>
                     <NavLink to="/create-event" onClick={() => {closeProfileMenu(); closeHamburgerMenu();}}>Create event</NavLink>
                 </div>
-                <div className='signout'>
-                    <NavLink to="/logout" onClick={() => {closeProfileMenu(); closeHamburgerMenu();}}>SIGN OUT</NavLink>
+                <div className='logout'>
+                    <button onClick={handleLogout}>LOG OUT</button>
                 </div>
             </div>     
         </nav>

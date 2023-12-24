@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet"
 import { Icon, divIcon } from "leaflet"
 import MarkerClusterGroup from "react-leaflet-cluster"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlass} from '@fortawesome/free-solid-svg-icons'
+import { request, setAuthHeader, getAuthToken } from '../../Helpers/axios_helper';
 
 import "leaflet/dist/leaflet.css";
 import "./css/Map.css"
@@ -11,44 +12,54 @@ import "./css/Map.css"
 
 
 export const Map = () => {
-    const markers = [
-        {
-            geoCode: [41.43570265650141, 22.003397140766968],
-            popUp: "Tikves winery"
-        },
-        {
-            geoCode: [41.581161, 21.936234],
-            popUp: "Stobi winery"
-        },
-        {
-            geoCode: [41.99534976816323, 21.427186099999997],
-            popUp: "Wines kamnik"
-        },
-        {
-            geoCode: [42.007989862779425, 21.490283400000003],
-            popUp: "Kamnik winery"
-        }
-    ]
+    const [results, setResults] = useState([])
+    const [filter, setFilter] = useState([])
+    const [input, setInput] = useState('')
 
     const customIcon = new Icon({
         iconUrl: require("../../images/pin.png"),
         iconSize: [38, 38]
     })
 
+    const initalData = () => {
+        request(
+            "GET",
+            "/wineries/all",
+            ).then(
+            (response) => {
+                setResults(response.data)
+                setFilter(response.data)
+            }).catch(
+            (error) => {
+              console.error('Error fetching data:', error);
+            }
+        );
+    };
 
-    // const createClusterCustomIcon = function (cluster) {
-    //     return new divIcon({
-    //         html: `<span class="cluster-icon">${cluster.getChildCount()}</span>`,
-    //         className: "custom-marker-cluster",
-    //         iconSize: point(33, 33, true)
-    //     });
-    // };
+    useEffect(() => {
+        initalData();
+    }, []);
+
+    const changeInput = (e) =>{
+        setInput(e.target.value)
+        filterWineries(e.target.value);
+    }
+
+    const filterWineries = (value) => {
+        if (value.trim() === '') {
+            setFilter(results);
+        } else {
+            const filteredResults = results.filter(result => result.name.toLowerCase().includes(value.toLowerCase()));
+            setFilter(filteredResults);
+        }
+    };
+
 
     return (
         <div className='map'>
 
             <div className='search-container'>
-                <input type="text" name="search"/>
+                <input type="text" name="search" onChange={changeInput} value={input}/>
                 <div className='search-icon-container'>
                     <FontAwesomeIcon icon={faMagnifyingGlass} className='search-icon'/>
                 </div>
@@ -63,16 +74,15 @@ export const Map = () => {
                     chunkedLoading
                 // iconCreateFunction={createClusterCustomIcon}
                 >
-                    {markers.map(
-                        marker => (
-                            <Marker position={marker.geoCode} icon={customIcon}>
+                    {filter.map(
+                        winery => (
+                            <Marker key={winery.id} position={[winery.xcordinate, winery.ycordinate]} icon={customIcon}>
                                 <Popup>
-                                    {marker.popUp}
+                                    {winery.name}
                                 </Popup>
                             </Marker>
 
                         )
-
                     )}
                 </MarkerClusterGroup>
             </MapContainer>

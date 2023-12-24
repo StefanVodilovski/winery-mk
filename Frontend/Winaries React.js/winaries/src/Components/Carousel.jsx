@@ -85,7 +85,7 @@ export const Carousel = () => {
                     return <div className='card'>
                         <div className='card-top'>
                             <h1>{item.title}</h1>
-                            <img src={item.icon} alt="" referrerpolicy="no-referrer"/>
+                            <img src={item.icon} alt="" referrerPolicy="no-referrer"/>
                         </div>
                         <div className='card-bottom'>
                             <h3>{item.description}</h3>

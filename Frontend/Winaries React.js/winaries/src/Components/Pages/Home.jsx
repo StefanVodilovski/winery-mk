@@ -1,31 +1,33 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import backgoundImg from '../../images/backgroundImage.jpg';
 import "./css/Home.css"
 import { Carousel } from '../Carousel';
 import { Link, NavLink } from "react-router-dom"
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet"
 import { Icon, divIcon } from "leaflet"
+import { request, setAuthHeader, getAuthToken } from '../../Helpers/axios_helper';
 
 
 export const Home = () => {
-    const markers = [
-        {
-            geoCode: [41.43570265650141, 22.003397140766968],
-            popUp: "Tikves winery"
-        },
-        {
-            geoCode: [41.581161, 21.936234],
-            popUp: "Stobi winery"
-        },
-        {
-            geoCode: [41.99534976816323, 21.427186099999997],
-            popUp: "Wines kamnik"
-        },
-        {
-            geoCode: [42.007989862779425, 21.490283400000003],
-            popUp: "Kamnik winery"
-        }
-    ]
+    const [results, setResults] = useState([])
+
+    const initalData = () => {
+        request(
+            "GET",
+            "/wineries/all",
+            ).then(
+            (response) => {
+                setResults(response.data)
+            }).catch(
+            (error) => {
+              console.error('Error fetching data:', error);
+            }
+        );
+    };
+
+    useEffect(() => {
+        initalData();
+    }, []);
 
     const customIcon = new Icon({
         iconUrl: require("../../images/pin.png"),
@@ -54,11 +56,11 @@ export const Home = () => {
                     <div className='open-map-button-container'>
                         <NavLink className='open-map-button' to="/map" > OPEN MAP </NavLink>
                     </div>
-                    {markers.map(
-                        marker => (
-                            <Marker position={marker.geoCode} icon={customIcon} interactive={false}>
+                    {results.map(
+                        winery => (
+                            <Marker position={[winery.xcordinate, winery.ycordinate]} icon={customIcon}>
                                 <Popup>
-                                    {marker.popUp}
+                                    {winery.name}
                                 </Popup>
                             </Marker>
 

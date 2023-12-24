@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useState, useEffect } from 'react'
 import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaflet';
 import "./css/CreateEvent.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -7,10 +7,15 @@ import { Icon, divIcon } from "leaflet"
 import MarkerClusterGroup from "react-leaflet-cluster"
 import L from 'leaflet';
 import ReactDOMServer from 'react-dom/server';
+import { request, setAuthHeader, getAuthToken } from '../../Helpers/axios_helper';
+import { SelectCheckBox } from '../SelectCheckBox';
 
 
 
 export const CreateEvent = () => {
+    const [results, setResults] = useState([])
+    const [selectList, setSelectList] = useState([])
+    const [selectedList, setSelectedList] = useState([])
 
     const [markerPosition, setMarkerPosition] = useState(null);
 
@@ -39,7 +44,31 @@ export const CreateEvent = () => {
         }
     }, []);
 
+    const initalData = () => {
+        request(
+            "GET",
+            "/wineries/all",
+            ).then(
+            (response) => {
+                setResults(response.data)
+                setSelectList(response.data)
+            }).catch(
+            (error) => {
+              console.error('Error fetching data:', error);
+            }
+        );
+    };
 
+    useEffect(() => {
+        initalData();
+    }, []);
+
+
+    const [isChecked, setIsChecked] = useState(false);
+
+  const handleCheckboxChange = () => {
+    setIsChecked(!isChecked);
+  };
 
     return (
         <div className='create-event-outer-container'>
@@ -71,9 +100,9 @@ export const CreateEvent = () => {
                         <div className='right-seciton'>
                             <div>
                                 <p>Profile Picture</p>
-                                <div class="profile-pic">
-                                    <label class="-label" for="file">
-                                        <span class="glyphicon glyphicon-camera"></span>
+                                <div className="profile-pic">
+                                    <label className="-label" htmlFor="file">
+                                        <span className="glyphicon glyphicon-camera"></span>
                                         <span><FontAwesomeIcon icon={faPlus} /></span>
                                     </label>
                                     <input id="file" type="file" name="eventImage" onChange={loadFile} accept="image/png, image/gif, image/jpeg" />
@@ -114,20 +143,47 @@ export const CreateEvent = () => {
                             </div>
                         </div>
                     </div>
-                    <div className='winaries-selection-section'>
-                        <div className='search-container'>
-                            <label htmlFor="search">Search Wineries</label>
-                            <input type="text" name="search" id="search" placeholder='Search...' />
-                        </div>
-                        <div className='filter'>
-                            <p>REGION</p>
-                            <select name="region"></select>
-                        </div>
-                        <div className='select-winaries-container'>
+                    <div className='wineries-selection-section'>
+                        <hr/>
+                        <h1>SELECT WINERIES</h1>
+                        <div className='select-wineries-container'>
 
+                            {selectList.map(selectWinery => (
+                                <SelectCheckBox imageSrc={selectWinery.photoUrl} 
+                                                altText={selectWinery.name} 
+                                                initialValue={false} 
+                                                id={selectWinery.id}
+                                                results={results}
+                                                setResults={setResults}
+                                                selectList={selectList}
+                                                setSelectList={setSelectList}
+                                                selectedList={selectedList}
+                                                setSelectedList={setSelectedList}
+                                                text="SELECT"/> 
+                            ))}
+                                         
                         </div>
-                        <div className='selected-winaries-container'>
-
+                        <hr/>
+                        {selectedList.length != 0 ? (
+                            <h1 id="selected-wineries-h1" >SELECTED WINERIES</h1>
+                        ):(
+                            <h1 id="selected-wineries-h1" ></h1>
+                        )}
+                        
+                        <div className='selected-wineries-container'>
+                            {selectedList.map(selectedWinery => (
+                                <SelectCheckBox imageSrc={selectedWinery.photoUrl} 
+                                                altText={selectedWinery.name} 
+                                                initialValue={true} 
+                                                id={selectedWinery.id}
+                                                results={results}
+                                                setResults={setResults}
+                                                selectList={selectList}
+                                                setSelectList={setSelectList}
+                                                selectedList={selectedList}
+                                                setSelectedList={setSelectedList}
+                                                text="SELECTED"/> 
+                            ))}
                         </div>
                     </div>
                     <button className="submit-button" type='submit' disabled={!markerPosition}>SUBMIT</button>

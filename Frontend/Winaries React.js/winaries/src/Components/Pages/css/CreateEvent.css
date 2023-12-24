@@ -181,7 +181,7 @@ body.route-create-event .leaflet-control-container{
     display: none;
 }
 
-body.route-create-event .winaries-selection-section{
+body.route-create-event .wineries-selection-section{
     width: 90%;
 }
 
@@ -203,28 +203,28 @@ body.route-create-event .search-container input{
     height: 45px;
 }
 
-.winaries-selection-section{
+.wineries-selection-section{
     display: flex;
     flex-direction: column;
     justify-content: start;
     align-items: center;
 }
 
-.winaries-selection-section .search-container{
+.wineries-selection-section .search-container{
     width: 100%;
 }
 
-.winaries-selection-section ::placeholder {
+.wineries-selection-section ::placeholder {
     color: black;
     opacity: 0.7; /* Firefox */
 }
 
-.winaries-selection-section input:focus{
+.wineries-selection-section input:focus{
     outline-color: #AC3636;
     background-color: white !important;
 }
 
-.winaries-selection-section .filter{
+.wineries-selection-section .filter{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -232,13 +232,13 @@ body.route-create-event .search-container input{
     margin-top: 30px;
 }
 
-.winaries-selection-section .filter p{
+.wineries-selection-section .filter p{
     margin-bottom: 10px;
     font-size: 18px;
     font-weight: 500;
 }
 
-.winaries-selection-section .filter select{
+.wineries-selection-section .filter select{
     width: 150px;
     background-color: #F6F5F5;
     border: none;
@@ -263,9 +263,52 @@ body.route-create-event .submit-button:disabled{
     background-color: #e0dcdc;
 }
 
-
-
-
 .non-clickable-icon {
     pointer-events: none !important;
-  }
+}
+
+body.route-create-event hr {
+    margin-top: 80px;
+    width: 100%;
+}
+
+body.route-create-event .select-wineries-container{
+    width: 100%;
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+}
+
+body.route-create-event .selected-wineries-container{
+    width: 100%;
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+}
+
+body.route-create-event .select-wineries-container button{
+    background-color: rgba(81, 74, 74, 0.8);
+}
+
+body.route-create-event .selected-wineries-container button{
+    background-color: rgba(172, 54, 54, 0.8);
+}
+
+body.route-create-event .wineries-selection-section h1{
+    width: 100%;
+    text-align: left;
+    font-style: italic;
+    color: black;
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+#selected-wineries-h1{
+    color: #D13636;
+}
+
+
+
+
+
+
+
+  
+  
