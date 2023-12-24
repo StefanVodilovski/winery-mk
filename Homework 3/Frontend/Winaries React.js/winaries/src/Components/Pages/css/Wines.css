@@ -1,0 +1,79 @@
+.wines-outer-container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.wines-inner-container{
+    width: 70%;
+    height: 100%;
+}
+
+.wines-inner-container h1{
+    text-align: center;
+}
+
+body.route-wines .search-bar-container {
+    margin-top: 30px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+body.route-wines .search-button{
+    border: none;
+    color: white;
+    text-align: center;
+    background-color: #CB1919;
+    height: 40px;
+    width: 70px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+body.route-wines .filter-options{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-top: 35px;
+}
+
+body.route-wines .filter-option{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    width: 20%;
+}
+
+body.route-wines .filter-option label{
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+body.route-wines .filter-option select{
+    width: 100%;   
+    border: none;
+    background-color: #F6F5F5;
+    color: black;
+    padding: 7px 0;
+    border-radius: 5px;
+}
+
+body.route-wines .filter-option select:focus{
+    outline: none;
+}
+
+
+.wines-list{
+    margin-top: 45px;
+    padding-top: 20px;
+    border-top: 2px solid #F6F5F5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

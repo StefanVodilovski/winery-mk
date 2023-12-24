@@ -1,0 +1,32 @@
+.wine-card{
+    cursor: pointer;
+}
+
+
+.productCard__content {
+    margin: 2rem;
+}
+
+.productName {
+    font-size: 1.5rem;
+    text-align: start;
+}
+
+.displayStack__1 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.productPrice {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #CB1919;
+}
+
+#wine-image-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

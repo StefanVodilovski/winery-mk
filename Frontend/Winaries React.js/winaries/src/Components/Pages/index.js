@@ -1,5 +1,0 @@
-export * from "./Home"
-export * from "./Events"
-export * from "./Map"
-export * from "./Winaries"
-export * from "./Wines"
