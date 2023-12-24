@@ -92,12 +92,10 @@ public class AuthController {
     private ResponseEntity<UserDto> editUser(@RequestHeader(value = "Authorization") String authorizationHeader) {
         String token = authorizationHeader.replace("Bearer ", "");
         Authentication authentication = authProvider.validateToken(token);
-        if(authentication.isAuthenticated()) {
-                String username = (String) authentication.getPrincipal();
-                UserEntity user = userService.findByUsername(username);
+        if(authentication != null && authentication.isAuthenticated()) {
+            UserDto userDto = (UserDto) authentication.getPrincipal();
 
-                if (user != null) {
-                    UserDto userDto = mapToUserDto(user);
+                if (userDto != null) {
                     return ResponseEntity.ok(userDto);
                 } else {
                     return ResponseEntity.notFound().build();
@@ -114,9 +112,10 @@ public class AuthController {
                                                    @RequestHeader(value = "Authorization") String authorizationHeader) {
         String token = authorizationHeader.replace("Bearer ", "");
         Authentication authentication = authProvider.validateToken(token);
-        if(authentication.isAuthenticated()) {
-            String name = (String) authentication.getPrincipal();
-            UserEntity user = userService.findByUsername(name);
+        if(authentication != null && authentication.isAuthenticated()) {
+            UserDto userDto = (UserDto) authentication.getPrincipal();
+
+            UserEntity user = userService.findByUsername(userDto.getUsername());
 
             if (user != null) {
                 if(!address.equals("-1")) {
@@ -129,8 +128,8 @@ public class AuthController {
                     user.setUsername(username);
                 }
                 userService.saveUpdate(user);
-                UserDto userDto = mapToUserDto(user);
-                return ResponseEntity.ok(userDto);
+                UserDto userDto2 = mapToUserDto(user);
+                return ResponseEntity.ok(userDto2);
             } else {
                 return ResponseEntity.notFound().build();
             }

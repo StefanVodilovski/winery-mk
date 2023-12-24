@@ -27,15 +27,11 @@ public class WineController {
     private final WineService wineService;
     private final UserService userService;
     private final PipeWinesService pipeWinesService;
-    private final CartService cartService;
-    private final UserAuthProvider authProvider;
 
-    public WineController(WineService wineService, UserService userService, PipeWinesService pipeWinesService, CartService cartService, UserAuthProvider authProvider) {
+    public WineController(WineService wineService, UserService userService, PipeWinesService pipeWinesService) {
         this.wineService = wineService;
         this.userService = userService;
         this.pipeWinesService = pipeWinesService;
-        this.cartService = cartService;
-        this.authProvider = authProvider;
     }
 
     @GetMapping("all")
@@ -55,27 +51,5 @@ public class WineController {
     @GetMapping("{wineId}")
     public WineDto getWineById(@PathVariable("wineId") Long wineId) {
         return wineService.findById(wineId);
-    }
-
-    @GetMapping("add/cart/item/{wineId}")
-        public ResponseEntity<String> putToCart(@PathVariable("wineId") Long wineId,
-                                                 @RequestParam("quantity") String quantity,
-                                            @RequestHeader(value = "Authorization") String authorizationHeader) {
-        String token = authorizationHeader.replace("Bearer ", "");
-        Authentication authentication = authProvider.validateToken(token);
-        if(authentication != null && authentication.isAuthenticated()) {
-            UserDto userDto = (UserDto) authentication.getPrincipal();
-
-            UserEntity user = userService.findByUsername(userDto.getUsername());
-
-            if (user != null) {
-                WineDto wine = wineService.findById(wineId);
-                cartService.saveCart(user, wine, Integer.parseInt(quantity));
-                return ResponseEntity.ok("Successfully added to cart.");
-            } else {
-                return ResponseEntity.badRequest().build();
-            }
-        }
-        return ResponseEntity.badRequest().build();
     }
 }

@@ -70,14 +70,15 @@ public class EventController {
                                 @RequestHeader(value = "Authorization") String authorizationHeader) {
         String token = authorizationHeader.replace("Bearer ", "");
         Authentication authentication = authProvider.validateToken(token);
-        if(authentication.isAuthenticated()) {
+        if(authentication != null && authentication.isAuthenticated()) {
             Event event = new Event();
             event.setName(name);
             event.setStartDateTime(dateStart);
             event.setEndDateTime(dateEnd);
             event.setDescription(description);
-            String username = (String) authentication.getPrincipal();
-            UserEntity user = userService.findByUsername(username);
+            UserDto userDto = (UserDto) authentication.getPrincipal();
+
+            UserEntity user = userService.findByUsername(userDto.getUsername());
 
             if (user != null) {
                 event.setCreatedBy(user);
