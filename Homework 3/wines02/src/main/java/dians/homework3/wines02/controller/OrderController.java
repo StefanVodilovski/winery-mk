@@ -68,8 +68,9 @@ public class OrderController {
         String token = authorizationHeader.replace("Bearer ", "");
         Authentication authentication = authProvider.validateToken(token);
         if(authentication.isAuthenticated()) {
-            String username = (String) authentication.getPrincipal();
-            UserEntity user = userService.findByUsername(username);
+            UserDto userDto = (UserDto) authentication.getPrincipal();
+
+            UserEntity user = userService.findByUsername(userDto.getUsername());
 
             if (user != null) {
                 orderService.createOrder(user);
