@@ -24,15 +24,12 @@ public class Order {
     private Long Id;
     private String code;
     private Status status;
+    private Integer total;
 
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne()
     @JoinColumn(name = "created_by")
     private UserEntity createdBy;
-
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
-    @Fetch(FetchMode.SELECT)
-    private List<AddWines> orderWines = new ArrayList<>();
 
     @CreationTimestamp
     private LocalDateTime createdOn;

@@ -1,11 +1,15 @@
 package dians.homework3.wines02.service.Impl;
 
+import dians.homework3.wines02.dto.AddWinesDto;
+import dians.homework3.wines02.mapper.AddWinesMapper;
 import dians.homework3.wines02.model.AddWines;
 import dians.homework3.wines02.model.Cart;
 import dians.homework3.wines02.model.Wine;
 import dians.homework3.wines02.repository.AddWinesRepository;
 import dians.homework3.wines02.service.AddWinesService;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class AddWinesServiceImpl implements AddWinesService {
@@ -16,11 +20,11 @@ public class AddWinesServiceImpl implements AddWinesService {
     }
 
     @Override
-    public void createAddWine(Wine wine, String quantity, Cart cart) {
-        AddWines addWines = new AddWines();
-        addWines.setWine(wine);
-        addWines.setCart(cart);
-        addWines.setQuantity(Integer.parseInt(quantity));
-        addWinesRepository.save(addWines);
+    public AddWinesDto findById(Long id) {
+        Optional<AddWines> wines = addWinesRepository.findById(id);
+        if(wines.isPresent()) {
+            return AddWinesMapper.mapToAddWinesDto(wines.get());
+        }
+        return null;
     }
 }

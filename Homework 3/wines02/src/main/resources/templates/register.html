@@ -9,7 +9,31 @@
 </head>
 <body>
 <section layout:fragment="body">
-    <p>profile</p>
+    <form id="form" class="needs-validation" role="form" method="post" action="/register/save"  >
+        <div class="mb-2">
+            <div class="mb-2">
+                <label for="username" class="h5">Username</label>
+                <input type="text" class="form-control" id="username" placeholder="Username"  name="username" required>
+            </div>
+            <div class="mb-2">
+                <label for="email" class="h5">Email</label>
+                <input type="text" class="form-control" id="email" placeholder="Email"  name="email" required>
+            </div>
+            <div class="mb-2">
+                <label for="password" class="h5">Password</label>
+                <input type="password" class="form-control" id="password" placeholder="Password"  name="password" required>
+            </div>
+            <div class="mb-2">
+                <label for="phoneNumber" class="h5">Phone Number</label>
+                <input type="text" class="form-control" id="phoneNumber" placeholder="Phone Number"  name="phoneNumber" required>
+            </div>
+            <div class="mb-2">
+                <label for="address" class="h5">Address</label>
+                <input type="text" class="form-control" id="address" placeholder="Address"  name="address" required>
+            </div>
+        </div>
+        <button th:href="@{/register}" class="btn btn-outline-dark mt-3" type="submit">Register</button>
+    </form>
 </section>
 </body>
 </html>

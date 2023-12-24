@@ -18,9 +18,7 @@ import java.util.List;
 public class AddWinesDto {
     private Long Id;
     private Integer quantity;
+    private WineDto wine;
     private LocalDateTime createdOn;
     private LocalDateTime updatedOn;
-    private Wine wine;
-    private Order order;
-    private Cart cart;
 }

@@ -19,8 +19,8 @@ public class OrderDto {
     private Long Id;
     private String code;
     private Status status;
-    private UserEntity createdBy;
-    private List<AddWines> orderWines = new ArrayList<>();
+    private Integer total;
+    private UserDto createBy;
     private LocalDateTime createdOn;
     private LocalDateTime updatedOn;
 }

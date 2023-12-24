@@ -1,35 +1,35 @@
 package dians.homework3.wines02.controller;
 
+
 import dians.homework3.wines02.dto.AddWinesDto;
-import dians.homework3.wines02.dto.CartDto;
+import dians.homework3.wines02.dto.UserDto;
 import dians.homework3.wines02.dto.WineDto;
 import dians.homework3.wines02.model.AddWines;
 import dians.homework3.wines02.model.UserEntity;
-import dians.homework3.wines02.model.Wine;
-import dians.homework3.wines02.service.AddWinesService;
-import dians.homework3.wines02.service.PipeWinesService;
-import dians.homework3.wines02.service.UserService;
-import dians.homework3.wines02.service.WineService;
-import org.hibernate.Hibernate;
+import dians.homework3.wines02.security.SecurityUtil;
+import dians.homework3.wines02.security.UserAuthProvider;
+import dians.homework3.wines02.service.*;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static dians.homework3.wines02.mapper.WineMapper.mapToWine;
+import static dians.homework3.wines02.mapper.UserMapper.mapToUserDto;
 
 @CrossOrigin("http://localhost:3001")
 @RestController
 @RequestMapping("/wines/")
 public class WineController {
     private final WineService wineService;
-    private final AddWinesService addWinesService;
     private final UserService userService;
     private final PipeWinesService pipeWinesService;
 
-    public WineController(WineService wineService, AddWinesService addWinesService, UserService userService, PipeWinesService pipeWinesService) {
+    public WineController(WineService wineService, UserService userService, PipeWinesService pipeWinesService) {
         this.wineService = wineService;
-        this.addWinesService = addWinesService;
         this.userService = userService;
         this.pipeWinesService = pipeWinesService;
     }
@@ -51,13 +51,5 @@ public class WineController {
     @GetMapping("{wineId}")
     public WineDto getWineById(@PathVariable("wineId") Long wineId) {
         return wineService.findById(wineId);
-    }
-
-    @PostMapping("add/cart/item/{wineId}/{userId}")
-    public ResponseEntity<String> putToCart(@PathVariable("wineId") Long wineId,
-                            @PathVariable("userId") Long userId,
-                            @RequestParam("quantity") String quantity) {
-        addWinesService.createAddWine(mapToWine(wineService.findById(wineId)),quantity,userService.findById(userId).getCart());
-        return ResponseEntity.ok("Added to cart");
     }
 }

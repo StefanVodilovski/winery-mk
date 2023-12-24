@@ -1,34 +1,62 @@
 package dians.homework3.wines02.controller;
 
 import dians.homework3.wines02.dto.OrderDto;
-import dians.homework3.wines02.mapper.OrderMapper;
+import dians.homework3.wines02.dto.UserDto;
+import dians.homework3.wines02.mapper.AddWinesMapper;
+import dians.homework3.wines02.model.AddWines;
+import dians.homework3.wines02.model.Cart;
 import dians.homework3.wines02.model.UserEntity;
+import dians.homework3.wines02.security.UserAuthProvider;
+import dians.homework3.wines02.service.AddWinesService;
+import dians.homework3.wines02.service.CartService;
 import dians.homework3.wines02.service.OrderService;
 import dians.homework3.wines02.service.UserService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static dians.homework3.wines02.mapper.AddWinesMapper.mapToAddWines;
+
+@CrossOrigin("http://localhost:3001")
 @RestController
 @RequestMapping("/orders/")
 public class OrderController {
     private final OrderService orderService;
     private final UserService userService;
+    private final CartService cartService;
+    private final AddWinesService addWinesService;
+    private final UserAuthProvider authProvider;
 
-    public OrderController(OrderService orderService, UserService userService) {
+
+    public OrderController(OrderService orderService, UserService userService, CartService cartService, AddWinesService addWinesService, UserAuthProvider authProvider) {
         this.orderService = orderService;
         this.userService = userService;
+        this.cartService = cartService;
+        this.addWinesService = addWinesService;
+        this.authProvider = authProvider;
     }
 
-    private UserEntity getUser(Long userId) {
-        return userService.findById(userId);
-    }
 
-    @GetMapping("all/{userId}")
-    public List<OrderDto> getAllOrders(@PathVariable("userId") Long userId) {
-        return getUser(userId).getOrders().stream().map(OrderMapper::mapToOrderDto).collect(Collectors.toList());
+    @GetMapping("all/view")
+    public ResponseEntity<List<OrderDto>> getAllOrders(@RequestHeader(value = "Authorization") String authorizationHeader) {
+        String token = authorizationHeader.replace("Bearer ", "");
+        Authentication authentication = authProvider.validateToken(token);
+        if(authentication.isAuthenticated()) {
+            String username = (String) authentication.getPrincipal();
+            UserEntity user = userService.findByUsername(username);
+
+            if (user != null) {
+                return ResponseEntity.ok(orderService.findByUser(user.getId()));
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        }
+        return ResponseEntity.badRequest().build();
     }
 
     @GetMapping("{orderId}")
@@ -36,10 +64,33 @@ public class OrderController {
         return orderService.getById(orderId);
     }
 
-    @PostMapping("new/{userId}")
-    public ResponseEntity<String> getAllWines(@PathVariable("userId") Long userId) {
-        UserEntity userEntity = getUser(userId);
-        orderService.createOrder(userEntity);
-        return ResponseEntity.ok("Order created");
+    @Transactional
+    @PostMapping("order/create")
+    public ResponseEntity<OrderDto> createOrder(@RequestHeader(value = "Authorization") String authorizationHeader) {
+        String token = authorizationHeader.replace("Bearer ", "");
+        Authentication authentication = authProvider.validateToken(token);
+        if(authentication != null && authentication.isAuthenticated()) {
+            UserDto userDto = (UserDto) authentication.getPrincipal();
+
+            UserEntity user = userService.findByUsername(userDto.getUsername());
+
+            if (user != null) {
+                Cart cart = user.getCart();
+                if(cart != null) {
+                        Integer totalPrice = cart.getCartWines()
+                                .stream()
+                                .map(wine -> wine.getWine().getPrice() * wine.getQuantity())
+                                .mapToInt(Integer::valueOf)
+                                .sum();
+                        OrderDto orderDto = orderService.makeOrder(user, totalPrice);
+                        cartService.deleteAddWines(cart);
+                        return ResponseEntity.ok(orderDto);
+                }
+                return ResponseEntity.notFound().build();
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        }
+        return ResponseEntity.badRequest().body(null);
     }
 }

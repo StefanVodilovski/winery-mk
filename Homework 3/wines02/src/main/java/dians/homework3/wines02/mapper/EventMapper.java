@@ -1,7 +1,11 @@
 package dians.homework3.wines02.mapper;
 
 import dians.homework3.wines02.dto.EventDto;
+import dians.homework3.wines02.dto.EventDto2;
 import dians.homework3.wines02.model.Event;
+
+import javax.transaction.Transactional;
+import java.util.stream.Collectors;
 
 public class EventMapper {
     public static Event mapToEvent(EventDto eventDto) {
@@ -9,15 +13,13 @@ public class EventMapper {
                 .Id(eventDto.getId())
                 .name(eventDto.getName())
                 .description(eventDto.getDescription())
-                .createdBy(eventDto.getCreatedBy())
                 .createdOn(eventDto.getCreatedOn())
                 .endDateTime(eventDto.getEndDateTime())
-                .geolocation(eventDto.getGeolocation())
-                .photoUrl(eventDto.getPhotoUrl())
+//                .photo(eventDto.getPhoto())
                 .startDateTime(eventDto.getStartDateTime())
                 .updatedOn(eventDto.getUpdatedOn())
-                .wineries(eventDto.getWineries())
-                .comments(eventDto.getComments())
+                .xCordinate(eventDto.getXCordinate())
+                .yCordinate(eventDto.getYCordinate())
                 .build();
     }
 
@@ -26,15 +28,23 @@ public class EventMapper {
                 .Id(event.getId())
                 .name(event.getName())
                 .description(event.getDescription())
-                .createdBy(event.getCreatedBy())
+                .createdBy(UserMapper.mapToUserDto(event.getCreatedBy()))
                 .createdOn(event.getCreatedOn())
                 .endDateTime(event.getEndDateTime())
-                .geolocation(event.getGeolocation())
-                .photoUrl(event.getPhotoUrl())
+//                .photo(event.getPhoto())
                 .startDateTime(event.getStartDateTime())
                 .updatedOn(event.getUpdatedOn())
-                .wineries(event.getWineries())
-                .comments(event.getComments())
+                .wineries(event.getWineries().stream().map(WineryMapper::mapToWineryDto2).collect(Collectors.toList()))
+                .comments(event.getComments().stream().map(EventCommentMapper::mapToEventCommentDto).collect(Collectors.toList()))
+                .xCordinate(event.getXCordinate())
+                .yCordinate(event.getYCordinate())
+                .build();
+    }
+
+    public static EventDto2 mapToEventDto2(Event event) {
+        return EventDto2.builder()
+                .name(event.getName())
+//                .photo(event.getPhoto())
                 .build();
     }
 }

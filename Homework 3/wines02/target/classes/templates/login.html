@@ -9,7 +9,19 @@
 </head>
 <body>
 <section layout:fragment="body">
-    <p>login</p>
+    <form id="form" class="needs-validation" role="form" method="post" th:action="@{/login}">
+        <div class="mb-2">
+            <div class="mb-2">
+                <label for="username" class="h5">Username</label>
+                <input type="text" class="form-control" id="username" placeholder="Username" name="username" required>
+            </div>
+            <div class="mb-2">
+                <label for="password" class="h5">Password</label>
+                <input type="password" class="form-control" id="password" placeholder="Password" name="password" required>
+            </div>
+        </div>
+        <button class="btn btn-outline-dark mt-3" value="Log in" type="submit">Login</button>
+    </form>
 </section>
 </body>
 </html>

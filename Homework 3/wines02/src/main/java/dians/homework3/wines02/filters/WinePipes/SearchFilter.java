@@ -12,7 +12,7 @@ public class SearchFilter implements Filter<String> {
     public List<WineDto> execute(String searchInput, List<WineDto> wines) {
         if(searchInput != null) {
             String finalSearchQuery = searchInput.toLowerCase();
-            return wines.stream().filter(wine -> wine.getName().contains(finalSearchQuery)).collect(Collectors.toList());
+            return wines.stream().filter(wine -> wine.getName().toLowerCase().contains(finalSearchQuery)).collect(Collectors.toList());
         }
         return wines;
     }

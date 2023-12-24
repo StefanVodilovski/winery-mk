@@ -3,28 +3,28 @@ package dians.homework3.wines02.mapper;
 import dians.homework3.wines02.dto.AddWinesDto;
 import dians.homework3.wines02.model.AddWines;
 
+import static dians.homework3.wines02.mapper.WineMapper.mapToWine;
+import static dians.homework3.wines02.mapper.WineMapper.mapToWineDto;
+
 public class AddWinesMapper {
     public static AddWines mapToAddWines(AddWinesDto addWinesDto) {
         return AddWines.builder()
                 .Id(addWinesDto.getId())
-                .wine(addWinesDto.getWine())
-                .order(addWinesDto.getOrder())
-                .cart(addWinesDto.getCart())
                 .quantity(addWinesDto.getQuantity())
                 .createdOn(addWinesDto.getCreatedOn())
                 .updatedOn(addWinesDto.getUpdatedOn())
+                .wine(mapToWine(addWinesDto.getWine()))
                 .build();
     }
 
     public static AddWinesDto mapToAddWinesDto(AddWines addWines) {
         return AddWinesDto.builder()
                 .Id(addWines.getId())
-                .wine(addWines.getWine())
-                .order(addWines.getOrder())
-                .cart(addWines.getCart())
                 .quantity(addWines.getQuantity())
                 .createdOn(addWines.getCreatedOn())
                 .updatedOn(addWines.getUpdatedOn())
+                .wine(mapToWineDto(addWines.getWine()))
                 .build();
     }
 }
+

@@ -11,6 +11,7 @@ import javax.persistence.*;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.math.BigInteger;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,18 +29,22 @@ public class Event {
     private String name;
     private LocalDateTime startDateTime;
     private LocalDateTime endDateTime;
-    private String photoUrl;
+//    @Lob
+//    @Column(name = "photo", columnDefinition = "BLOB")
+//    private byte[] photo;
     private String description;
-    private String geolocation;
+    private double xCordinate;
+    private double yCordinate;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @ManyToMany(cascade = CascadeType.MERGE)
+    @Fetch(FetchMode.SELECT)
     @JoinTable(name = "event_wineries",
             joinColumns = @JoinColumn(name = "event_id"),
             inverseJoinColumns = @JoinColumn(name = "winery_id"))
     private List<Winery> wineries = new ArrayList<>();
 
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private UserEntity createdBy;
 

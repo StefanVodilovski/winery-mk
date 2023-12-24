@@ -5,6 +5,7 @@ import dians.homework3.wines02.filters.EventPipes.PipeEvents;
 import dians.homework3.wines02.filters.EventPipes.SearchFilterEvent;
 import dians.homework3.wines02.filters.EventPipes.WineryFilterEvent;
 import dians.homework3.wines02.mapper.EventMapper;
+import dians.homework3.wines02.model.Event;
 import dians.homework3.wines02.repository.EventRepository;
 import dians.homework3.wines02.service.PipeEventsService;
 import org.springframework.stereotype.Service;
@@ -35,7 +36,7 @@ public class PipeEventsServiceImpl implements PipeEventsService {
         List<String> stringList = new ArrayList<>();
         stringList.add(search);
         stringList.add(winery);
-        List<EventDto> eventsDto = eventRepository.findAll().stream().map(EventMapper::mapToEventDto).collect(Collectors.toList());
-        return pipeEvents.runFilters(stringList, eventsDto);
+        List<Event> events = eventRepository.findAll().stream().collect(Collectors.toList());
+        return pipeEvents.runFilters(stringList, events).stream().map(EventMapper::mapToEventDto).collect(Collectors.toList());
     }
 }
