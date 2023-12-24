@@ -77,15 +77,12 @@ public class OrderController {
             if (user != null) {
                 Cart cart = user.getCart();
                 if(cart != null) {
-                        List<AddWines> addWines = cart.getCartWines().stream().map((addWine) -> mapToAddWines(addWinesService.findById(addWine.getId()))).collect(Collectors.toList());
                         Integer totalPrice = cart.getCartWines()
                                 .stream()
                                 .map(wine -> wine.getWine().getPrice() * wine.getQuantity())
                                 .mapToInt(Integer::valueOf)
                                 .sum();
-                        List<AddWinesOrder> addWinesOrder = new ArrayList<>();
-                        addWinesOrder = addWines.stream().map(AddWinesMapper::mapToAddWinesOrder).collect(Collectors.toList());
-                        OrderDto orderDto = orderService.makeOrder(addWinesOrder, user, totalPrice);
+                        OrderDto orderDto = orderService.makeOrder(user, totalPrice);
                         cartService.deleteAddWines(cart);
                         return ResponseEntity.ok(orderDto);
                 }
