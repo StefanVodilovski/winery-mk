@@ -60,11 +60,4 @@ public class CartServiceImpl implements CartService {
         Optional<Cart> cart = cartRepository.findById(l);
         return cart.orElseGet(Cart::new);
     }
-
-    @Override
-    @Transactional
-    public void deleteProducts(Cart cart) {
-        cart.getCartWines().clear();
-        cartRepository.save(cart);
-    }
 }

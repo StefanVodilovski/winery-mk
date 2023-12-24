@@ -3,6 +3,7 @@ package dians.homework3.wines02.service.Impl;
 import dians.homework3.wines02.dto.OrderDto;
 import dians.homework3.wines02.mapper.OrderMapper;
 import dians.homework3.wines02.model.*;
+import dians.homework3.wines02.repository.AddWinesRepository;
 import dians.homework3.wines02.repository.OrderRepository;
 import dians.homework3.wines02.service.OrderService;
 import javassist.NotFoundException;
@@ -21,23 +22,12 @@ import static dians.homework3.wines02.mapper.WineryMapper.mapToWineryDto;
 @Service
 public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepository;
-    private static final AtomicLong counter = new AtomicLong(System.currentTimeMillis());
+    private final AddWinesRepository addWinesRepository;
 
-    public OrderServiceImpl(OrderRepository orderRepository) {
+    public OrderServiceImpl(OrderRepository orderRepository, AddWinesRepository addWinesRepository) {
         this.orderRepository = orderRepository;
+        this.addWinesRepository = addWinesRepository;
     }
-
-//    @Override
-//    public void createOrder(UserEntity userEntity) {
-//        Cart cart = userEntity.getCart();
-//        Order order = new Order();
-//        order.setOrderWines(cart.getCartWines());
-//        order.setCreatedBy(userEntity);
-//        long uniqueNumber = counter.getAndIncrement();
-//        order.setCode(String.valueOf(uniqueNumber));
-//        order.setStatus(Status.Preparing);
-//        orderRepository.save(order);
-//    }
 
     @Override
     public OrderDto getById(Long orderId) {
@@ -59,8 +49,10 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public OrderDto makeOrder(List<AddWines> addWines, UserEntity user, Integer totalPrice) {
+        addWines.forEach(wine -> wine.setCart(null));
+        addWinesRepository.saveAll(addWines);
         Order order = new Order();
-//        order.setOrderWines(addWines);
+        order.setOrderWines(addWines);
         order.setTotal(totalPrice);
         order.setStatus(Status.Preparing);
         order.setCreatedBy(user);

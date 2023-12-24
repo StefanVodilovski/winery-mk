@@ -12,6 +12,4 @@ public interface CartService {
     public void save(UserEntity user);
 
     Cart findById(long l);
-
-    void deleteProducts(Cart cart);
 }

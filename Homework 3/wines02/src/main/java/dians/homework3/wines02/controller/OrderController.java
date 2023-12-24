@@ -83,8 +83,6 @@ public class OrderController {
                                 .map(wine -> wine.getWine().getPrice() * wine.getQuantity())
                                 .mapToInt(Integer::valueOf)
                                 .sum();
-                        cartService.deleteProducts(cart);
-                        addWines.forEach(wine -> wine.setCart(null));
                         OrderDto orderDto = orderService.makeOrder(addWines, user, totalPrice);
                         return ResponseEntity.ok(orderDto);
                 }
