@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -63,6 +64,7 @@ public class OrderController {
         return orderService.getById(orderId);
     }
 
+    @Transactional
     @PostMapping("order/create")
     public ResponseEntity<OrderDto> createOrder(@RequestHeader(value = "Authorization") String authorizationHeader) {
         String token = authorizationHeader.replace("Bearer ", "");
