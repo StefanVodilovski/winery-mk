@@ -7,7 +7,8 @@ import { faMagnifyingGlass} from '@fortawesome/free-solid-svg-icons'
 import { request, setAuthHeader, getAuthToken } from '../../Helpers/axios_helper';
 
 export const Wines = () => {
-    const [results, setResults] = useState([])
+    const [resultsWines, setResultsWines] = useState([])
+    const [resultsWineries, setResultsWineries] = useState([])
 
     const [searchQuery, setSearchQuery] = useState('')
 
@@ -36,7 +37,6 @@ export const Wines = () => {
             url = url + "&winery=" + winery;
         if(litrage != -1)
             url = url + "&litrage=" + litrage;
-        console.log(url)
         
             request(
                 "GET",
@@ -48,7 +48,7 @@ export const Wines = () => {
                   }
                 ).then(
                 (response) => {
-                    setResults(response.data)
+                    setResultsWines(response.data)
                 }).catch(
                 (error) => {
                   console.error('Error fetching data:', error);
@@ -56,7 +56,7 @@ export const Wines = () => {
             );
     };    
 
-    const initalData = () => {
+    const initalDataWines = () => {
         request(
             "GET",
             "/wines/all",
@@ -67,7 +67,21 @@ export const Wines = () => {
               }
             ).then(
             (response) => {
-                setResults(response.data)
+                setResultsWines(response.data)
+            }).catch(
+            (error) => {
+              console.error('Error fetching data:', error);
+            }
+        );
+    };
+
+    const initalDataWineries = () => {
+        request(
+            "GET",
+            "/wineries/all",
+            ).then(
+            (response) => {
+                setResultsWineries(response.data)
             }).catch(
             (error) => {
               console.error('Error fetching data:', error);
@@ -76,7 +90,8 @@ export const Wines = () => {
     };
 
     useEffect(() => {
-        initalData();
+        initalDataWines();
+        initalDataWineries();
     }, []);
 
     return (
@@ -85,7 +100,7 @@ export const Wines = () => {
                 <h1>WINES</h1>
                 <div className='filter-section'>
                     <div className='search-bar-container'>
-                        <Searchbar setResults={setResults} updateSearch={updateSearch} ></Searchbar>
+                        <Searchbar setResults={setResultsWines} updateSearch={updateSearch} ></Searchbar>
                         <button className='search-button' onClick={handleButtonClick}><FontAwesomeIcon icon={faMagnifyingGlass} /></button>
                     </div>
                     <div className='filter-options'>
@@ -111,12 +126,9 @@ export const Wines = () => {
                             <label htmlFor="winery">Winery</label>
                             <select name='winery' id='winery' onChange={(e) => (setWinery(e.target.value))}>
                                 <option value={-1}></option>
-                                <option value={1}>Tikveš Châteaux & Domaines</option>
-                                <option value={2}>Kartal Winery</option>
-                                <option value={3}>Iliev Winery</option>
-                                <option value={4}>Old School Winery</option>
-                                <option value={5}>Kamnik Winery</option>
-                                <option value={6}>Paragon Winery</option>
+                                {resultsWineries.map(winery => (
+                                    <option value={winery.id}>{winery.name}</option>
+                                ))}
                             </select>
                         </div>
                         <div className='filter-option'>
@@ -132,7 +144,7 @@ export const Wines = () => {
                 </div>
 
                 <div className='wines-list'>
-                    <SearchWinesList results={results} />
+                    <SearchWinesList results={resultsWines} />
                 </div>
             </div>
         </div>

@@ -31,6 +31,22 @@ export const Wine = () => {
     setNumber(parseInt(e.target.value))
   }
 
+  const handleAddToCart = () => {
+    request(
+      "GET",
+      "/wines/add/cart/item/" + wineData.id +"?quantity=" + number,
+      {
+        headers: {
+            authorizationHeader: `Bearer ${getAuthToken()}`, // Include the authentication token in the Authorization header
+        },
+      }
+      ).catch(
+      (error) => {
+        console.error('Error fetching data:', error);
+      }
+    );
+  }
+
   const initalData = () => {
     request(
         "GET",
@@ -49,6 +65,10 @@ export const Wine = () => {
       initalData();
   }, []);
 
+  useEffect(() => {
+    setNumber(1);
+  }, [wineData]);
+
   return (
     <div id="winePageWidth">
         <div className='wine-description-container'>
@@ -60,14 +80,14 @@ export const Wine = () => {
                   <h1>{wineData.name.toUpperCase()}</h1>
                   <p className='winePrice'>{wineData.price} mkd</p>
                   <p className='wineryName'>WINERY: <span>{wineData.winery.name}</span></p>
-                  <form>
+                    <div className='add-to-cart-form'>
                     <div className='inputType'>
                       <button type="button" onClick={lowerValue} id='prev'><FontAwesomeIcon icon={faAngleLeft} /></button>
-                      <input type="number" min='0' max={wineData.stock} value={number} onChange={changeValue}/>
+                      <input name="quantity" type="number" min='0' max={wineData.stock} value={number} onChange={changeValue}/>
                       <button type="button" onClick={higherValue} id='next'><FontAwesomeIcon icon={faAngleRight} /></button>
                     </div>
-                    <button type='submit' id='addToCart'>ADD TO CART</button>
-                  </form>
+                    <button type='submit' id='addToCart' onClick={handleAddToCart}>ADD TO CART</button>
+                    </div>
                 </div>
             </div>
 

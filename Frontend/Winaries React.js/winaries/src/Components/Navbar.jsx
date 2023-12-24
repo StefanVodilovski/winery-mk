@@ -91,7 +91,6 @@ export const Navbar = () => {
               }
           );
       };
-
     return (
         <nav className={navClass}>
             <Link to="/" className='title'>

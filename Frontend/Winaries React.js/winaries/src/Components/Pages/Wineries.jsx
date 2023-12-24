@@ -27,7 +27,6 @@ export const Wineries = () => {
             url = url + "&searchQuery=" + searchQuery;
         if(region != -1)
             url = url + "&region=" + region;
-        console.log(url)
         
             request(
                 "GET",

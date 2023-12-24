@@ -25,9 +25,7 @@ export const Events = () => {
         let url = "/wines/filter?";
         if(searchQuery != "")
             url = url + "&searchQuery=" + searchQuery;
-        if(winery != -1)
-        console.log(url)
-        
+        if(winery != -1) 
             request(
                 "GET",
                 url,
