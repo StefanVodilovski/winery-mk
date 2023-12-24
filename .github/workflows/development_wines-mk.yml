@@ -21,8 +21,12 @@ jobs:
         with:
           java-version: '17'
 
+      - name: specify path 
+        run: mvn -f Homework 3/wines02/pom.xml
+      
       - name: Build with Maven
         run: mvn clean install
+        
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
