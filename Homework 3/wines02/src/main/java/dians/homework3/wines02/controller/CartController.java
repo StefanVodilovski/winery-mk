@@ -32,10 +32,11 @@ public class CartController {
     private WineService wineService;
     private final UserAuthProvider authProvider;
 
-    public CartController(UserService userService, UserAuthProvider userAuthProvider, CartService cartService, UserAuthProvider authProvider) {
+    public CartController(UserService userService, UserAuthProvider userAuthProvider, CartService cartService, WineService wineService, UserAuthProvider authProvider) {
         this.userService = userService;
         this.userAuthProvider = userAuthProvider;
         this.cartService = cartService;
+        this.wineService = wineService;
         this.authProvider = authProvider;
     }
 
