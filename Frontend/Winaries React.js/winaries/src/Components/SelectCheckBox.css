@@ -1,20 +1,22 @@
 .image-container {
     position: relative;
-    display: inline-block;
+    width: 200px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   
   .image {
-    display: block;
     max-width: 200px;
     height: auto;
   }
-  
-  .checkbox-button {
+
+  .image-container button{
     position: absolute;
-    top: 50%;
-    left: 50%;
+    top:50%;
+    left:50%;
     transform: translate(-50%, -50%);
-    display: inline-block;
     padding: 8px 16px;
     border: none;
     cursor: pointer;
@@ -24,14 +26,7 @@
     text-align: center;
   }
   
-  .checkbox-button.unchecked {
-    background-color: rgba(81, 74, 74, 0.8);
-  }
-  
-  .checkbox-button.checked {
-    background-color: rgba(172, 54, 54, 0.8); /* Red color */
-  }
-  
-  .checkbox-button input {
-    display: none; /* Hide the actual checkbox input */
-  }
+/* ///////////// */
+
+
+

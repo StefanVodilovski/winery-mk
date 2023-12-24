@@ -70,8 +70,6 @@ export const CreateEvent = () => {
     setIsChecked(!isChecked);
   };
 
-
-
     return (
         <div className='create-event-outer-container'>
             <div className='create-event-inner-container'>
@@ -146,15 +144,8 @@ export const CreateEvent = () => {
                         </div>
                     </div>
                     <div className='wineries-selection-section'>
-                        <div className='search-container'>
-                            <label htmlFor="search">Search Wineries</label>
-                            <input type="text" name="search" id="search" placeholder='Search...' />
-                        </div>
-                        <div className='filter'>
-                            <p>REGION</p>
-                            <select name="region"></select>
-                        </div>
                         <hr/>
+                        <h1>SELECT WINERIES</h1>
                         <div className='select-wineries-container'>
 
                             {selectList.map(selectWinery => (
@@ -167,11 +158,18 @@ export const CreateEvent = () => {
                                                 selectList={selectList}
                                                 setSelectList={setSelectList}
                                                 selectedList={selectedList}
-                                                setSelectedList={setSelectedList}/> 
+                                                setSelectedList={setSelectedList}
+                                                text="SELECT"/> 
                             ))}
                                          
                         </div>
                         <hr/>
+                        {selectedList.length != 0 ? (
+                            <h1 id="selected-wineries-h1" >SELECTED WINERIES</h1>
+                        ):(
+                            <h1 id="selected-wineries-h1" ></h1>
+                        )}
+                        
                         <div className='selected-wineries-container'>
                             {selectedList.map(selectedWinery => (
                                 <SelectCheckBox imageSrc={selectedWinery.photoUrl} 
@@ -183,7 +181,8 @@ export const CreateEvent = () => {
                                                 selectList={selectList}
                                                 setSelectList={setSelectList}
                                                 selectedList={selectedList}
-                                                setSelectedList={setSelectedList}/> 
+                                                setSelectedList={setSelectedList}
+                                                text="SELECTED"/> 
                             ))}
                         </div>
                     </div>

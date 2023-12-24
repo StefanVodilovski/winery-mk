@@ -8,6 +8,7 @@ import { request, setAuthHeader, getAuthToken } from '../../Helpers/axios_helper
 
 export const Events = () => {
     const [results, setResults] = useState([])
+    const [resultsWineries, setResultsWineries] = useState([])
 
     const [searchQuery, setSearchQuery] = useState('')
 
@@ -22,7 +23,7 @@ export const Events = () => {
     };
 
     const fetchData = () => {
-        let url = "/wines/filter?";
+        let url = "/events/filter?";
         if(searchQuery != "")
             url = url + "&searchQuery=" + searchQuery;
         if(winery != -1) 
@@ -53,8 +54,23 @@ export const Events = () => {
         );
     };
 
+    const initalDataWineries = () => {
+        request(
+            "GET",
+            "/wineries/all",
+            ).then(
+            (response) => {
+                setResultsWineries(response.data)
+            }).catch(
+            (error) => {
+              console.error('Error fetching data:', error);
+            }
+        );
+    };
+
     useEffect(() => {
         initalData();
+        initalDataWineries();
     }, []);
 
     return (
@@ -71,12 +87,9 @@ export const Events = () => {
                             <label htmlFor="winery">Winery</label>
                             <select name='winery' id='winery' onChange={(e) => (setWinery(e.target.value))}>
                                 <option value={-1}></option>
-                                <option value={1}>Tikveš Châteaux & Domaines</option>
-                                <option value={2}>Kartal Winery</option>
-                                <option value={3}>Iliev Winery</option>
-                                <option value={4}>Old School Winery</option>
-                                <option value={5}>Kamnik Winary</option>
-                                <option value={6}>Paragon Winery</option>
+                                {resultsWineries.map(winery => (
+                                    <option value={winery.id}>{winery.name}</option>
+                                ))}
                             </select>
                         </div>
                     </div>

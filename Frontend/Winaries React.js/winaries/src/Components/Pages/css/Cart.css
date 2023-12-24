@@ -78,9 +78,13 @@ body.route-cart .shopping-cart-icon{
 
 .cart-wine{
     display: flex;
-    justify-content: space-between;
+    justify-content: start;
     align-items: center;
     border-bottom: 1px solid #E1E1E1;
+}
+
+.cart-wine:last-child{
+    border-bottom: none;
 }
 
 .order-confirmation {
@@ -103,6 +107,7 @@ body.route-cart .shopping-cart-icon{
 }
 .cart-wine img {
     max-width: 300px;
+    margin-right: 10px;
 }
 .order-confirmation p span {
     color: #D13636 !important;

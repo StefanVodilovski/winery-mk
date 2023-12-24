@@ -2,14 +2,12 @@ import React, { useState } from 'react';
 import './SelectCheckBox.css'
 
 
-export const SelectCheckBox = ({results, setResults, selectList, setSelectList, selectedList, setSelectedList, imageSrc, altText, initialValue, id}) => {
+export const SelectCheckBox = ({results, setResults, selectList, setSelectList, selectedList, setSelectedList, imageSrc, altText, initialValue, id, text}) => {
   const [isChecked, setIsChecked] = useState(initialValue);
 
   const handleCheckboxChange = () => {
-    let temp = !isChecked
-    setIsChecked(temp);
     const winery = results.find((result) => result.id === id);
-      if (temp) {
+      if (text === "SELECT") {
         setSelectList(selectList.filter(w => w.id !== id));
         setSelectedList(selectedList.concat(winery));
       } else {
@@ -19,16 +17,13 @@ export const SelectCheckBox = ({results, setResults, selectList, setSelectList, 
   };
 
   return (
-    <div className="image-container">
-      <img
-        src={imageSrc}
-        alt={altText}
-        className="image"
-      />
-      <label className={`checkbox-button ${isChecked ? 'checked' : 'unchecked'}`}>
-        <input type="checkbox" checked={isChecked} onClick={handleCheckboxChange} />
-        {isChecked ? 'SELECTED' : 'SELECT'}
-      </label>
-    </div>
+      <div className="image-container">
+        <img
+          src={imageSrc}
+          alt={altText}
+          className="image"
+        />
+        <button type="button" onClick={handleCheckboxChange}>{text}</button>
+      </div>
   );
 };

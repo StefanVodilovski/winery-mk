@@ -274,7 +274,37 @@ body.route-create-event hr {
 
 body.route-create-event .select-wineries-container{
     width: 100%;
+    display: grid;
+    grid-template-columns: auto auto auto auto;
 }
+
+body.route-create-event .selected-wineries-container{
+    width: 100%;
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+}
+
+body.route-create-event .select-wineries-container button{
+    background-color: rgba(81, 74, 74, 0.8);
+}
+
+body.route-create-event .selected-wineries-container button{
+    background-color: rgba(172, 54, 54, 0.8);
+}
+
+body.route-create-event .wineries-selection-section h1{
+    width: 100%;
+    text-align: left;
+    font-style: italic;
+    color: black;
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+#selected-wineries-h1{
+    color: #D13636;
+}
+
+
 
 
 

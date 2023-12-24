@@ -8,6 +8,17 @@ import { FixedSizeList as List } from 'react-window';
 export const Cart = () => {
     const[results, setResults] = useState([])
     const[wines, setWines] = useState([])
+    const[total, setTotal] = useState(0)
+
+    const  calculateTotal = (response) =>{
+        let length = response.cartWines.length;
+        let temp = 0;
+
+        for(let i = 0; i < length; i++){
+            temp += parseInt(response.cartWines[i].wine.price) * parseInt(response.cartWines[i].quantity);
+        }
+        setTotal(temp)
+    }
 
     const handleOrder = () => {
         request(
@@ -18,15 +29,26 @@ export const Cart = () => {
                 Authorization: `Bearer ${getAuthToken()}`,
             },
           }
-          ).then(
-            (response) => {
-                console.log(response)
-            }).catch(
+          ).catch(
           (error) => {
             console.error('Error fetching data:', error);
           }
         );
       }
+
+      const initalWines = () => {
+        request(
+            "GET",
+            "/wines/all",
+            ).then(
+            (response) => {
+                setWines(response.data)
+            }).catch(
+            (error) => {
+              console.error('Error fetching data:', error);
+            }
+        );
+    };
 
       const initalData = () => {
         request(
@@ -39,7 +61,7 @@ export const Cart = () => {
             }).then(
             (response) => {
                 setResults(response.data)
-                console.log(response)
+                calculateTotal(response.data);
             }).catch(
             (error) => {
               console.error('Error fetching data:', error);
@@ -49,6 +71,7 @@ export const Cart = () => {
     
       useEffect(() => {
           initalData();
+          initalWines();
       }, []);
 
       return(
@@ -64,8 +87,8 @@ export const Cart = () => {
                                             <img src={results.cartWines[index].wine.photoUrl} alt={results.cartWines[index].wine.name} />
                                             <div id="wine-details">
                                                 <h2>{results.cartWines[index].wine.name.toUpperCase()}</h2>
-                                                <p id="single-price">Price: {results.cartWines[index].wine.price} mkd</p>
-                                                <p id="total-price">Total Price: {results.cartWines[index].wine.price} x {results.cartWines[index].quantity} = <span>{(results.cartWines[index].wine.price)*(results.cartWines[index].quantity)} mkd</span></p>
+                                                <p id="single-price">{results.cartWines[index].wine.price} mkd</p>
+                                                <p id="total-price">{results.cartWines[index].wine.price} x {results.cartWines[index].quantity} = <span>{(results.cartWines[index].wine.price)*(results.cartWines[index].quantity)} mkd</span></p>
                                                 <p id="winery-name">WINERY: <span>{results.cartWines[index].wine.winery.name}</span></p>
                                             </div>
                                         </div>
@@ -76,10 +99,10 @@ export const Cart = () => {
                             )}
                         <div className='order-confirmation'>
                                 <h2>SUMMARY</h2>
-                                <p>Total: mkd</p>
-                                <p>Delivery: mkd</p>
+                                <p>Total: {total} mkd</p>
+                                <p>Delivery: 150 mkd</p>
                                 <hr/>
-                                <p id="total-price-order">TOTAL: <span>mkd</span></p>
+                                <p id="total-price-order">TOTAL: <span>{total + 150} mkd</span></p>
                                 <button onClick={handleOrder}>ORDER</button>
                         </div>
                         <div>
