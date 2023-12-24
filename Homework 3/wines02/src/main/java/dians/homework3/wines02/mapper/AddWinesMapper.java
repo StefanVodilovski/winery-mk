@@ -10,6 +10,7 @@ public class AddWinesMapper {
                 .quantity(addWinesDto.getQuantity())
                 .createdOn(addWinesDto.getCreatedOn())
                 .updatedOn(addWinesDto.getUpdatedOn())
+                .wine(addWinesDto.getWine())
                 .build();
     }
 
@@ -19,6 +20,7 @@ public class AddWinesMapper {
                 .quantity(addWines.getQuantity())
                 .createdOn(addWines.getCreatedOn())
                 .updatedOn(addWines.getUpdatedOn())
+                .wine(addWines.getWine())
                 .build();
     }
 }
