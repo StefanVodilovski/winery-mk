@@ -57,7 +57,7 @@ public class CartController {
         return ResponseEntity.<CartDto>status(HttpStatus.UNAUTHORIZED).body(null);
     }
 
-    @GetMapping("add/cart/item/{wineId}")
+    @GetMapping("add/wines/{wineId}")
     public ResponseEntity<String> putToCart(@PathVariable("wineId") Long wineId,
                                             @RequestParam("quantity") String quantity,
                                             @RequestHeader(value = "Authorization") String authorizationHeader) {
