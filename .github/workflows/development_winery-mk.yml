@@ -12,6 +12,12 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      AZURE_POSTGRESQL_PASSWORD: ${{ azure-db-env.AZURE_POSTGRESQL_PASSWORD }}
+      AZURE_POSTGRESQL_RESOURCE_GROUP: ${{ azure-db-env.AZURE_POSTGRESQL_RESOURCE_GROUP }}
+      AZURE_POSTGRESQL_SUBSCRIPTION_ID: ${{ azure-db-env.AZURE_POSTGRESQL_SUBSCRIPTION_ID }}
+      AZURE_POSTGRESQL_URL: ${{ azure-db-env.AZURE_POSTGRESQL_URL }}
+      AZURE_POSTGRESQL_USERNAME: ${{ azure-db-env.AZURE_POSTGRESQL_USERNAME }}
 
     steps:
       - uses: actions/checkout@v4
