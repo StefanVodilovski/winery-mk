@@ -6,5 +6,5 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 public interface PipeWinesService {
-    List<Wine> filter(String search, String priceValue, String regionValue, String wineryValue, String litrageValue);
+    List<Long> filter(String search, String priceValue, String regionValue, String wineryValue, String litrageValue);
 }

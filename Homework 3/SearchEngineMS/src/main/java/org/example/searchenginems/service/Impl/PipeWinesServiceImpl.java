@@ -36,7 +36,7 @@ public class PipeWinesServiceImpl implements PipeWinesService {
     }
 
     @Override
-    public List<Wine> filter(String search, String priceValue, String regionValue, String wineryValue, String litrageValue) {
+    public List<Long> filter(String search, String priceValue, String regionValue, String wineryValue, String litrageValue) {
         List<String> stringList = new ArrayList<>();
         stringList.add(search);
         stringList.add(priceValue);

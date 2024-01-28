@@ -30,7 +30,7 @@ public class PipeWineriesServiceImpl implements PipeWineriesService {
 
 
     @Override
-    public List<Winery> filter(String search, String region) {
+    public List<Long> filter(String search, String region) {
         List<String> stringList = new ArrayList<>();
         stringList.add(search);
         stringList.add(region);

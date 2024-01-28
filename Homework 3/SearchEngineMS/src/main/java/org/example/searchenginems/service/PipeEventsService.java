@@ -6,5 +6,5 @@ import org.example.searchenginems.model.Event;
 import java.util.List;
 
 public interface PipeEventsService {
-    List<Event> filter(String search, String winery);
+    List<Long> filter(String search, String winery);
 }

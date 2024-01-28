@@ -49,4 +49,9 @@ public class WineryServiceImpl implements WineryService {
         Optional<Winery> winery = wineryRepository.findById(wineryId);
         return winery.map(value -> value.getWines().stream().map(WineMapper::mapToWineDto).collect(Collectors.toList())).orElse(null);
     }
+
+    @Override
+    public List<Winery> findAllById(List<Long> wineriesId) {
+        return wineryRepository.findAllById(wineriesId);
+    }
 }

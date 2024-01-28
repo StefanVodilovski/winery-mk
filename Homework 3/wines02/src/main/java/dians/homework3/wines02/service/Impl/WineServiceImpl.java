@@ -39,4 +39,9 @@ public class WineServiceImpl implements WineService {
             throw new RuntimeException(e);
         }
     }
+
+    @Override
+    public List<Wine> findAllById(List<Long> winesId) {
+        return wineRepository.findAllById(winesId);
+    }
 }

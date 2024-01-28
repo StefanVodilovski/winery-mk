@@ -29,7 +29,7 @@ public class SearchController {
     }
 
     @GetMapping(value = "filter/wines", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Wine> filterWines(@RequestParam(required = false) String searchQuery,
+    public List<Long> filterWines(@RequestParam(required = false) String searchQuery,
                                   @RequestParam(required = false) String priceFilter,
                                   @RequestParam(required = false) String region,
                                   @RequestParam(required = false) String winery,
@@ -37,14 +37,14 @@ public class SearchController {
         return pipeWinesService.filter(searchQuery, priceFilter, region, winery, litrage);
     }
 
-    @GetMapping("filter/wineries")
-    public List<Winery> filterWineries(@RequestParam(required = false) String searchQuery,
+    @GetMapping(value = "filter/wineries", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Long> filterWineries(@RequestParam(required = false) String searchQuery,
                                        @RequestParam(required = false) String region) {
         return pipeWineriesService.filter(searchQuery, region);
     }
 
-    @GetMapping("filter/events")
-    public List<Event> filterEvents(@RequestParam(required = false) String searchQuery,
+    @GetMapping(value = "filter/events", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Long> filterEvents(@RequestParam(required = false) String searchQuery,
                                     @RequestParam(required = false) String winery) {
         return pipeEventsService.filter(searchQuery, winery);
     }

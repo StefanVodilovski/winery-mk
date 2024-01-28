@@ -1,21 +1,23 @@
 package dians.homework3.wines02.controller;
 
 import dians.homework3.wines02.dto.*;
+import dians.homework3.wines02.filter_models.EventFilterRequest;
+import dians.homework3.wines02.filter_models.WineryFilterRequest;
 import dians.homework3.wines02.mapper.EventMapper;
-import dians.homework3.wines02.model.AddWines;
-import dians.homework3.wines02.model.Cart;
-import dians.homework3.wines02.model.Event;
-import dians.homework3.wines02.model.UserEntity;
+import dians.homework3.wines02.mapper.WineryMapper;
+import dians.homework3.wines02.model.*;
 import dians.homework3.wines02.security.SecurityUtil;
 import dians.homework3.wines02.security.UserAuthProvider;
 import dians.homework3.wines02.service.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -46,7 +48,34 @@ public class EventController {
     @GetMapping("filter")
     public List<EventDto> filterWines(@RequestParam(required = false) String searchQuery,
                                        @RequestParam(required = false) String winery) {
-        return pipeEventsService.filter(searchQuery, winery);
+        RestTemplate restTemplate = new RestTemplate();
+
+        StringBuilder apiUrlBuilder = new StringBuilder("http://localhost:8081/api/filter/events?");
+
+        if (searchQuery != null) {
+            apiUrlBuilder.append("searchQuery=").append(searchQuery).append("&");
+        }
+
+        if (winery != null) {
+            apiUrlBuilder.append("winery=").append(winery);
+        }
+
+        String apiUrl = apiUrlBuilder.toString();
+
+        // Create a WineFilterRequest object to hold the parameters
+        EventFilterRequest filterRequest = new EventFilterRequest(searchQuery, winery);
+
+        // Make the HTTP request and retrieve the response
+        ResponseEntity<Long[]> responseEntity = restTemplate.getForEntity(apiUrl, Long[].class, filterRequest);
+
+        // Convert Long[] to List<Long>
+        List<Long> eventIds = Arrays.asList(responseEntity.getBody());
+
+        List<Event> events = eventService.findAllById(eventIds);
+        // Extract the array of WineDto from the response
+        List<EventDto> eventDtos = events.stream().map(EventMapper::mapToEventDto).collect(Collectors.toList());
+
+        return eventDtos;
     }
 
     @GetMapping("{eventId}")

@@ -61,4 +61,9 @@ public class EventServiceImpl implements EventService {
     public void save(Event event) {
         eventRepository.save(event);
     }
+
+    @Override
+    public List<Event> findAllById(List<Long> eventsId) {
+        return eventRepository.findAllById(eventsId);
+    }
 }

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class PipeWines<T> {
@@ -14,13 +15,13 @@ public class PipeWines<T> {
     public void addFilter(Filter<T> filter){
         filters.add(filter);}
 
-    public List<Wine> runFilters(List<T> input, List<Wine> wines) {
+    public List<Long> runFilters(List<T> input, List<Wine> wines) {
         List<Wine> wineDtos = wines;
         int counter = -1;
         for (Filter<T> filter: filters) {
             counter += 1;
             wineDtos = filter.execute(input.get(counter),wineDtos);
         }
-        return wineDtos;
+        return wineDtos.stream().map(Wine::getId).collect(Collectors.toList());
     }
 }

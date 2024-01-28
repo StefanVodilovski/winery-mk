@@ -22,6 +22,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -56,20 +57,46 @@ public class WineController {
 
         RestTemplate restTemplate = new RestTemplate();
 
-        String apiUrl = "http://localhost:8081/api/filter/wines";
+        StringBuilder apiUrlBuilder = new StringBuilder("http://localhost:8081/api/filter/wines?");
+
+        // Add non-null parameters to the URL
+        if (searchQuery != null) {
+            apiUrlBuilder.append("searchQuery=").append(searchQuery).append("&");
+        }
+
+        if (priceFilter != null) {
+            apiUrlBuilder.append("priceFilter=").append(priceFilter).append("&");
+        }
+
+        if (region != null) {
+            apiUrlBuilder.append("region=").append(region).append("&");
+        }
+
+        if (winery != null) {
+            apiUrlBuilder.append("winery=").append(winery).append("&");
+        }
+
+        if (litrage != null) {
+            apiUrlBuilder.append("litrage=").append(litrage).append("&");
+        }
+
+        String apiUrl = apiUrlBuilder.toString();
 
         // Create a WineFilterRequest object to hold the parameters
         WineFilterRequest filterRequest = new WineFilterRequest(searchQuery, priceFilter, region, winery, litrage);
 
         // Make the HTTP request and retrieve the response
-        ResponseEntity<Wine[]> responseEntity = restTemplate.getForEntity(apiUrl, Wine[].class, filterRequest);
+        ResponseEntity<Long[]> responseEntity = restTemplate.getForEntity(apiUrl, Long[].class, filterRequest);
 
+        // Convert Long[] to List<Long>
+        List<Long> wineIds = Arrays.asList(responseEntity.getBody());
+
+        List<Wine> wines = wineService.findAllById(wineIds);
         // Extract the array of WineDto from the response
-        List<WineDto> wineDtos = Arrays.stream(responseEntity.getBody()).map(WineMapper::mapToWineDto).collect(Collectors.toList());
+        List<WineDto> wineDtos = wines.stream().map(WineMapper::mapToWineDto).collect(Collectors.toList());
 
         // Convert the array to a List and return it
         return wineDtos;
-        // return pipeWinesService.filter(searchQuery, priceFilter, region, winery, litrage);
     }
 
     @GetMapping("{wineId}")

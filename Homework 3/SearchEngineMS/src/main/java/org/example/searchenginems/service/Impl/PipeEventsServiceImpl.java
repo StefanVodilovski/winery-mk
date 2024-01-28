@@ -30,7 +30,7 @@ public class PipeEventsServiceImpl implements PipeEventsService {
 
 
     @Override
-    public List<Event> filter(String search, String winery) {
+    public List<Long> filter(String search, String winery) {
         List<String> stringList = new ArrayList<>();
         stringList.add(search);
         stringList.add(winery);
