@@ -6,4 +6,4 @@
 
 ## Линк до публикуваната апликација:
 
-[ЛИНК](https://winesmktest-production.up.railway.app/wines/all)
+[ЛИНК](https://wines-mk.netlify.app/)
