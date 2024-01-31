@@ -32,9 +32,9 @@ export const SliderBox = ({results, display}) => {
       return(
         <Slider {...settings}>
             {results.map((result, id) => {
-                if(display == "wine")
+                if(display === "wine")
                     return <WineBox result={result} key={id}/>;
-                if(display == "winery")
+                if(display === "winery")
                     return <WineryBox result={result} key={id}/>;
                 
             })}

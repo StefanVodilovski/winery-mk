@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { Link, NavLink } from "react-router-dom"
-import logoImage from '../images/logoWhite.png';
 import "./Navbar.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBagShopping, faBars} from '@fortawesome/free-solid-svg-icons'
@@ -28,8 +27,6 @@ export const Navbar = () => {
     }, []);
 
     const navClass = scrollVh > 30 ? 'scrolled' : '';
-
-    const [menuOpen, setMenuOpen] = useState(false)
 
     const [activeProfile, setActiveProfile] = useState(false);
     const [activeHamburger, setActiveHamburger] = useState(false);
@@ -91,6 +88,33 @@ export const Navbar = () => {
               }
           );
       };
+
+      const [userDetails, setUserDetails] = useState([])
+
+      const initalUserDetails = () => {
+        request(
+            "GET",
+            "/auth/user/edit",
+            {
+              headers: {
+                  Authorization: `Bearer ${getAuthToken()}`,
+              },
+            }
+            ).then(
+            (response) => {
+                setUserDetails(response.data)
+            }).catch(
+            (error) => {
+              console.error('Error fetching data:', error);
+            }
+        );
+    };
+
+    useEffect(() => {
+        if(getAuthToken() !== "null" && getAuthToken() !== null)
+          initalUserDetails()
+    }, []);
+
     return (
         <nav className={navClass}>
             <Link to="/" className='title'>
@@ -109,7 +133,7 @@ export const Navbar = () => {
                 <li> <NavLink to="/events" onClick={() => {closeProfileMenu(); closeHamburgerMenu();}}> Events </NavLink> </li>
                 <li> <NavLink to="/map" onClick={() => {closeProfileMenu(); closeHamburgerMenu();}}> Map </NavLink> </li>
                 <li><NavLink to="/cart" onClick={() => {closeProfileMenu(); closeHamburgerMenu();}}><FontAwesomeIcon icon={faBagShopping} className='shopping-cart-icon'/></NavLink></li>
-                {getAuthToken() !== "null" ? (
+                {getAuthToken() !== "null"  && getAuthToken() !== null ? (
                       <li><button onClick={handleLogout}>LOG OUT</button></li>
                     ) : (
                       <li>
@@ -130,12 +154,13 @@ export const Navbar = () => {
             <div className='right-end'>
                 <ul name="right_end">
                     <li><NavLink to="/cart" onClick={() => {closeProfileMenu(); closeHamburgerMenu();}}><FontAwesomeIcon icon={faBagShopping} className='shopping-cart-icon'/></NavLink></li>
-                    {getAuthToken() !== "null" ? (
+                    {getAuthToken() !== "null" && getAuthToken() !== null ? (
                       <li>
                         <img
                           className={activeProfile ? 'active' : ''}
-                          onClick={handleClickProfile}
+                          onClick={getAuthToken() !== null && getAuthToken() !== "null" ? handleClickProfile : null}
                           src={require("../images/defaultProfilePicture.jpg")}
+                          alt="Profile"
                         />
                       </li>
                     ) : (
@@ -151,12 +176,12 @@ export const Navbar = () => {
 
             <div className={`profile-menu ${activeProfile ? 'profile-menu-opened' : ''}`}>
                 <div className='profile-username'>
-                    <img src={require("../images/defaultProfilePicture.jpg")} />
-                    <p>Name</p>
+                    <img src={require("../images/defaultProfilePicture.jpg")} alt="Profile"/>
+                    <p>{getAuthToken() !== null && getAuthToken() !== "null" ? userDetails.username : ""}</p>
                 </div>
                 
                 <div className='profile-links'>
-                    <NavLink to="/profile" onClick={() => {closeProfileMenu(); closeHamburgerMenu();}}>Edit your profiles</NavLink>
+                    <NavLink to="/profile" onClick={() => {closeProfileMenu(); closeHamburgerMenu();}}>Edit your profile</NavLink>
                 </div>
                 <div className='profile-links'>
                     <NavLink to="#" onClick={() => {closeProfileMenu(); closeHamburgerMenu();}}>View your orders</NavLink>

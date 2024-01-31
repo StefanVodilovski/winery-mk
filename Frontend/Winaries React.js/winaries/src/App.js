@@ -21,6 +21,10 @@ function App() {
   const location = useLocation();
 
   useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'instant'
+    });
     // Extract the route name (removing the leading slash)
     const routeName = location.pathname === '/' ? 'home' : location.pathname.slice(1);
 

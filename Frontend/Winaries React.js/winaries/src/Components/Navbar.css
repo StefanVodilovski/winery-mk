@@ -185,8 +185,11 @@ a:has(.shopping-cart-icon):hover .shopping-cart-icon{
 
 }
 
-.profile-links{
+.profile-menu div:nth-child(2){
     border-top: 1px solid #E1E1E1;
+}
+
+.profile-links{
     border-bottom: 1px solid #E1E1E1;
     width: 80%;
     padding: 20px 0;
