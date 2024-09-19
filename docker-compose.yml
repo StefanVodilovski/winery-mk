@@ -1,0 +1,37 @@
+version: '3'
+services:
+  backend:
+    image: backend-winesapp
+    build:
+      context: "./Homework 3/wines02"
+    ports:
+      - "8080:8080"
+    depends_on:
+      - database
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://database:5432/wines
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: "!post_SQL123!"
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SECURITY_JWT_TOKEN_SECRET_KEY: secret-value
+      JWT_SECRET: secretKey
+      SPRING_JPA_OPEN_IN_VIEW: "true"
+
+  database:
+    image: postgres:12
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: wines
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: "!post_SQL123!"
+
+
+  frontend:
+    image: frontend-winesapp
+    build:
+      context: "./Frontend/Winaries React.js/winaries"
+    ports:
+      - "3000:80" 
+    depends_on:
+      - backend
